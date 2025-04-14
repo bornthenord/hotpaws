@@ -9,12 +9,12 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-
+    var keyborg: Keyborg?
     
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        keyborg = Keyborg()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

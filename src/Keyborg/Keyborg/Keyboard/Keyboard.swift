@@ -24,9 +24,9 @@ struct Keyboard {
                         down?.flags.insert(.maskCommand)
                     }
                 }
-                
-                down?.post(tap: .cghidEventTap)
             }
+            
+            down?.post(tap: .cghidEventTap)
         }
         
         for key in keys {

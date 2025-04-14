@@ -32,12 +32,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusItem?.menu = menu
         
-        statusItem?.button?.title = "keyborg"
-        //        statusItem?.button?.image = NSImage(systemSymbolName: "hand.raised.square.on.square", accessibilityDescription: nil)
+//        statusItem?.button?.title = "keyborg"
+        var img = NSImage(named: "AppIcon")
+        img?.size = NSSize(width: 16, height: 16)
+        statusItem?.button?.image = img
         
         // The application does not appear in the Dock and may not create
         // windows or be activated.
-        NSApp.setActivationPolicy(.accessory)
+//        NSApp.setActivationPolicy(.accessory)
     }
 }
 

@@ -8,23 +8,28 @@ import Cocoa
 
 struct Keyboard {
     public static func press(keys: [Key], modifiers: [Modifier]?) {
+        
+        var flags: CGEventFlags = []
+        
+        if (modifiers != nil) {
+            for modifier in modifiers! {
+                switch modifier {
+                case .shift:
+                    flags.insert(.maskShift)
+                case .control:
+                    flags.insert(.maskControl)
+                case .option:
+                    flags.insert(.maskAlternate)
+                case .command:
+                    flags.insert(.maskCommand)
+                }
+            }
+        }
+        
         for key in keys {
             let down = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: true)
             
-            if (modifiers != nil) {
-                for modifier in modifiers! {
-                    switch modifier {
-                    case .shift:
-                        down?.flags.insert(.maskShift)
-                    case .control:
-                        down?.flags.insert(.maskControl)
-                    case .option:
-                        down?.flags.insert(.maskAlternate)
-                    case .command:
-                        down?.flags.insert(.maskCommand)
-                    }
-                }
-            }
+            down?.flags = flags
             
             down?.post(tap: .cghidEventTap)
         }

@@ -1,6 +1,6 @@
 //
 //  Key.swift
-//  keyborg-app
+//  keyborg
 //
 //  Created by cat dog on 14.04.2025.
 //

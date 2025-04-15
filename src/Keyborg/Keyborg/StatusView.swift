@@ -8,8 +8,8 @@
 import Cocoa
 
 class StatusView {
-    static let systemSymbolNameOn = "circle"
-    static let systemSymbolNameOff = "circle.slash"
+    static let systemSymbolNameOn = "cube.fill"
+    static let systemSymbolNameOff = "cube"
     private let modifiedChange: Event?
     
     @IBOutlet weak var menu: NSMenu?

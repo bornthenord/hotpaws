@@ -10,7 +10,7 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="Keyborg" image="keys" id="1Xt-HY-uBw">
+                            <menuItem title="Keyborg" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Keyborg" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
@@ -45,7 +45,4 @@
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="keys" width="128" height="128"/>
-    </resources>
 </document>

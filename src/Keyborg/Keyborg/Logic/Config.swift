@@ -15,4 +15,7 @@ let Map: [Key: (Keys: [Key], Modifiers: [Modifier]?)] = [
     // tab navigation
     Key.s: ([Key.left], [Modifier.option, Modifier.command]),
     Key.d: ([Key.right], [Modifier.option, Modifier.command]),
+    
+    //
+    Key.m: ([Key.enter], nil),
 ]

@@ -18,7 +18,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // The application does not appear in the Dock and may not create
         // windows or be activated.
-//        NSApp.setActivationPolicy(.accessory)
+       NSApp.setActivationPolicy(.accessory)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

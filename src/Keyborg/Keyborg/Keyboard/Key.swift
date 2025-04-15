@@ -5,6 +5,10 @@
 //  Created by cat dog on 14.04.2025.
 //
 
+enum KeyErrors: Error {
+    case KeyNotExists
+}
+
 enum Key: UInt16 {
     case a                          = 0x00
     case b                          = 0x0B
@@ -41,14 +45,6 @@ enum Key: UInt16 {
     case space                      = 0x31
     case delete                     = 0x33
     case escape                     = 0x35
-    case command                    = 0x37
-    case shift                      = 0x38
-    case capsLock                   = 0x39
-    case option                     = 0x3A
-    case control                    = 0x3B
-    case rightShift                 = 0x3C
-    case rightOption                = 0x3D
-    case rightControl               = 0x3E
     case volumeUp                   = 0x48
     case volumeDown                 = 0x49
     case mute                       = 0x4A
@@ -67,18 +63,121 @@ enum Key: UInt16 {
     case f7                         = 0x62
     case f3                         = 0x63
     case f8                         = 0x64
-    case f9                         = 0x65
-    case f10                        = 0x6D
-    case f11                        = 0x67
-    case f12                        = 0x6F
-    case f13                        = 0x69
-    case f14                        = 0x6B
-    case f15                        = 0x71
-    case f16                        = 0x6A
-    case f17                        = 0x40
-    case f18                        = 0x4F
-    case f19                        = 0x50
-    case f20                        = 0x5A
+    
+    public static func parse(_ key: String) throws -> Key {
+        let lower = key.lowercased()
+        
+        switch lower {
+        case "a":
+            return .a
+        case "b":
+            return .b
+        case "c":
+            return .c
+        case "d":
+            return .d
+        case "e":
+            return .e
+        case "f":
+            return .f
+        case "g":
+            return .g
+        case "h":
+            return .h
+        case "i":
+            return .i
+        case "j":
+            return .j
+        case "k":
+            return .k
+        case "l":
+            return .l
+        case "m":
+            return .m
+        case "n":
+            return .n
+        case "o":
+            return .o
+        case "p":
+            return .p
+        case "q":
+            return .q
+        case "r":
+            return .r
+        case "s":
+            return .s
+        case "t":
+            return .t
+        case "u":
+            return .u
+        case "v":
+            return .v
+        case "w":
+            return .w
+        case "x":
+            return .x
+        case "y":
+            return .y
+        case "z":
+            return .z
+        case "left":
+            return .left
+        case "right":
+            return .right
+        case "down":
+            return .down
+        case "up":
+            return .up
+        case "enter":
+            return .enter
+        case "tab":
+            return .tab
+        case "space":
+            return .space
+        case "delete":
+            return .delete
+        case "escape":
+            return .escape
+        case "volumeUp":
+            return .volumeUp
+        case "volumeDown":
+            return .volumeDown
+        case "mute":
+            return .mute
+        case "help":
+            return .help
+        case "home":
+            return .home
+        case "pageUp":
+            return .pageUp
+        case "pageDown":
+            return .pageDown
+        case "forwardDelete":
+            return .forwardDelete
+        case "end":
+            return .end
+        case "function":
+            return .function
+        case "f1":
+            return .f1
+        case "f2":
+            return .f2
+        case "f3":
+            return .f3
+        case "f4":
+            return .f4
+        case "f5":
+            return .f5
+        case "f6":
+            return .f6
+        case "f7":
+            return .f7
+        case "f8":
+            return .f8
+        default:
+            throw KeyErrors.KeyNotExists
+        }
+    }
 }
 
 enum Modifier: UInt16 {
@@ -86,4 +185,21 @@ enum Modifier: UInt16 {
     case control                    = 0x3B
     case option                     = 0x3A
     case command                    = 0x37
+    
+    public static func parse(_ modifier: String) throws -> Modifier {
+        let lower = modifier.lowercased()
+        
+        switch lower {
+        case "shift":
+            return .shift
+        case "control":
+            return .control
+        case "option":
+            return .option
+        case "command":
+            return .command
+        default:
+            throw KeyErrors.KeyNotExists
+        }
+    }
 }

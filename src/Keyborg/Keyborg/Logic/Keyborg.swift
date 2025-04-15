@@ -24,7 +24,7 @@ private func handleKeyDown(
             let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             
             if let key = Key(rawValue: event.keyCode) {
-                if let item = Config[key] {
+                if let item = Config.Mapping?[key] {
                     let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
                     
                     Keyboard.press(keys: item.Keys, modifiers: modifiers)

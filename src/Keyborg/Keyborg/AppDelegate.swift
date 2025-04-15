@@ -10,12 +10,15 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     var keyborg: Keyborg?
-    var statusItem: NSStatusItem?
-    @IBOutlet weak var menu: NSMenu?
-    @IBOutlet weak var firstMenuItem: NSMenuItem?
+    var status: StatusView?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         keyborg = Keyborg()
+        status = StatusView()
+        
+        // The application does not appear in the Dock and may not create
+        // windows or be activated.
+//        NSApp.setActivationPolicy(.accessory)
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -24,19 +27,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem?.menu = menu
-        
-        statusItem?.button?.image = NSImage(systemSymbolName: "figure.snowboarding", accessibilityDescription: nil)
-        
-        // The application does not appear in the Dock and may not create
-        // windows or be activated.
-        NSApp.setActivationPolicy(.accessory)
     }
 }
 

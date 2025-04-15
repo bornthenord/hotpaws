@@ -12,8 +12,6 @@ class StatusView {
     static let systemSymbolNameOff = "cube"
     private let modifiedChange: Event?
     
-    @IBOutlet weak var menu: NSMenu?
-    
     public static var enabled: Bool = false
     public static var statusItem: NSStatusItem?
     
@@ -22,7 +20,6 @@ class StatusView {
         modifiedChange?.subscribe(type: CGEventType.flagsChanged, handler: handleModifierChanged)
         
         StatusView.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        StatusView.statusItem?.menu = menu
         
         StatusView.statusItem?.button?.image = NSImage(systemSymbolName: StatusView.systemSymbolNameOff, accessibilityDescription: nil)
     }

@@ -12,13 +12,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var keyborg: Keyborg?
     var status: StatusView?
     
+    @IBOutlet weak var menu: NSMenu?
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         keyborg = Keyborg()
         status = StatusView()
         
         // The application does not appear in the Dock and may not create
         // windows or be activated.
-       NSApp.setActivationPolicy(.accessory)
+        NSApp.setActivationPolicy(.accessory)
+        
+        StatusView.statusItem?.menu = menu
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {

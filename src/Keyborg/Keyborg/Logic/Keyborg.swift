@@ -21,10 +21,10 @@ private func handleKeyDown(
         if let event = NSEvent(cgEvent: cgEvent),
            event.modifierFlags.contains(.capsLock) {
             
-            var pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
+            let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             
             if let key = Key(rawValue: event.keyCode) {
-                if let item = Map[key] {
+                if let item = Config[key] {
                     let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
                     
                     Keyboard.press(keys: item.Keys, modifiers: modifiers)

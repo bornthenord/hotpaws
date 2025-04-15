@@ -7,11 +7,11 @@
 
 import Cocoa
 
-class KeyDownEvent {
+class Event {
     private var eventTap: CFMachPort?
     
-    public func subscribe(handler: CGEventTapCallBack) {
-        let eventMask = (1 << CGEventType.keyDown.rawValue)
+    func subscribe(type: CGEventType, handler: CGEventTapCallBack) {
+        let eventMask = (1 << type.rawValue)
         if let tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
@@ -25,7 +25,7 @@ class KeyDownEvent {
             CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
             CGEvent.tapEnable(tap: tap, enable: true)
         } else {
-            print("Failed to create event tap.")
+            print("Failed to create event: \(type).")
         }
     }
 }

@@ -8,11 +8,11 @@
 import Cocoa
 
 struct Keyborg {
-    private let keyDownEvent: KeyDownEvent?
+    private let keyDownEvent: Event?
     
     init() {
-        keyDownEvent = KeyDownEvent()
-        keyDownEvent?.subscribe(handler: handleKeyDown)
+        keyDownEvent = Event()
+        keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
     }
 }
 

@@ -14,11 +14,17 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        text.string = File.content
+        text.string = Repository.config
     }
     
     @IBAction func onClick(_ sender: Any) {
-        print(text.string)
+        do {
+            Keyborg.config = try Parser.parse(text.string)
+            Repository.config = text.string
+            
+        } catch {
+            text.string = "\(error)"
+        }
     }
     
     override var representedObject: Any? {

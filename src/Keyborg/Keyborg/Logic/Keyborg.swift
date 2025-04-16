@@ -16,7 +16,7 @@ struct Keyborg {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
         
-        Keyborg.config = try Parser.parse(File.content)
+        Keyborg.config = try Parser.parse(Repository.config)
     }
 }
 

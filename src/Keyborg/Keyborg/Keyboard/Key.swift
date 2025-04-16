@@ -6,7 +6,7 @@
 //
 
 enum KeyErrors: Error {
-    case KeyNotExists
+    case KeyNotExists(key: String)
 }
 
 enum Key: UInt16 {
@@ -175,7 +175,7 @@ enum Key: UInt16 {
         case "f8":
             return .f8
         default:
-            throw KeyErrors.KeyNotExists
+            throw KeyErrors.KeyNotExists(key: key)
         }
     }
 }
@@ -199,7 +199,7 @@ enum Modifier: UInt16 {
         case "command":
             return .command
         default:
-            throw KeyErrors.KeyNotExists
+            throw KeyErrors.KeyNotExists(key: modifier)
         }
     }
 }

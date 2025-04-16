@@ -10,9 +10,13 @@ import Cocoa
 struct Keyborg {
     private let keyDownEvent: Event?
     
-    init() {
+    public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
+    
+    init() throws {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
+        
+        Keyborg.config = try Parser.parse(File.content)
     }
 }
 
@@ -24,7 +28,7 @@ private func handleKeyDown(
             let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             
             if let key = Key(rawValue: event.keyCode) {
-                if let item = Config.Mapping?[key] {
+                if let item = Keyborg.config?[key] {
                     let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
                     
                     Keyboard.press(keys: item.Keys, modifiers: modifiers)

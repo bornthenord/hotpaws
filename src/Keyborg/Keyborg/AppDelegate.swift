@@ -16,9 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         do {
-            try Config.load()
-            
-            keyborg = Keyborg()
+            keyborg = try Keyborg()
             status = StatusView()
             
             // The application does not appear in the Dock and may not create

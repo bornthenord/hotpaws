@@ -1,41 +1,18 @@
 //
-//  Config.swift
+//  Parser.swift
 //  Keyborg
 //
-//  Created by cat dog on 14.04.2025.
+//  Created by cat dog on 16.04.2025.
 //
 
-let file = """
-    # vim
-    h:left
-    k:up
-    j:down
-    l:right
-    #
-    u:z:command
-    y:c:command
-    p:v:command
-    x:delete
-    s:left:option:command
-    # tab navigation
-    d:right:option:command
-    #
-    m:enter
-    e:escape
-    """
+import Foundation
 
 enum ConfigErrors: Error {
     case Invalid(String)
 }
 
-struct Config {
-    public static var Mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
-    
-    public static func load() throws {
-        Mapping = try getConfig(content: file)
-    }
-    
-    private static func getConfig(content: String) throws -> [Key: (Keys: [Key], Modifiers: [Modifier]?)] {
+struct Parser {
+    public static func parse(_ content: String) throws -> [Key: (Keys: [Key], Modifiers: [Modifier]?)] {
         var result = [Key: (Keys: [Key], Modifiers: [Modifier]?)]()
         
         for raw in content.split(separator: "\n") {

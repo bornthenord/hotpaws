@@ -15,19 +15,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var menu: NSMenu?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // The application does not appear in the Dock and may not create
+        // windows or be activated.
+        NSApp.setActivationPolicy(.accessory)
+        status = StatusView()
+        StatusView.statusItem?.menu = menu
+        
         do {
             keyborg = try Keyborg()
-            status = StatusView()
-            
-            // The application does not appear in the Dock and may not create
-            // windows or be activated.
-            NSApp.setActivationPolicy(.accessory)
-            
-            StatusView.statusItem?.menu = menu
-
         } catch {
             print(error)
-            return
         }
     }
     

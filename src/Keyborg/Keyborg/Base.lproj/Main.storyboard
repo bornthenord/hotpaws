@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -18,6 +19,12 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Settings" id="9Hd-SN-OgI">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <segue destination="ucf-hV-fKq" kind="modal" id="GRg-BB-U7Y"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Quit Keyborg" keyEquivalent="q" id="4sb-4s-VLi">
@@ -43,6 +50,91 @@
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="SV1-8Y-6g0">
+            <objects>
+                <windowController id="ucf-hV-fKq" sceneMemberID="viewController">
+                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="57x-d7-nPV">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="242" width="480" height="267"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+                        <view key="contentView" id="ZMV-pL-Zlm">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="267"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="ucf-hV-fKq" id="Hhw-hB-sN5"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="cyY-jG-O88" kind="relationship" relationship="window.shadowedContentViewController" id="Sjx-yd-vck"/>
+                    </connections>
+                </windowController>
+                <customObject id="uPj-MP-smG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="408"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="6MC-iu-Lai">
+            <objects>
+                <viewController id="cyY-jG-O88" customClass="ViewController" customModule="Keyborg" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" identifier="save_btn" id="JXk-J1-Z5E">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QO9-ki-PMZ">
+                                <rect key="frame" x="0.0" y="42" width="480" height="228"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <clipView key="contentView" drawsBackground="NO" id="Ygj-Qq-gMJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="228"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="XP9-Hu-GJt">
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="228"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="480" height="228"/>
+                                            <size key="maxSize" width="480" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="29I-tR-vYe">
+                                    <rect key="frame" x="-100" y="-100" width="225" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="mB5-PQ-zC4">
+                                    <rect key="frame" x="464" y="0.0" width="16" height="228"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ekf-ZN-t6t">
+                                <rect key="frame" x="398" y="2" width="64" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="z6Q-Za-hSn">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <accessibility identifier="save_btn"/>
+                                <connections>
+                                    <action selector="onClick:" target="cyY-jG-O88" id="efB-1s-nBO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <accessibility identifier="save_btn"/>
+                        <connections>
+                            <accessibilityConnection property="link" destination="z6Q-Za-hSn" id="nxG-pI-baI"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="test" destination="Ygj-Qq-gMJ" id="4sJ-od-5BG"/>
+                        <outlet property="text" destination="XP9-Hu-GJt" id="bWO-kS-yGQ"/>
+                    </connections>
+                </viewController>
+                <customObject id="WDX-iW-J7L" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="876"/>
         </scene>
     </scenes>
 </document>

@@ -19,7 +19,7 @@ class ViewController: NSViewController {
         text.font = .systemFont(ofSize: 16)
     }
     
-    @IBAction func onClick(_ sender: Any) {
+    @IBAction func apply(_ sender: Any) {
         do {
             Keyborg.config = try Parser.parse(text.string)
             Repository.config = text.string

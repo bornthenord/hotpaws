@@ -1,4 +1,5 @@
 # Keyborg
+## Change your keys, change your life
 ![Remap Mac Keys, Boost Productivity!](https://github.com/bornthenord/keyborg/blob/main/logo.png)
 
 
@@ -25,5 +26,3 @@ j:down\
 l:right\
 \# next tab\
 s:left:option,command
-
-### change your keys, change your life

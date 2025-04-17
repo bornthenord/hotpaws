@@ -26,4 +26,4 @@ l:right\
 \# next tab\
 s:left:option,command
 
-### chenge your keys, change your life
+### change your keys, change your life

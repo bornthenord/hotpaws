@@ -23,16 +23,15 @@ class ViewController: NSViewController {
         do {
             Keyborg.config = try Parser.parse(text.string)
             Repository.config = text.string
+            alert(text: "Applied")
         } catch {
-            let alert = NSAlert()
-            alert.messageText = "\(error)"
-            alert.beginSheetModal(for: self.view.window!)
+            alert(text: "\(error)")
         }
     }
     
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    private func alert(text: String) {
+        let alert = NSAlert()
+        alert.messageText = text
+        alert.beginSheetModal(for: self.view.window!)
     }
 }

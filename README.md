@@ -11,7 +11,8 @@ Capslock - enable/disable
 
 ## Configuration
 
-The configuration consists of mapping rules ([key source]:[keys targets]:[modifier keys]) and comments (#)\
+The configuration consists of mapping rules ([key source]:[keys targets]:[modifier keys]) and comments (#)
+
 [key source] - the key to be redefined\
 [keys targets] - keys (separated by commas) to which we assign\
 [modifier keys] - modifier keys (separated by commas) to be pressed, not required

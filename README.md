@@ -5,7 +5,10 @@
 # What is?
 The next time I moved my hand to the arrow keys on my keyboard to find another file, I realized that this couldn't go on. 
 
-# Configuration
+# How use
+Capslock - enable/disable
+
+## Configuration
 
 The configuration consists of mapping rules ([key source]:[keys targets]:[modifier keys]) and comments (#)\
 [key source] - the key to be redefined\

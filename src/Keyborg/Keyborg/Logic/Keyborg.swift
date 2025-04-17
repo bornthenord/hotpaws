@@ -11,7 +11,7 @@ struct Keyborg {
     private let keyDownEvent: Event?
     
     public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
-    
+   
     init() throws {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)

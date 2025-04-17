@@ -6,23 +6,20 @@
 //
 
 public let DefaultConfig: String = """
-    # vim
-    ## navigation
+    # navigation
     h:left
     k:up
     j:down
     l:right
-    ## cmd z,c,v, del
+    # cmd z,c,v, del
     u:z:command
     y:c:command
     p:v:command
     x:delete
-    ## go to begin/end
+    # go to begin/end
     e:right:option
     b:left:option
     # tab navigation
     s:left:option,command
     d:right:option,command
-    # other
-    m:enter
     """

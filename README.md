@@ -1,5 +1,5 @@
 # Keyborg
-## Change your keys, change your life
+
 ![Remap Mac Keys, Boost Productivity!](https://github.com/bornthenord/keyborg/blob/main/logo.png)
 
 

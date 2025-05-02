@@ -23,7 +23,7 @@ struct Keyborg {
 private func handleKeyDown(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           event.modifierFlags.contains(.capsLock) {
+           event.modifierFlags.contains(.capsLock) || event.modifierFlags.contains(.function) {
             
             let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             

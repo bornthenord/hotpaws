@@ -7,7 +7,9 @@
 The next time I moved my hand to the arrow keys on my keyboard to find another file, I realized that this couldn't go on. 
 
 # How use
-Capslock - enable/disable
+Capslock - enable/disable\
+or\
+press 'fn' for sticky layer
 
 ## Configuration
 

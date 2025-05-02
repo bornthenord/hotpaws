@@ -29,3 +29,8 @@ j:down\
 l:right\
 \# next tab\
 s:left:option,command
+
+## Tips and tricks
+### Sticky Layer
+Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\
+Now, while holding Caps Lock, you can easily switch between layers as needed.

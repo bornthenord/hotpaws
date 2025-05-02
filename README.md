@@ -9,7 +9,7 @@ The next time I moved my hand to the arrow keys on my keyboard to find another f
 # How use
 Capslock - enable/disable\
 or\
-press 'fn' for sticky layer
+press 'fn'
 
 ## Configuration
 
@@ -31,6 +31,5 @@ l:right\
 s:left:option,command
 
 ## Tips and tricks
-### Sticky Layer
 Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\
-Now, while holding Caps Lock, you can easily switch between layers as needed.
+Now, while holding Caps Lock, you can easily switch between "layers" as needed.

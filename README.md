@@ -2,9 +2,7 @@
 
 ![](https://github.com/bornthenord/keyborg/blob/main/logo.png)
 
-
-## Remap Mac Keys, Boost Productivity!
-The next time I moved my hand to the arrow keys on my keyboard to find another file, I realized that this couldn't go on. 
+## Quick key remapping for macOS
 
 # How use
 Capslock - enable/disable\

@@ -1,5 +1,7 @@
-# Quick key remapping for macOS
-![](https://github.com/bornthenord/keyborg/blob/main/logo.png)
+<p align="center">
+  <img width="256" height="256" src="https://github.com/bornthenord/keyborg/blob/main/logo.png">
+<p>
+<h1 align="center">Quick key remapping for macOS</h1>
 
 ## Installation
 1. Download dmg [installer](https://github.com/bornthenord/keyborg/releases)

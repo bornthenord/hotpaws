@@ -7,7 +7,7 @@
 # How use
 Capslock - enable/disable\
 or\
-press 'fn'
+press 'fn' (remapping will be enabled while the button is held down)
 
 ## Configuration
 
@@ -30,4 +30,4 @@ s:left:option,command
 
 ## Tips and tricks
 Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\
-Now, while holding Caps Lock, you can easily switch between "layers" as needed.
+Now, by holding down the Caps Lock key with your pinky, you can easily switch between "layers" as needed.

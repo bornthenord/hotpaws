@@ -33,6 +33,6 @@ l:right\
 \# next tab\
 s:left:option,command
 
-## Tips & Tricks
+# Tips & Tricks
 Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\
 Now, by holding down the Caps Lock key with your pinky, you can easily switch between "layers" as needed.

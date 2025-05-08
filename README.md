@@ -15,13 +15,12 @@ press 'fn' (remapping will be enabled while the button is held down)
 
 ### Configuration
 
-The configuration consists of mapping rules ([key source]:[keys targets]:[modifier keys]) and comments (#)
+The configuration consists of mapping rules [key source]:[keys target]:[modifiers] and comments #
 
-[key source] - the key to be redefined\
-[keys targets] - keys (separated by commas) to which we assign\
-[modifier keys] - modifier keys (separated by commas) to be pressed, not required
+[key source] - the [key](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) to be redefined\
+[keys targets] - [keys](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) (separated by commas) to which we assign\
+[modifiers] - [modifier](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
 
-[Key/modifier naming](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Key.swift)
 ### Example
 
 \# like vim navigation\

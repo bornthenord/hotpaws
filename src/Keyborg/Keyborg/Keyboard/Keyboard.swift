@@ -16,11 +16,22 @@ struct Keyboard {
                 switch modifier {
                 case .shift:
                     flags.insert(.maskShift)
+                case .rightShift:
+                    flags.insert(.maskShift)
+                    
                 case .control:
                     flags.insert(.maskControl)
+                case .rightControl:
+                    flags.insert(.maskControl)
+                    
                 case .option:
                     flags.insert(.maskAlternate)
+                case .rightOption:
+                    flags.insert(.maskAlternate)
+                    
                 case .command:
+                    flags.insert(.maskCommand)
+                case .rightCommand:
                     flags.insert(.maskCommand)
                 }
             }

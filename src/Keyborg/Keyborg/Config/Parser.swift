@@ -71,12 +71,12 @@ struct Parser {
     private static func toKey(_ raw: String) throws -> Key {
         let key = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return try Key.parse(key)
+        return try KeyParser.parseKey(key)
     }
     
     private static func toModifier(_ raw: String) throws -> Modifier {
         let modifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return try Modifier.parse(modifier)
+        return try KeyParser.parseModifier(modifier)
     }
 }

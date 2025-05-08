@@ -9,7 +9,7 @@
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 
 ## How use
-Capslock - enable/disable\
+caps lock - enable/disable\
 or\
 press 'fn' (remapping will be enabled while the button is held down)
 

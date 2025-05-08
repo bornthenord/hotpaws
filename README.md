@@ -9,17 +9,16 @@
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 
 ## How use
-caps lock - enable/disable\
-or\
-press 'fn' (remapping will be enabled while the button is held down)
+<b>caps lock</b> - enable/disable\
+or press <b>fn</b> for remapping will be enabled while the button is held down
 
 ### Configuration
 
-The configuration consists of mapping rules [key source]:[keys target]:[modifiers] and comments #
+The configuration consists of mapping rules [***key source***]:[***keys target***]:[***modifiers***] and comments ***#***
 
-[key source] - the [key](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) to be redefined\
-[keys target] - [keys](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) (separated by commas) to which we assign\
-[modifiers] - [modifier](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
+[***key source***] - the [key](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) to be redefined\
+[***keys target***] - [keys](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) (separated by commas) to which we assign\
+[***modifiers***] - [modifier](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
 
 ### Example
 

@@ -50,8 +50,6 @@ class KeyParser {
             return .home
         case "pageUp":
             return .pageUp
-        case "forwardDelete":
-            return .forwardDelete
         case "end":
             return .end
         case "pageDown":
@@ -242,9 +240,6 @@ class KeyParser {
         let lower = modifier.lowercased()
         
         switch lower {
-        case "capsLock":
-            return .capsLock
-            
         case "shift":
             return .shift
         case "control":

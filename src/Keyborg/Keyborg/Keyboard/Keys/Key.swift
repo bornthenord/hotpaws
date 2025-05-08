@@ -10,7 +10,7 @@ enum Key: UInt16 {
     case enter                     = 0x4C
     case tab                       = 0x30
     case space                     = 0x31
-    case delete                    = 0x33
+    case delete                    = 0x75
     case escape                    = 0x35
     case left                      = 0x7B
     case right                     = 0x7C
@@ -22,7 +22,6 @@ enum Key: UInt16 {
     case help                      = 0x72
     case home                      = 0x73
     case pageUp                    = 0x74
-    case forwardDelete             = 0x75
     case end                       = 0x77
     case pageDown                  = 0x79
     case function                  = 0x3F

@@ -6,8 +6,6 @@
 //
 
 enum Modifier: UInt16 {
-    case capsLock                  = 0x39
-    
     case shift                      = 0x38
     case control                    = 0x3B
     case option                     = 0x3A

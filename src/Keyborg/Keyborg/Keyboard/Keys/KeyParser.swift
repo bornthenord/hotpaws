@@ -18,8 +18,8 @@ class KeyParser {
         
         switch lower {
             
-        case "returnKey":
-            return .returnKey
+        case "return":
+            return .return
         case "enter":
             return .enter
         case "tab":

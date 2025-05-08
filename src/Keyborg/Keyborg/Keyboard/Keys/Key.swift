@@ -6,7 +6,7 @@
 //
 
 enum Key: UInt16 {
-    case returnKey                 = 0x24
+    case `return`                  = 0x24
     case enter                     = 0x4C
     case tab                       = 0x30
     case space                     = 0x31

@@ -18,7 +18,7 @@ The configuration consists of mapping rules [***key source***]:[***keys target**
 
 [***key source***] - the [key](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) to be redefined\
 [***keys target***] - [keys](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) (separated by commas) to which we assign\
-[***modifiers***] - [modifier](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
+[***modifiers***] - [modifiers](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
 
 ### Example
 

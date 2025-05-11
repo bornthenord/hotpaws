@@ -27,8 +27,9 @@ h:left\
 k:up\
 j:down\
 l:right\
-\# next tab\
-s:left:option,command
+\# tab navigation\
+s:left:option,command\mmm
+d:right:option,command
 
 ## Tips & Tricks
 Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\

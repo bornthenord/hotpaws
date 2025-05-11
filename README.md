@@ -28,7 +28,7 @@ k:up\
 j:down\
 l:right\
 \# tab navigation\
-s:left:option,command\mmm
+s:left:option,command\
 d:right:option,command
 
 ## Tips & Tricks

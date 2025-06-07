@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		23BDE3612DACFD4100122A93 /* Keyborg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keyborg.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2372A5C42DF4DA9600BF1EBE /* HotPaws.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HotPaws.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		23BDE3632DACFD4100122A93 /* Keyborg */ = {
+		2372A5C62DF4DA9600BF1EBE /* HotPaws */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Keyborg;
+			path = HotPaws;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		23BDE35E2DACFD4100122A93 /* Frameworks */ = {
+		2372A5C12DF4DA9600BF1EBE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -29,18 +29,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23BDE3582DACFD4100122A93 = {
+		2372A5BB2DF4DA9600BF1EBE = {
 			isa = PBXGroup;
 			children = (
-				23BDE3632DACFD4100122A93 /* Keyborg */,
-				23BDE3622DACFD4100122A93 /* Products */,
+				2372A5C62DF4DA9600BF1EBE /* HotPaws */,
+				2372A5C52DF4DA9600BF1EBE /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		23BDE3622DACFD4100122A93 /* Products */ = {
+		2372A5C52DF4DA9600BF1EBE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				23BDE3612DACFD4100122A93 /* Keyborg.app */,
+				2372A5C42DF4DA9600BF1EBE /* HotPaws.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,64 +48,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		23BDE3602DACFD4100122A93 /* Keyborg */ = {
+		2372A5C32DF4DA9600BF1EBE /* HotPaws */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 23BDE3702DACFD4200122A93 /* Build configuration list for PBXNativeTarget "Keyborg" */;
+			buildConfigurationList = 2372A5D32DF4DA9700BF1EBE /* Build configuration list for PBXNativeTarget "HotPaws" */;
 			buildPhases = (
-				23BDE35D2DACFD4100122A93 /* Sources */,
-				23BDE35E2DACFD4100122A93 /* Frameworks */,
-				23BDE35F2DACFD4100122A93 /* Resources */,
+				2372A5C02DF4DA9600BF1EBE /* Sources */,
+				2372A5C12DF4DA9600BF1EBE /* Frameworks */,
+				2372A5C22DF4DA9600BF1EBE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				23BDE3632DACFD4100122A93 /* Keyborg */,
+				2372A5C62DF4DA9600BF1EBE /* HotPaws */,
 			);
-			name = Keyborg;
+			name = HotPaws;
 			packageProductDependencies = (
 			);
-			productName = Keyborg;
-			productReference = 23BDE3612DACFD4100122A93 /* Keyborg.app */;
+			productName = HotPaws;
+			productReference = 2372A5C42DF4DA9600BF1EBE /* HotPaws.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		23BDE3592DACFD4100122A93 /* Project object */ = {
+		2372A5BC2DF4DA9600BF1EBE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1630;
-				LastUpgradeCheck = 1630;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					23BDE3602DACFD4100122A93 = {
-						CreatedOnToolsVersion = 16.3;
+					2372A5C32DF4DA9600BF1EBE = {
+						CreatedOnToolsVersion = 16.4;
 					};
 				};
 			};
-			buildConfigurationList = 23BDE35C2DACFD4100122A93 /* Build configuration list for PBXProject "Keyborg" */;
+			buildConfigurationList = 2372A5BF2DF4DA9600BF1EBE /* Build configuration list for PBXProject "HotPaws" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 23BDE3582DACFD4100122A93;
+			mainGroup = 2372A5BB2DF4DA9600BF1EBE;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 23BDE3622DACFD4100122A93 /* Products */;
+			productRefGroup = 2372A5C52DF4DA9600BF1EBE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				23BDE3602DACFD4100122A93 /* Keyborg */,
+				2372A5C32DF4DA9600BF1EBE /* HotPaws */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		23BDE35F2DACFD4100122A93 /* Resources */ = {
+		2372A5C22DF4DA9600BF1EBE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,7 +115,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		23BDE35D2DACFD4100122A93 /* Sources */ = {
+		2372A5C02DF4DA9600BF1EBE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -125,7 +125,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		23BDE36E2DACFD4200122A93 /* Debug */ = {
+		2372A5D12DF4DA9700BF1EBE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -178,7 +178,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -188,7 +188,7 @@
 			};
 			name = Debug;
 		};
-		23BDE36F2DACFD4200122A93 /* Release */ = {
+		2372A5D22DF4DA9700BF1EBE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -235,7 +235,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 15.3;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -243,16 +243,15 @@
 			};
 			name = Release;
 		};
-		23BDE3712DACFD4200122A93 /* Debug */ = {
+		2372A5D42DF4DA9700BF1EBE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = Keyborg/Keyborg.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HotPaws/HotPaws.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 02.05.25;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -261,8 +260,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.9.1;
-				PRODUCT_BUNDLE_IDENTIFIER = bornthenord.Keyborg;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bornthenord.HotPaws;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -270,16 +269,15 @@
 			};
 			name = Debug;
 		};
-		23BDE3722DACFD4200122A93 /* Release */ = {
+		2372A5D52DF4DA9700BF1EBE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = Keyborg/Keyborg.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HotPaws/HotPaws.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 02.05.25;
+				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
@@ -288,8 +286,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.9.1;
-				PRODUCT_BUNDLE_IDENTIFIER = bornthenord.Keyborg;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = bornthenord.HotPaws;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -300,25 +298,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		23BDE35C2DACFD4100122A93 /* Build configuration list for PBXProject "Keyborg" */ = {
+		2372A5BF2DF4DA9600BF1EBE /* Build configuration list for PBXProject "HotPaws" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23BDE36E2DACFD4200122A93 /* Debug */,
-				23BDE36F2DACFD4200122A93 /* Release */,
+				2372A5D12DF4DA9700BF1EBE /* Debug */,
+				2372A5D22DF4DA9700BF1EBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23BDE3702DACFD4200122A93 /* Build configuration list for PBXNativeTarget "Keyborg" */ = {
+		2372A5D32DF4DA9700BF1EBE /* Build configuration list for PBXNativeTarget "HotPaws" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				23BDE3712DACFD4200122A93 /* Debug */,
-				23BDE3722DACFD4200122A93 /* Release */,
+				2372A5D42DF4DA9700BF1EBE /* Debug */,
+				2372A5D52DF4DA9700BF1EBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 23BDE3592DACFD4100122A93 /* Project object */;
+	rootObject = 2372A5BC2DF4DA9600BF1EBE /* Project object */;
 }

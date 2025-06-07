@@ -7,7 +7,7 @@
 
 import Cocoa
 
-struct Keyborg {
+struct HotSwap {
     private let keyDownEvent: Event?
     
     public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
@@ -16,7 +16,7 @@ struct Keyborg {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
         
-        Keyborg.config = try Parser.parse(Repository.config)
+        HotSwap.config = try Parser.parse(Repository.config)
     }
 }
 
@@ -28,7 +28,7 @@ private func handleKeyDown(
             let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             
             if let key = Key(rawValue: event.keyCode) {
-                if let item = Keyborg.config?[key] {
+                if let item = HotSwap.config?[key] {
                     let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
                     
                     Keyboard.press(keys: item.Keys, modifiers: modifiers)

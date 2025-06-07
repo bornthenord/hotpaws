@@ -9,7 +9,7 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var keyborg: Keyborg?
+    var hotSwap: HotSwap?
     var status: StatusView?
     
     @IBOutlet weak var menu: NSMenu?
@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         StatusView.statusItem?.menu = menu
         
         do {
-            keyborg = try Keyborg()
+            hotSwap = try HotSwap()
         } catch {
             print(error)
         }

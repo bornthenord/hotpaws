@@ -1,3 +1,6 @@
+<p align="center">
+  <img width="256" height="256" src="https://github.com/bornthenord/keyborg/blob/main/logo.png">
+<p>
 <h1 align="center">Hot swap key mapping for macOS</h1>
 
 ## Installation

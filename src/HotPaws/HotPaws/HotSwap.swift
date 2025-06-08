@@ -12,7 +12,6 @@ struct HotSwap {
     private let keyUpEvent: Event = Event()
 
     public static let ReservedKeys: Set<Key> = [.space]
-    public static let ReservedModifiers: Set<Modifier> = [.capsLock]
     public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
    
     public static var skipSpaceDown: Bool = true

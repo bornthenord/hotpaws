@@ -30,6 +30,8 @@ class ViewController: NSViewController {
         
         handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
         handleModifierChange.subscribe(type: CGEventType.flagsChanged, handler: modifierForDescHandler)
+        
+        ViewController.instace?.title = "Settings"
     }
     
     @IBAction func apply(_ sender: Any) {

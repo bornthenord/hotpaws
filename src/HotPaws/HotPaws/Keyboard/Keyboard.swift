@@ -9,6 +9,20 @@ import Cocoa
 struct Keyboard {
     public static func press(keys: [Key], modifiers: [Modifier]?) {
         
+        down(keys: keys, modifiers: modifiers)
+        
+        up(keys: keys)
+    }
+    
+    public static func up(keys: [Key]) {
+        for key in keys {
+            let up = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: false)
+            up?.post(tap: .cghidEventTap)
+        }
+    }
+    
+    public static func down(keys: [Key], modifiers: [Modifier]?)
+    {
         var flags: CGEventFlags = []
         
         if (modifiers != nil) {
@@ -47,11 +61,6 @@ struct Keyboard {
             down?.flags = flags
             
             down?.post(tap: .cghidEventTap)
-        }
-        
-        for key in keys {
-            let up = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: false)
-            up?.post(tap: .cghidEventTap)
         }
     }
 }

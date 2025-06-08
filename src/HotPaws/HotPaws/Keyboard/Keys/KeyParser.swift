@@ -1,6 +1,6 @@
 //
 //  Parser.swift
-//  Keyborg
+//  HotPaws
 //
 //  Created by cat dog on 08.05.2025.
 //
@@ -54,8 +54,6 @@ class KeyParser {
             return .end
         case "pageDown":
             return .pageDown
-        case "function":
-            return .function
         
         case "f1":
             return .f1
@@ -184,8 +182,8 @@ class KeyParser {
             return .comma
         case "period":
             return .period
-        case "forwardSlash":
-            return .forwardSlash
+        case "slash":
+            return .slash
         case "backslash":
             return .backslash
         case "grave":

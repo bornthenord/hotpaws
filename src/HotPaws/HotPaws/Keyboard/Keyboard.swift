@@ -1,6 +1,6 @@
 //
 //  Keyboard.swift
-//  keyborg
+//  HotPaws
 //
 //  Created by cat dog on 14.04.2025.
 //
@@ -33,6 +33,10 @@ struct Keyboard {
                     flags.insert(.maskCommand)
                 case .rightCommand:
                     flags.insert(.maskCommand)
+                case .function:
+                    break
+                case .capsLock:
+                    break
                 }
             }
         }

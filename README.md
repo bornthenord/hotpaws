@@ -12,16 +12,17 @@ Version macOS Big Sur 11.5 or higher
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 
 ## How use
-<b>caps lock</b> - enable/disable\
-or press <b>fn</b> for remapping will be enabled while the button is held down
+If you hold down the spacebar, the replacement keys specified in the configuration will be activated.
 
 ### Configuration
 
 The configuration consists of mapping rules [***key source***]:[***keys target***]:[***modifiers***] and comments ***#***
 
-[***key source***] - the [key](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) to be redefined\
-[***keys target***] - [keys](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) (separated by commas) to which we assign\
-[***modifiers***] - [modifiers](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
+[***key source***] - the key to be redefined\
+[***keys target***] - keys (separated by commas) to which we assign\
+[***modifiers***] - modifiers (separated by commas) to be pressed, not required
+
+*To determine the code of the desired key, you need to use the key definition function in the settings.*
 
 ### Example
 
@@ -33,7 +34,3 @@ l:right\
 \# tab navigation\
 s:left:option,command\
 d:right:option,command
-
-## Tips & Tricks
-Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\
-Now, by holding down the Caps Lock key with your pinky, you can easily switch between "layers" as needed.

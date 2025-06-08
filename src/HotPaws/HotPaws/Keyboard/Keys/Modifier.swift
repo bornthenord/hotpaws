@@ -13,7 +13,6 @@ enum Modifier: UInt16, CaseIterable {
     case function                  = 0x3F
     case capsLock                  = 0x39
     case rightShift                = 0x3C
-    case rightControl              = 0x3E
     case rightOption               = 0x3D
     case rightCommand              = 0x36
     
@@ -27,7 +26,6 @@ enum Modifier: UInt16, CaseIterable {
         case .capsLock: return "capsLock"
             
         case .rightShift: return "rightShift"
-        case .rightControl: return "rightControl"
         case .rightOption: return "rightOption"
         case .rightCommand: return "rightCommand"
         }
@@ -49,8 +47,6 @@ enum Modifier: UInt16, CaseIterable {
             return .capsLock
         case "rightShift":
             return .rightShift
-        case "rightControl":
-            return .rightControl
         case "rightOption":
             return .rightOption
         case "rightCommand":

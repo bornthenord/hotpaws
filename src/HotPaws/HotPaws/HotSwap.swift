@@ -11,21 +11,24 @@ struct HotSwap {
     private let keyDownEvent: Event?
     
     public static var mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
-    public static var controlKey: Modifier?
+    public static var controlKey: Modifier {
+        get {
+            return Config.controlKey
+        }
+    }
     
     init() throws {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
         
         HotSwap.mapping = try ConfigParser.parse(Config.mapping)
-        HotSwap.controlKey = Config.controlKey
     }
 }
 
 private func handleKeyDown(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           event.modifierFlags.contains(.capsLock) || event.modifierFlags.contains(.function) {
+           isControlKeyPressed(flags: event.modifierFlags) {
             
             let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             
@@ -39,8 +42,20 @@ private func handleKeyDown(
                 }
             }
         }
-    
-    return Unmanaged.passUnretained(cgEvent)
+        
+        return Unmanaged.passUnretained(cgEvent)
+    }
+
+private func isControlKeyPressed(flags: NSEvent.ModifierFlags) -> Bool {
+    return flags.contains(.capsLock) && HotSwap.controlKey == .capsLock ||
+    flags.contains(.shift) && HotSwap.controlKey == .shift ||
+    flags.contains(.function) && HotSwap.controlKey == .function ||
+    flags.contains(.control) && HotSwap.controlKey == .control ||
+    flags.contains(.option) && HotSwap.controlKey == .option ||
+    flags.contains(.command) && HotSwap.controlKey == .command ||
+    flags.contains(.command) && flags.rawValue == 1048848 && HotSwap.controlKey == .rightCommand ||
+    flags.contains(.option) && flags.rawValue == 524608 && HotSwap.controlKey == .rightOption ||
+    flags.contains(.shift) && flags.rawValue == 131332 && HotSwap.controlKey == .rightShift
 }
 
 private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {

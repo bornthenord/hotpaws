@@ -21,8 +21,6 @@ struct Keyboard {
                     
                 case .control:
                     flags.insert(.maskControl)
-                case .rightControl:
-                    flags.insert(.maskControl)
                     
                 case .option:
                     flags.insert(.maskAlternate)
@@ -33,6 +31,7 @@ struct Keyboard {
                     flags.insert(.maskCommand)
                 case .rightCommand:
                     flags.insert(.maskCommand)
+
                 case .function:
                     break
                 case .capsLock:

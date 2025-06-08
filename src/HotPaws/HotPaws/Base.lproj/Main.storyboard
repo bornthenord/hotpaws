@@ -131,12 +131,14 @@
                                 <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GMs-fK-zic">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <connections>
+                                        <action selector="apply:" target="XfG-lQ-9wD" id="vsf-Bj-W8E"/>
+                                    </connections>
                                 </buttonCell>
                             </button>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="applyBtn" destination="Ibz-6Z-eHi" id="e6v-zX-GBC"/>
                         <outlet property="configText" destination="Pgn-v4-5MJ" id="nLR-eq-zU5"/>
                         <outlet property="lastPressedKeyLabel" destination="gsh-03-9sq" id="nQ7-bQ-7OJ"/>
                         <outlet property="lastPressedKeyText" destination="aLc-NU-Zbx" id="P0L-gO-H8u"/>

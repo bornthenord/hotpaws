@@ -29,9 +29,9 @@ class ViewController: NSViewController {
                 .controlKeyBox.insertItem(withObjectValue: modifier.description, at: 0)
         }
         
-        ViewController.instace?.controlKeyBox.selectItem(withObjectValue: Repository.controlKey.description)
+        ViewController.instace?.controlKeyBox.selectItem(withObjectValue: Config.controlKey.description)
         
-        configText.string = Repository.config
+        configText.string = Config.mapping
         configText.font = .systemFont(ofSize: 16)
         
         handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
@@ -39,10 +39,10 @@ class ViewController: NSViewController {
     
     @IBAction func apply(_ sender: Any) {
         do {
-            HotSwap.config = try Parser.parse(configText.string)
+            HotSwap.mapping = try Parser.parse(configText.string)
             let controlKey = try KeyParser.parseModifier(controlKeyBox.stringValue)
-            Repository.controlKey = controlKey
-            Repository.config = configText.string
+            Config.controlKey = controlKey
+            Config.mapping = configText.string
             
             alert(text: "Applied")
         } catch {

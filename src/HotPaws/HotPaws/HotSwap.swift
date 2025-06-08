@@ -10,15 +10,15 @@ import Cocoa
 struct HotSwap {
     private let keyDownEvent: Event?
     
-    public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
+    public static var mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
     public static var controlKey: Modifier?
     
     init() throws {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
         
-        HotSwap.config = try Parser.parse(Repository.config)
-        HotSwap.controlKey = Repository.controlKey
+        HotSwap.mapping = try Parser.parse(Config.mapping)
+        HotSwap.controlKey = Config.controlKey
     }
 }
 
@@ -30,7 +30,7 @@ private func handleKeyDown(
             let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             
             if let key = Key(rawValue: event.keyCode) {
-                if let item = HotSwap.config?[key] {
+                if let item = HotSwap.mapping?[key] {
                     let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
                     
                     Keyboard.press(keys: item.Keys, modifiers: modifiers)

@@ -8,17 +8,42 @@
 import Foundation
 
 
-struct Repository {
+struct Config {
     private static let _keyConfig: String = "config"
     private static var _contentConfig: String?
     
     private static let _keyControlKey: String = "controlKey"
     private static var _keyControl: Modifier?
     
-    public static var config: String {
+    private static var defaultControlKey: Modifier {
+        get {
+            return .function
+        }
+    }
+
+    private static let defaultConfig: String = """
+        # navigation
+        h:left
+        k:up
+        j:down
+        l:right
+        # cmd z,c,v, del
+        u:z:command
+        y:c:command
+        p:v:command
+        x:delete
+        # go to begin/end
+        e:right:option
+        b:left:option
+        # tab navigation
+        s:left:option,command
+        d:right:option,command
+        """
+    
+    public static var mapping: String {
         get {
             if _contentConfig == nil {
-                _contentConfig = UserDefaults.standard.string(forKey: _keyConfig) ?? DefaultConfig
+                _contentConfig = UserDefaults.standard.string(forKey: _keyConfig) ?? defaultConfig
             }
             
             return _contentConfig!
@@ -36,12 +61,12 @@ struct Repository {
                 let keyStr = UserDefaults.standard.string(forKey: _keyControlKey)
                 
                 if keyStr == nil {
-                    _keyControl = DefaultControlKey
+                    _keyControl = defaultControlKey
                 } else {
                     do {
                         _keyControl = try KeyParser.parseModifier(keyStr!)
                     } catch {
-                        _keyControl = DefaultControlKey
+                        _keyControl = defaultControlKey
                     }
                 }
             }

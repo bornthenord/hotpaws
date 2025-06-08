@@ -8,14 +8,13 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    
     private let handleKeyUp: Event = Event()
     private let handleModifierChange: Event = Event()
     
     @IBOutlet weak var lastPressedKeyLabel: NSTextFieldCell!
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
     @IBOutlet var configText: NSTextView!
-    @IBOutlet weak var applyBtn: NSButton!
     
     public static var instace: ViewController? = nil
     public static let lastPressedKeyLabelDefault: String = "Press the key"
@@ -32,11 +31,21 @@ class ViewController: NSViewController {
         handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
         handleModifierChange.subscribe(type: CGEventType.flagsChanged, handler: modifierForDescHandler)
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
+    
+    @IBAction func apply(_ sender: Any) {
+        do {
+            HotSwap.config = try Parser.parse(configText.string)
+            Repository.config = configText.string
+            alert(text: "Applied")
+        } catch {
+            alert(text: "\(error)")
         }
+    }
+    
+    private func alert(text: String) {
+        let alert = NSAlert()
+        alert.messageText = text
+        alert.beginSheetModal(for: self.view.window!)
     }
 }
 

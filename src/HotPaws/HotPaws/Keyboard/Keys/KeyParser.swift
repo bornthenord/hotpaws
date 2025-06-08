@@ -54,8 +54,6 @@ class KeyParser {
             return .end
         case "pageDown":
             return .pageDown
-        case "function":
-            return .function
         
         case "f1":
             return .f1

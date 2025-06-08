@@ -6,11 +6,12 @@
 //
 
 enum Modifier: UInt16 {
-    case shift                      = 0x38
-    case control                    = 0x3B
-    case option                     = 0x3A
-    case command                    = 0x37
-    
+    case shift                     = 0x38
+    case control                   = 0x3B
+    case option                    = 0x3A
+    case command                   = 0x37
+    case function                  = 0x3F
+    case capsLock                  = 0x39
     case rightShift                = 0x3C
     case rightControl              = 0x3E
     case rightOption               = 0x3D
@@ -22,7 +23,9 @@ enum Modifier: UInt16 {
         case .control: return "control"
         case .option: return "option"
         case .command: return "command"
-
+        case .function: return "function cannot be reassigned"
+        case .capsLock: return "capsLock cannot be reassigned"
+            
         case .rightShift: return "rightShift"
         case .rightControl: return "rightControl"
         case .rightOption: return "rightOption"

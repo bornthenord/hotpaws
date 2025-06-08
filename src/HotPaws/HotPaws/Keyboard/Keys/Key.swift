@@ -10,7 +10,8 @@ enum Key: UInt16 {
     case enter                     = 0x4C
     case tab                       = 0x30
     case space                     = 0x31
-    case delete                    = 0x75
+    case delete                    = 0x33
+    case forwardDelete             = 0x75
     case escape                    = 0x35
     case left                      = 0x7B
     case right                     = 0x7C
@@ -24,7 +25,6 @@ enum Key: UInt16 {
     case pageUp                    = 0x74
     case end                       = 0x77
     case pageDown                  = 0x79
-    case function                  = 0x3F
     
     case f1                        = 0x7A
     case f2                        = 0x78
@@ -122,6 +122,7 @@ enum Key: UInt16 {
         case .tab: return "tab"
         case .space: return "space"
         case .delete: return "delete"
+        case .forwardDelete: return "forwardDelete"
         case .escape: return "escape"
         case .left: return "left"
         case .right: return "right"
@@ -135,7 +136,6 @@ enum Key: UInt16 {
         case .pageUp: return "pageUp"
         case .end: return "end"
         case .pageDown: return "pageDown"
-        case .function: return "function"
             
         case .f1: return "f1"
         case .f2: return "f2"

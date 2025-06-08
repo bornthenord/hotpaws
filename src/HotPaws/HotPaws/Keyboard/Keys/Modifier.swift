@@ -15,4 +15,18 @@ enum Modifier: UInt16 {
     case rightControl              = 0x3E
     case rightOption               = 0x3D
     case rightCommand              = 0x36
+    
+    var description : String {
+        switch self {
+        case .shift: return "shift"
+        case .control: return "control"
+        case .option: return "option"
+        case .command: return "command"
+
+        case .rightShift: return "rightShift"
+        case .rightControl: return "rightControl"
+        case .rightOption: return "rightOption"
+        case .rightCommand: return "rightCommand"
+        }
+    }
 }

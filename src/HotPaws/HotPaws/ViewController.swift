@@ -14,6 +14,8 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var lastPressedKeyLabel: NSTextFieldCell!
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
+    @IBOutlet var configText: NSTextView!
+    @IBOutlet weak var applyBtn: NSButton!
     
     public static var instace: ViewController? = nil
     public static let lastPressedKeyLabelDefault: String = "Press the key"
@@ -23,6 +25,9 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         ViewController.instace = self
+        
+        configText.string = Repository.config
+        configText.font = .systemFont(ofSize: 16)
         
         handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
         handleModifierChange.subscribe(type: CGEventType.flagsChanged, handler: modifierForDescHandler)
@@ -37,15 +42,17 @@ class ViewController: NSViewController {
 
 private func keyForDescHandler(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-        if let event = NSEvent(cgEvent: cgEvent) {
-            var description: String = ViewController.unknownKeyText
-            
-            if let key = Key(rawValue: event.keyCode){
-                description = key.description
-                ViewController.instace!.lastPressedKeyLabel.stringValue = "Pressed key:"
+        if ViewController.instace?.lastPressedKeyText.isAccessibilityFocused() == true {
+            if let event = NSEvent(cgEvent: cgEvent) {
+                var description: String = ViewController.unknownKeyText
+                
+                if let key = Key(rawValue: event.keyCode){
+                    description = key.description
+                    ViewController.instace!.lastPressedKeyLabel.stringValue = "Pressed key:"
+                }
+                
+                ViewController.instace!.lastPressedKeyText.stringValue = description
             }
-            
-            ViewController.instace!.lastPressedKeyText.stringValue = description
         }
         
         return Unmanaged.passUnretained(cgEvent)
@@ -53,16 +60,17 @@ private func keyForDescHandler(
 
 private func modifierForDescHandler(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-        if let event = NSEvent(cgEvent: cgEvent) {
-            var description: String = ViewController.unknownKeyText
-            
-            if let modifier = Modifier(rawValue: event.keyCode){
-                description = modifier.description
-                ViewController.instace!.lastPressedKeyLabel.stringValue = "Pressed modifier:"
+        if ViewController.instace?.lastPressedKeyText.isAccessibilityFocused() == true {
+            if let event = NSEvent(cgEvent: cgEvent) {
+                var description: String = ViewController.unknownKeyText
+                
+                if let modifier = Modifier(rawValue: event.keyCode){
+                    description = modifier.description
+                    ViewController.instace!.lastPressedKeyLabel.stringValue = "Pressed modifier:"
+                }
+                
+                ViewController.instace!.lastPressedKeyText.stringValue = description
             }
-            
-            ViewController.instace!.lastPressedKeyText.stringValue = description
         }
-        
         return Unmanaged.passUnretained(cgEvent)
     }

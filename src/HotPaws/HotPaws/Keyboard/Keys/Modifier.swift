@@ -33,6 +33,34 @@ enum Modifier: UInt16, CaseIterable {
         }
     }
     
+    public static func parse(_ modifier: String) throws -> Modifier {
+        switch modifier {
+        case "shift":
+            return .shift
+        case "control":
+            return .control
+        case "option":
+            return .option
+        case "command":
+            return .command
+        case "function":
+            return .function
+        case "capsLock":
+            return .capsLock
+        case "rightShift":
+            return .rightShift
+        case "rightControl":
+            return .rightControl
+        case "rightOption":
+            return .rightOption
+        case "rightCommand":
+            return .rightCommand
+            
+        default:
+            throw KeyErrors.KeyNotExists(key: modifier)
+        }
+    }
+    
     public static func GetAll() -> [Modifier] {
         var result = [Modifier]()
         

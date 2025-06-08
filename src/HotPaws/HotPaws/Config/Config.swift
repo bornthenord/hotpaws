@@ -64,7 +64,7 @@ struct Config {
                     _keyControl = defaultControlKey
                 } else {
                     do {
-                        _keyControl = try KeyParser.parseModifier(keyStr!)
+                        _keyControl = try Modifier.parse(keyStr!)
                     } catch {
                         _keyControl = defaultControlKey
                     }

@@ -40,8 +40,7 @@ class ViewController: NSViewController {
     @IBAction func apply(_ sender: Any) {
         do {
             HotSwap.mapping = try ConfigParser.parse(configText.string)
-            let controlKey = try KeyParser.parseModifier(controlKeyBox.stringValue)
-            Config.controlKey = controlKey
+            Config.controlKey = try Modifier.parse(controlKeyBox.stringValue)
             Config.mapping = configText.string
             
             alert(text: "Applied")

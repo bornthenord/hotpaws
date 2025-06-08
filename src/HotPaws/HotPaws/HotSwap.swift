@@ -15,33 +15,33 @@ struct HotSwap {
     public static let ReservedModifiers: Set<Modifier> = [.capsLock]
     public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
    
-    public static var skipDown: Bool = true
+    public static var skipSpaceDown: Bool = true
     public static var lastSpaceDownDate: Date? = nil
+    public static var spaceIsDown: Bool = false
     
     init() throws {
         keyDownEvent.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
-        keyUpEvent.subscribe(type: CGEventType.keyUp, handler: handleUpDown)
+        keyUpEvent.subscribe(type: CGEventType.keyUp, handler: handleKeyUp)
         
         HotSwap.config = try Parser.parse(Repository.config)
     }
 }
 
-private func handleUpDown(
+private func handleKeyUp(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           event.modifierFlags.contains(.capsLock) == false {
-            if let key = Key(rawValue: event.keyCode) {
-                if key == Key.space{
-                    
-                    let diff = Date().timeIntervalSince(HotSwap.lastSpaceDownDate!)
-                    HotSwap.lastSpaceDownDate = nil
-                    
-                    if diff < 0.1 {
-                        HotSwap.skipDown = false
-                        Keyboard.down(keys: [Key.space], modifiers: nil)
-                    } else {
-                        return nil
-                    }
+           let key = Key(rawValue: event.keyCode) {
+            if key == Key.space{
+                HotSwap.spaceIsDown = false
+                
+                let diff = Date().timeIntervalSince(HotSwap.lastSpaceDownDate!)
+                HotSwap.lastSpaceDownDate = nil
+                
+                if diff < 0.1 {
+                    HotSwap.skipSpaceDown = false
+                    Keyboard.down(keys: [Key.space], modifiers: nil)
+                } else {
+                    return nil
                 }
             }
         }
@@ -49,15 +49,28 @@ private func handleUpDown(
         return Unmanaged.passUnretained(cgEvent)
     }
 
-
 private func handleKeyDown(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           event.modifierFlags.contains(.capsLock) {
+           let key = Key(rawValue: event.keyCode) {
+            if key == Key.space {
+                HotSwap.spaceIsDown = true
+                
+                if HotSwap.lastSpaceDownDate == nil {
+                    HotSwap.lastSpaceDownDate = Date()
+                }
+                
+                if HotSwap.skipSpaceDown {
+                    return nil
+                }
+                
+                HotSwap.lastSpaceDownDate = nil
+                HotSwap.skipSpaceDown = true
+            }
             
-            let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
-            
-            if let key = Key(rawValue: event.keyCode) {
+            if HotSwap.spaceIsDown {
+                let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
+                
                 if let item = HotSwap.config?[key] {
                     let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
                     
@@ -67,9 +80,9 @@ private func handleKeyDown(
                 }
             }
         }
-    
-    return Unmanaged.passUnretained(cgEvent)
-}
+        
+        return Unmanaged.passUnretained(cgEvent)
+    }
 
 private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {
     var result : [Modifier]?

@@ -184,8 +184,8 @@ class KeyParser {
             return .comma
         case "period":
             return .period
-        case "forwardSlash":
-            return .forwardSlash
+        case "slash":
+            return .slash
         case "backslash":
             return .backslash
         case "grave":

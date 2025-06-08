@@ -140,7 +140,6 @@
                         <outlet property="configText" destination="Pgn-v4-5MJ" id="nLR-eq-zU5"/>
                         <outlet property="lastPressedKeyLabel" destination="gsh-03-9sq" id="nQ7-bQ-7OJ"/>
                         <outlet property="lastPressedKeyText" destination="aLc-NU-Zbx" id="P0L-gO-H8u"/>
-                        <outlet property="text" destination="Pgn-v4-5MJ" id="kJh-me-8N2"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

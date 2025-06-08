@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Keyborg
+//  HotPaws
 //
 //  Created by cat dog on 14.04.2025.
 //

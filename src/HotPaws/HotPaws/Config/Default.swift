@@ -4,6 +4,11 @@
 //
 //  Created by cat dog on 16.04.2025.
 //
+internal var DefaultControlKey: Modifier {
+    get {
+        return .function
+    }
+}
 
 public let DefaultConfig: String = """
     # navigation

@@ -11,12 +11,14 @@ struct HotSwap {
     private let keyDownEvent: Event?
     
     public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
-   
+    public static var controlKey: Modifier?
+    
     init() throws {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
         
         HotSwap.config = try Parser.parse(Repository.config)
+        HotSwap.controlKey = Repository.controlKey
     }
 }
 

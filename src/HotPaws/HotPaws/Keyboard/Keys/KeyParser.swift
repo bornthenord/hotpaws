@@ -14,10 +14,8 @@ enum KeyErrors: Error {
 class KeyParser {
     
     static func parseKey(_ key: String) throws -> Key {
-        let lower = key.lowercased()
         
-        switch lower {
-            
+        switch key {
         case "return":
             return .return
         case "enter":
@@ -54,7 +52,7 @@ class KeyParser {
             return .end
         case "pageDown":
             return .pageDown
-        
+            
         case "f1":
             return .f1
         case "f2":
@@ -95,7 +93,7 @@ class KeyParser {
             return .f19
         case "f20":
             return .f20
-        
+            
         case "a":
             return .a
         case "b":
@@ -192,7 +190,7 @@ class KeyParser {
             return .leftBracket
         case "rightBracket":
             return .rightBracket
-        
+            
         case "keypadDecimal":
             return .keypadDecimal
         case "keypadMultiply":
@@ -207,7 +205,7 @@ class KeyParser {
             return .keypadMinus
         case "keypadEquals":
             return .keypadEquals
-        
+            
         case "keypad0":
             return .keypad0
         case "keypad1":
@@ -228,16 +226,14 @@ class KeyParser {
             return .keypad8
         case "keypad9":
             return .keypad9
-    
+            
         default:
             throw KeyErrors.KeyNotExists(key: key)
         }
     }
     
     public static func parseModifier(_ modifier: String) throws -> Modifier {
-        let lower = modifier.lowercased()
-        
-        switch lower {
+        switch modifier {
         case "shift":
             return .shift
         case "control":
@@ -246,7 +242,10 @@ class KeyParser {
             return .option
         case "command":
             return .command
-
+        case "function":
+            return .function
+        case "capsLock":
+            return .capsLock
         case "rightShift":
             return .rightShift
         case "rightControl":

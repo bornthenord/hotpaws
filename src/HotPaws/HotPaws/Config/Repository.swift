@@ -9,21 +9,49 @@ import Foundation
 
 
 struct Repository {
-    private static let _key: String = "config"
-    private static var _content: String?
+    private static let _keyConfig: String = "config"
+    private static var _contentConfig: String?
+    
+    private static let _keyControlKey: String = "controlKey"
+    private static var _keyControl: Modifier?
     
     public static var config: String {
         get {
-            if _content == nil {
-                _content = UserDefaults.standard.string(forKey: _key) ?? DefaultConfig
+            if _contentConfig == nil {
+                _contentConfig = UserDefaults.standard.string(forKey: _keyConfig) ?? DefaultConfig
             }
             
-            return _content!
+            return _contentConfig!
         }
         
         set {
-            UserDefaults.standard.set(newValue, forKey: _key)
-            _content = newValue
+            UserDefaults.standard.set(newValue, forKey: _keyConfig)
+            _contentConfig = newValue
+        }
+    }
+    
+    public static var controlKey: Modifier {
+        get {
+            if _keyControl == nil {
+                let keyStr = UserDefaults.standard.string(forKey: _keyControlKey)
+                
+                if keyStr == nil {
+                    _keyControl = DefaultControlKey
+                } else {
+                    do {
+                        _keyControl = try KeyParser.parseModifier(keyStr!)
+                    } catch {
+                        _keyControl = DefaultControlKey
+                    }
+                }
+            }
+            
+            return _keyControl!
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue.description, forKey: _keyControlKey)
+            _keyControl = newValue
         }
     }
 }

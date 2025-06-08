@@ -110,15 +110,15 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <size key="minSize" width="443" height="448"/>
-                                            <size key="maxSize" width="445" height="10000000"/>
+                                            <size key="maxSize" width="458" height="10000000"/>
                                         </textView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="n6o-Va-gjH">
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="n6o-Va-gjH">
                                     <rect key="frame" x="-100" y="-100" width="225" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="JYM-8L-MHn">
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="JYM-8L-MHn">
                                     <rect key="frame" x="443" y="0.0" width="15" height="448"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>

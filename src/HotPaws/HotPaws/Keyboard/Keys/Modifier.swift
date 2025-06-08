@@ -33,11 +33,11 @@ enum Modifier: UInt16, CaseIterable {
         }
     }
     
-    public static func GetAll() -> [String] {
-        var result = [String]()
+    public static func GetAll() -> [Modifier] {
+        var result = [Modifier]()
         
         for modifier in Modifier.allCases {
-            result.append(modifier.description)
+            result.append(modifier)
         }
         
         return result

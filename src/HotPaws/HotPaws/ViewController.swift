@@ -22,20 +22,28 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         ViewController.instace = self
+        ViewController.instace?.title = "Settings"
+        
+        for modifier in Modifier.allCases{
+            ViewController.instace?
+                .controlKeyBox.insertItem(withObjectValue: modifier.description, at: 0)
+        }
+        
+        ViewController.instace?.controlKeyBox.selectItem(withObjectValue: Repository.controlKey.description)
         
         configText.string = Repository.config
         configText.font = .systemFont(ofSize: 16)
         
         handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
-        
-        ViewController.instace?.title = "Settings"
-        ViewController.instace?.controlKeyBox.addItems(withObjectValues: Modifier.GetAll())
     }
     
     @IBAction func apply(_ sender: Any) {
         do {
             HotSwap.config = try Parser.parse(configText.string)
+            let controlKey = try KeyParser.parseModifier(controlKeyBox.stringValue)
+            Repository.controlKey = controlKey
             Repository.config = configText.string
+            
             alert(text: "Applied")
         } catch {
             alert(text: "\(error)")

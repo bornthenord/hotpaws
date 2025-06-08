@@ -1,6 +1,6 @@
 //
 //  Modifier.swift
-//  Keyborg
+//  HotPaws
 //
 //  Created by cat dog on 08.05.2025.
 //

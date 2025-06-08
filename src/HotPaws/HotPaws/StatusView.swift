@@ -1,6 +1,6 @@
 //
 //  StatusView.swift
-//  Keyborg
+//  HotPaws
 //
 //  Created by cat dog on 15.04.2025.
 //

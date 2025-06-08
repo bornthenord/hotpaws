@@ -3,6 +3,9 @@
 <p>
 <h1 align="center">Hot swap key mapping for macOS</h1>
 
+## Pre requirements
+Version macOS Big Sur 11.5 or higher
+
 ## Installation
 1. Download dmg [installer](https://github.com/bornthenord/keyborg/releases)
 2. Open the installer and copy the app to the Applications folder

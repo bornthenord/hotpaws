@@ -17,7 +17,7 @@ struct HotSwap {
         keyDownEvent = Event()
         keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
         
-        HotSwap.mapping = try Parser.parse(Config.mapping)
+        HotSwap.mapping = try ConfigParser.parse(Config.mapping)
         HotSwap.controlKey = Config.controlKey
     }
 }

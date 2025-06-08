@@ -39,7 +39,7 @@ class ViewController: NSViewController {
     
     @IBAction func apply(_ sender: Any) {
         do {
-            HotSwap.mapping = try Parser.parse(configText.string)
+            HotSwap.mapping = try ConfigParser.parse(configText.string)
             let controlKey = try KeyParser.parseModifier(controlKeyBox.stringValue)
             Config.controlKey = controlKey
             Config.mapping = configText.string

@@ -11,7 +11,7 @@ enum ConfigErrors: Error {
     case Invalid(String)
 }
 
-struct Parser {
+struct ConfigParser {
     public static func parse(_ content: String) throws -> [Key: (Keys: [Key], Modifiers: [Modifier]?)] {
         var result = [Key: (Keys: [Key], Modifiers: [Modifier]?)]()
         

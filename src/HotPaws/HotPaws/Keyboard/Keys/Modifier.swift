@@ -5,7 +5,7 @@
 //  Created by cat dog on 08.05.2025.
 //
 
-enum Modifier: UInt16 {
+enum Modifier: UInt16, CaseIterable {
     case shift                     = 0x38
     case control                   = 0x3B
     case option                    = 0x3A
@@ -23,13 +23,23 @@ enum Modifier: UInt16 {
         case .control: return "control"
         case .option: return "option"
         case .command: return "command"
-        case .function: return "function cannot be reassigned"
-        case .capsLock: return "capsLock cannot be reassigned"
+        case .function: return "function"
+        case .capsLock: return "capsLock"
             
         case .rightShift: return "rightShift"
         case .rightControl: return "rightControl"
         case .rightOption: return "rightOption"
         case .rightCommand: return "rightCommand"
         }
+    }
+    
+    public static func GetAll() -> [String] {
+        var result = [String]()
+        
+        for modifier in Modifier.allCases {
+            result.append(modifier.description)
+        }
+        
+        return result
     }
 }

@@ -77,20 +77,20 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="HotPaws" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="554"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="582"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAf-WY-uTs">
-                                <rect key="frame" x="18" y="526" width="310" height="16"/>
+                                <rect key="frame" x="16" y="64" width="310" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" id="gsh-03-9sq">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Pressed key" id="gsh-03-9sq">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJI-zK-DJd">
-                                <rect key="frame" x="20" y="497" width="440" height="21"/>
+                                <rect key="frame" x="16" y="40" width="452" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" identifier="lastPressedKey" placeholderString="Hover and click the button to determine the key code" drawsBackground="YES" id="aLc-NU-Zbx">
                                     <font key="font" metaFont="system"/>
@@ -99,17 +99,17 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mV-kO-rWt">
-                                <rect key="frame" x="22" y="53" width="438" height="398"/>
+                                <rect key="frame" x="10" y="88" width="458" height="448"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" drawsBackground="NO" id="g9l-zs-zTC">
-                                    <rect key="frame" x="0.0" y="0.0" width="423" height="398"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="443" height="448"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Pgn-v4-5MJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="423" height="398"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="443" height="448"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="423" height="398"/>
+                                            <size key="minSize" width="443" height="448"/>
                                             <size key="maxSize" width="445" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -119,21 +119,30 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="JYM-8L-MHn">
-                                    <rect key="frame" x="423" y="0.0" width="15" height="398"/>
+                                    <rect key="frame" x="443" y="0.0" width="15" height="448"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aec-bp-mxj">
-                                <rect key="frame" x="20" y="459" width="44" height="16"/>
+                            <comboBox focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEa-Iu-c9f">
+                                <rect key="frame" x="87" y="542" width="384" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Config" id="ypc-al-SzK">
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="10" id="s52-Up-vGS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </comboBoxCell>
+                            </comboBox>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ogN-wI-xvb">
+                                <rect key="frame" x="10" y="546" width="73" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Control key" id="y3U-ys-UBV">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ibz-6Z-eHi">
-                                <rect key="frame" x="398" y="6" width="69" height="32"/>
+                                <rect key="frame" x="406" y="5" width="69" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GMs-fK-zic">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -147,13 +156,13 @@
                     </view>
                     <connections>
                         <outlet property="configText" destination="Pgn-v4-5MJ" id="nLR-eq-zU5"/>
-                        <outlet property="lastPressedKeyLabel" destination="gsh-03-9sq" id="nQ7-bQ-7OJ"/>
+                        <outlet property="controlKeyBox" destination="kEa-Iu-c9f" id="24D-iH-WJC"/>
                         <outlet property="lastPressedKeyText" destination="aLc-NU-Zbx" id="P0L-gO-H8u"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89" y="1283"/>
+            <point key="canvasLocation" x="89" y="1297"/>
         </scene>
     </scenes>
 </document>

@@ -10,6 +10,8 @@ import Cocoa
 struct HotSwap {
     private let keyDownEvent: Event?
     
+    public static let ReservedKeys: Set<Key> = [.space]
+    public static let ReservedModifiers: Set<Modifier> = [.capsLock]
     public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
    
     init() throws {
@@ -23,7 +25,7 @@ struct HotSwap {
 private func handleKeyDown(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           event.modifierFlags.contains(.capsLock) || event.modifierFlags.contains(.function) {
+           event.modifierFlags.contains(.capsLock) {
             
             let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
             

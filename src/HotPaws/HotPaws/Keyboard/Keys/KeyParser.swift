@@ -246,7 +246,10 @@ class KeyParser {
             return .option
         case "command":
             return .command
-
+        case "function":
+            return .function
+        case "capsLock":
+            return .capsLock
         case "rightShift":
             return .rightShift
         case "rightControl":

@@ -23,8 +23,8 @@ enum Modifier: UInt16 {
         case .control: return "control"
         case .option: return "option"
         case .command: return "command"
-        case .function: return "function cannot be reassigned"
-        case .capsLock: return "capsLock cannot be reassigned"
+        case .function: return "function"
+        case .capsLock: return "capsLock"
             
         case .rightShift: return "rightShift"
         case .rightControl: return "rightControl"

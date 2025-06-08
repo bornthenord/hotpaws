@@ -58,7 +58,12 @@ private func keyForDescHandler(
                 var description: String = ViewController.unknownKeyText
                 
                 if let key = Key(rawValue: event.keyCode){
-                    description = key.description
+                    if HotSwap.ReservedKeys.contains(key){
+                        description = "Key [\(key.description)] cannot be reassigned"
+                    } else {
+                        description = key.description
+                    }
+                    
                     ViewController.instace!.lastPressedKeyLabel.stringValue = "Pressed key:"
                 }
                 
@@ -76,7 +81,12 @@ private func modifierForDescHandler(
                 var description: String = ViewController.unknownKeyText
                 
                 if let modifier = Modifier(rawValue: event.keyCode){
-                    description = modifier.description
+                    if HotSwap.ReservedModifiers.contains(modifier){
+                        description = "Modifier [\(modifier.description)] cannot be reassigned"
+                    } else {
+                        description = modifier.description
+                    }
+                    
                     ViewController.instace!.lastPressedKeyLabel.stringValue = "Pressed modifier:"
                 }
                 

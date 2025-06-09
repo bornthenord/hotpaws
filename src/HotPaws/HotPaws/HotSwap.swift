@@ -11,13 +11,13 @@ struct HotSwap {
     private let keyDownEvent: Event = Event()
     
     init() throws {
-        keyDownEvent.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
+        keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownEventHandler)
         
         try Config.load()
     }
 }
 
-private func handleKeyDown(
+private func keyDownEventHandler(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
            

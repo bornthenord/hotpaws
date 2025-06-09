@@ -8,8 +8,8 @@
 import Cocoa
 
 class ViewController: NSViewController {
-    
-    private let handleKeyUp: Event = Event()
+
+    private var keyDetected: KeyDetected?
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
     @IBOutlet var mappingText: NSTextView!
@@ -26,7 +26,7 @@ class ViewController: NSViewController {
         initControlKeyBox(selectedKey: Config.controlKey)
         initMapping(mapping: Config.mappingString)
         
-        handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
+        keyDetected = KeyDetected(textView: self.lastPressedKeyText)
     }
     
     @IBAction func apply(_ sender: Any) {
@@ -59,20 +59,3 @@ class ViewController: NSViewController {
         mappingText.font = .systemFont(ofSize: 16)
     }
 }
-
-private func keyForDescHandler(
-    _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-        if ViewController.instace?.lastPressedKeyText.isAccessibilityFocused() == true {
-            if let event = NSEvent(cgEvent: cgEvent) {
-                var description: String = "unknown key"
-                
-                if let key = Key(rawValue: event.keyCode){
-                    description = key.description
-                }
-                
-                ViewController.instace!.lastPressedKeyText.stringValue = description
-            }
-        }
-        
-        return Unmanaged.passUnretained(cgEvent)
-    }

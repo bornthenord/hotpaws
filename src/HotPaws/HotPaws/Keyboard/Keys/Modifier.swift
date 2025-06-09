@@ -5,7 +5,7 @@
 //  Created by cat dog on 08.05.2025.
 //
 
-enum Modifier: UInt16, CaseIterable {
+public enum Modifier: UInt16, CaseIterable {
     case shift                     = 0x38
     case control                   = 0x3B
     case option                    = 0x3A

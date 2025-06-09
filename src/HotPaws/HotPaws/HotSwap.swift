@@ -26,7 +26,7 @@ private func handleKeyDown(
             
             if let key = Key(rawValue: event.keyCode) {
                 if let item = Config.mapping[key] {
-                    let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
+                    let modifiers = pressedModfifers.merge(item.Modifiers)
                     
                     Keyboard.press(keys: item.Keys, modifiers: modifiers)
                     
@@ -110,16 +110,4 @@ private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {
     }
     
     return result
-}
-
-private func mergeModifiers(left: [Modifier]?, right: [Modifier]?) -> [Modifier]? {
-    if left == nil {
-        return right
-    }
-    
-    if right == nil {
-        return left
-    }
-    
-    return left! + right!
 }

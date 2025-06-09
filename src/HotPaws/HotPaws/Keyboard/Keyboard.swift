@@ -7,7 +7,7 @@
 import Cocoa
 
 struct Keyboard {
-    public static func press(keys: [Key], modifiers: [Modifier]?) {
+    public static func press(keys: Set<Key>, modifiers: Set<Modifier>?) {
         
         var flags: CGEventFlags = []
         
@@ -33,9 +33,9 @@ struct Keyboard {
                     flags.insert(.maskCommand)
 
                 case .function:
-                    break
+                    continue
                 case .capsLock:
-                    break
+                    continue
                 }
             }
         }

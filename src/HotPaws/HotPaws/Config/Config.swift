@@ -8,9 +8,15 @@
 import Foundation
 
 
+struct MappingRule {
+    var key: Key
+    var targetKeys: Set<Key>
+    var modifiers: Set<Modifier>?
+}
+
 struct Config {
     private static let _keyMapping: String = "mapping"
-    private static var _mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)] = [:]
+    private static var _mapping: Dictionary<Key,MappingRule> = [:]
     private static var _mappingString: String = """
         # navigation
         h:left
@@ -26,7 +32,7 @@ struct Config {
         _keyControl
     }
     
-    public static var mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)] {
+    public static var mapping: Dictionary<Key,MappingRule> {
         _mapping
     }
     

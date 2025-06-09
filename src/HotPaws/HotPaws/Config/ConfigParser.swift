@@ -12,23 +12,23 @@ enum ConfigErrors: Error {
 }
 
 struct ConfigParser {
-    public static func parse(_ content: String) throws -> [Key: (Keys: [Key], Modifiers: [Modifier]?)] {
-        var result = [Key: (Keys: [Key], Modifiers: [Modifier]?)]()
+    public static func parse(_ content: String) throws -> Dictionary<Key,MappingRule> {
+        var result = Dictionary<Key,MappingRule>()
         
         for raw in content.split(separator: "\n") {
             if raw.starts(with: "#") {
                 continue
             }
             
-            let map = try parseLine(String(raw))
+            let rule = try parseLine(String(raw))
             
-            result[map.Key] = (map.Keys, map.Modifiers)
+            result[rule.key] = rule
         }
         
         return result
     }
     
-    private static func parseLine(_ raw: String) throws -> (Key: Key, Keys: [Key], Modifiers: [Modifier]?) {
+    private static func parseLine(_ raw: String) throws -> MappingRule {
         let items = raw.split(separator: ":")
         
         if items.count < 2 {
@@ -37,32 +37,32 @@ struct ConfigParser {
         
         let key = try toKey(String(items[0]))
         let targetKeys = try parseKeys(String(items[1]))
-        var modifiers: [Modifier]?
+        var modifiers: Set<Modifier>?
         
         if items.count == 3 {
             modifiers = try parseModifiers(String(items[2]))
         }
         
-        return (key, targetKeys, modifiers)
+        return MappingRule(key: key, targetKeys: targetKeys, modifiers: modifiers)
     }
     
-    private static func parseKeys(_ keys: String) throws -> [Key] {
-        var result = [Key]()
+    private static func parseKeys(_ keys: String) throws -> Set<Key> {
+        var result = Set<Key>()
         let raws = keys.split(separator: ",")
         
         for raw in raws {
-            result.append(try toKey(String(raw)))
+            result.insert(try toKey(String(raw)))
         }
         
         return result
     }
     
-    private static func parseModifiers(_ modifiers: String) throws -> [Modifier] {
-        var result = [Modifier]()
+    private static func parseModifiers(_ modifiers: String) throws -> Set<Modifier> {
+        var result = Set<Modifier>()
         let raws = modifiers.split(separator: ",")
         
         for raw in raws {
-            result.append(try toModifier(String(raw)))
+            result.insert(try toModifier(String(raw)))
         }
         
         return result

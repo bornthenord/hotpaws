@@ -12,30 +12,34 @@ Version macOS Big Sur 11.5 or higher
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 
 ## How use
-Remapping will be enabled while key modifier **[Control key]** is held down
+Remapping will be enabled while **[switch key]** is held down
 
 ### Configuration
+The configuration consists of **[switch key]**
 
-#### Control key
-This is a modifier key that controls remapping
+- **[switch key]** - toggle key, required
 
-#### Mapping
+mapping rule **key source**:**keys target**:**modifiers** for switch key
 
-The configuration consists of mapping rules [***key source***]:[***keys target***]:[***modifiers***] and comments ***#***
+- **key source** - the key to be redefined, required
+- **keys target** - keys (separated by commas) to which we assign, required
+- **modifiers** - modifiers (separated by commas) to be pressed, not required
 
-[***key source***] - the key to be redefined\
-[***keys target***] - keys (separated by commas) to which we assign\
-[***modifiers***] - modifiers (separated by commas) to be pressed, not required
+and comment **#**
 
 ### Example
 
 ```text
+# cmd layer
+[cmd]
 # like vim navigation
 h:left
 k:up
 j:down
 l:right
-# tab navigation
-s:left:option,command
-d:right:option,command
+
+# cmdr layer
+[cmdr]
+l:enter
+k:escape
 ```

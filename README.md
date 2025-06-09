@@ -12,28 +12,30 @@ Version macOS Big Sur 11.5 or higher
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 
 ## How use
-<b>caps lock</b> - enable/disable\
-or press <b>fn</b> for remapping will be enabled while the button is held down
+Remapping will be enabled while key modifier **[Control key]** is held down
 
 ### Configuration
 
+#### Control key
+This is a modifier key that controls remapping
+
+#### Mapping
+
 The configuration consists of mapping rules [***key source***]:[***keys target***]:[***modifiers***] and comments ***#***
 
-[***key source***] - the [key](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) to be redefined\
-[***keys target***] - [keys](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) (separated by commas) to which we assign\
-[***modifiers***] - [modifiers](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
+[***key source***] - the key to be redefined\
+[***keys target***] - keys (separated by commas) to which we assign\
+[***modifiers***] - modifiers (separated by commas) to be pressed, not required
 
 ### Example
 
-\# like vim navigation\
-h:left\
-k:up\
-j:down\
-l:right\
-\# tab navigation\
-s:left:option,command\
+```text
+# like vim navigation
+h:left
+k:up
+j:down
+l:right
+# tab navigation
+s:left:option,command
 d:right:option,command
-
-## Tips & Tricks
-Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\
-Now, by holding down the Caps Lock key with your pinky, you can easily switch between "layers" as needed.
+```

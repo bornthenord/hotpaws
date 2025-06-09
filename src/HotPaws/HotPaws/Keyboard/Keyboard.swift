@@ -31,7 +31,7 @@ struct Keyboard {
                     flags.insert(.maskCommand)
                 case .rightCommand:
                     flags.insert(.maskCommand)
-
+                    
                 case .function:
                     continue
                 case .capsLock:

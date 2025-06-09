@@ -17,20 +17,23 @@ Remapping will be enabled while **[switch key]** is held down
 ### Configuration
 The configuration consists of **[switch key]**
 
-- **[switch key]** - toggle key, required
+- **[switch key]** - modifier code, required
 
-mapping rule **key source**:**keys target**:**modifiers** for switch key
+mapping rule **key**:**targets**:**modifiers** for switch key
 
-- **key source** - the key to be redefined, required
-- **keys target** - keys (separated by commas) to which we assign, required
-- **modifiers** - modifiers (separated by commas) to be pressed, not required
+- **key** - key code to be redefined, required
+- **targets** - key codes (separated by commas) to which we assign, required
+- **modifiers** - modifier codes (separated by commas) to be pressed, not required
 
 and comment **#**
+
+You can assign rules to modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command\
+To determine the code for the desired key or modifier, use the code definition feature in the settings.
 
 ### Example
 
 ```text
-# cmd layer
+# command layer
 [cmd]
 # like vim navigation
 h:left
@@ -38,7 +41,7 @@ k:up
 j:down
 l:right
 
-# cmdr layer
+# right command layer
 [cmdr]
 l:enter
 k:escape

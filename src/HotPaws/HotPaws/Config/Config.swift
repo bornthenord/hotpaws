@@ -12,11 +12,12 @@ struct Config {
     private static let _keyMapping: String = "config"
     private static var _mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> = [:]
     private static var _mappingString: String = """
+        [fn]
         # navigation
-        fn:h:left
-        fn:k:up
-        fn:j:down
-        fn:l:right
+        h:left
+        k:up
+        j:down
+        l:right
         """
 
     public static var mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> {

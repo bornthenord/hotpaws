@@ -14,41 +14,46 @@ enum ConfigErrors: Error {
 struct ConfigParser {
     public static func parse(_ content: String) throws -> Dictionary<Modifier,Dictionary<Key,Mapping>> {
         var layers = Dictionary<Modifier,Dictionary<Key,Mapping>>()
+        var currentSwitchModifier = Modifier.fn
         
         for raw in content.split(separator: "\n") {
             if raw.starts(with: "#") {
                 continue
             }
             
-            let layer = try parseLine(String(raw))
+            if raw.starts(with: "[") {
+                currentSwitchModifier = try toSwitchModifier(String(raw))
+                continue
+            }
             
-            if layers.keys.contains(layer.switchModifier) {
-                layers[layer.switchModifier]![layer.mapping.key] = layer.mapping
+            let mapping = try parseMapping(String(raw))
+            
+            if layers.keys.contains(currentSwitchModifier) {
+                layers[currentSwitchModifier]![mapping.key] = mapping
             } else {
-                layers[layer.switchModifier] = [layer.mapping.key: layer.mapping]
+                layers[currentSwitchModifier] = [mapping.key: mapping]
             }
         }
         
         return layers
     }
     
-    private static func parseLine(_ raw: String) throws -> (switchModifier: Modifier, mapping: Mapping) {
+    private static func parseMapping(_ raw: String) throws -> Mapping {
         let items = raw.split(separator: ":")
         
-        if items.count < 3 {
+        if items.count < 2 {
             throw ConfigErrors.Invalid(raw)
         }
         
-        let switchModifier = try toModifier(String(items[0]))
-        let key = try toKey(String(items[1]))
-        let targets = try parseKeys(String(items[2]))
+        let key = try toKey(String(items[0]))
+        let targets = try parseKeys(String(items[1]))
         var modifiers: Set<Modifier>?
         
-        if items.count == 4 {
-            modifiers = try parseModifiers(String(items[3]))
+        if items.count == 3 {
+            modifiers = try parseModifiers(String(items[2]))
         }
         
-        return (switchModifier, Mapping(key: key, targets: targets, modifiers: modifiers))
+        return Mapping(key: key, targets: targets, modifiers: modifiers)
     }
     
     private static func parseKeys(_ keys: String) throws -> Set<Key> {
@@ -83,5 +88,14 @@ struct ConfigParser {
         let modifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
         return try Modifier.parse(modifier)
+    }
+    
+    private static func toSwitchModifier(_ raw: String) throws -> Modifier {
+        var switchModifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        switchModifier = String(switchModifier.dropFirst())
+        switchModifier = String(switchModifier.dropLast())
+        
+        return try Modifier.parse(switchModifier)
     }
 }

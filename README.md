@@ -7,7 +7,7 @@
 Version macOS Big Sur 11.5 or higher
 
 ## Installation
-1. Download dmg [installer](https://github.com/bornthenord/keyborg/releases)
+1. Download zip [arhive](https://github.com/bornthenord/keyborg/releases)
 2. Open the installer and copy the app to the Applications folder
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 

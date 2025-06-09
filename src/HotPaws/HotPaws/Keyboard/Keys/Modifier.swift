@@ -56,14 +56,4 @@ enum Modifier: UInt16, CaseIterable {
             throw KeyErrors.KeyNotExists(key: modifier)
         }
     }
-    
-    public static func GetAll() -> [Modifier] {
-        var result = [Modifier]()
-        
-        for modifier in Modifier.allCases {
-            result.append(modifier)
-        }
-        
-        return result
-    }
 }

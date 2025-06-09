@@ -8,9 +8,10 @@
 import Cocoa
 
 struct HotSwap {
-    private let keyDownEvent: Event?
+    private let keyDownEvent: Event = Event()
     
     public static var mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
+    
     public static var controlKey: Modifier {
         get {
             return Config.controlKey
@@ -18,8 +19,7 @@ struct HotSwap {
     }
     
     init() throws {
-        keyDownEvent = Event()
-        keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
+        keyDownEvent.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
         
         HotSwap.mapping = try ConfigParser.parse(Config.mapping)
     }
@@ -47,21 +47,21 @@ private func handleKeyDown(
     }
 
 private func isControlKeyPressed(flags: NSEvent.ModifierFlags) -> Bool {
-    return flags.contains(.capsLock) && HotSwap.controlKey == .capsLock ||
-    flags.contains(.shift) && HotSwap.controlKey == .shift ||
-    flags.contains(.function) && HotSwap.controlKey == .function ||
-    flags.contains(.control) && HotSwap.controlKey == .control ||
-    flags.contains(.option) && HotSwap.controlKey == .option ||
-    flags.contains(.command) && HotSwap.controlKey == .command ||
-    flags.contains(.command) && flags.rawValue == 1048848 && HotSwap.controlKey == .rightCommand ||
-    flags.contains(.option) && flags.rawValue == 524608 && HotSwap.controlKey == .rightOption ||
-    flags.contains(.shift) && flags.rawValue == 131332 && HotSwap.controlKey == .rightShift
+    return (flags.contains(.capsLock) && HotSwap.controlKey == .capsLock) ||
+    (flags.contains(.function) && HotSwap.controlKey == .function) ||
+    (flags.contains(.shift) && HotSwap.controlKey == .shift) ||
+    (flags.contains(.control) && HotSwap.controlKey == .control) ||
+    (flags.contains(.option) && HotSwap.controlKey == .option) ||
+    (flags.contains(.command) && HotSwap.controlKey == .command) ||
+    (flags.containsRightCommand() && HotSwap.controlKey == .rightCommand) ||
+    (flags.containsRightOption() && HotSwap.controlKey == .rightOption) ||
+    (flags.containsRightShift() && HotSwap.controlKey == .rightShift)
 }
 
 private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {
     var result : [Modifier]?
     
-    if flags.contains(.shift) {
+    if flags.contains(.shift) && HotSwap.controlKey != .shift {
         if result == nil {
             result = [.shift]
         } else {
@@ -69,7 +69,15 @@ private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {
         }
     }
     
-    if flags.contains(.control) {
+    if flags.containsRightShift() && HotSwap.controlKey != .rightShift {
+        if result == nil {
+            result = [.rightShift]
+        } else {
+            result?.append(.rightShift)
+        }
+    }
+    
+    if flags.contains(.control) && HotSwap.controlKey != .control {
         if result == nil {
             result = [.control]
         } else {
@@ -77,7 +85,7 @@ private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {
         }
     }
     
-    if flags.contains(.option) {
+    if flags.contains(.option) && HotSwap.controlKey != .option{
         if result == nil {
             result = [.option]
         } else {
@@ -85,11 +93,27 @@ private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {
         }
     }
     
-    if flags.contains(.command) {
+    if flags.containsRightOption() && HotSwap.controlKey != .rightOption{
+        if result == nil {
+            result = [.rightOption]
+        } else {
+            result?.append(.rightOption)
+        }
+    }
+    
+    if flags.contains(.command) && HotSwap.controlKey != .command {
         if result == nil {
             result = [.command]
         } else {
             result?.append(.command)
+        }
+    }
+    
+    if flags.containsRightCommand() && HotSwap.controlKey != .rightCommand {
+        if result == nil {
+            result = [.rightCommand]
+        } else {
+            result?.append(.rightCommand)
         }
     }
     

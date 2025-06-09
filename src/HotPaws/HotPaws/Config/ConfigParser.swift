@@ -12,38 +12,43 @@ enum ConfigErrors: Error {
 }
 
 struct ConfigParser {
-    public static func parse(_ content: String) throws -> Dictionary<Key,MappingRule> {
-        var result = Dictionary<Key,MappingRule>()
+    public static func parse(_ content: String) throws -> Dictionary<Modifier,Dictionary<Key,Mapping>> {
+        var layers = Dictionary<Modifier,Dictionary<Key,Mapping>>()
         
         for raw in content.split(separator: "\n") {
             if raw.starts(with: "#") {
                 continue
             }
             
-            let rule = try parseLine(String(raw))
+            let layer = try parseLine(String(raw))
             
-            result[rule.key] = rule
+            if layers.keys.contains(layer.switchModifier) {
+                layers[layer.switchModifier]![layer.mapping.key] = layer.mapping
+            } else {
+                layers[layer.switchModifier] = [layer.mapping.key: layer.mapping]
+            }
         }
         
-        return result
+        return layers
     }
     
-    private static func parseLine(_ raw: String) throws -> MappingRule {
+    private static func parseLine(_ raw: String) throws -> (switchModifier: Modifier, mapping: Mapping) {
         let items = raw.split(separator: ":")
         
-        if items.count < 2 {
+        if items.count < 3 {
             throw ConfigErrors.Invalid(raw)
         }
         
-        let key = try toKey(String(items[0]))
-        let targetKeys = try parseKeys(String(items[1]))
+        let switchModifier = try toModifier(String(items[0]))
+        let key = try toKey(String(items[1]))
+        let targets = try parseKeys(String(items[2]))
         var modifiers: Set<Modifier>?
         
-        if items.count == 3 {
-            modifiers = try parseModifiers(String(items[2]))
+        if items.count == 4 {
+            modifiers = try parseModifiers(String(items[3]))
         }
         
-        return MappingRule(key: key, targetKeys: targetKeys, modifiers: modifiers)
+        return (switchModifier, Mapping(key: key, targets: targets, modifiers: modifiers))
     }
     
     private static func parseKeys(_ keys: String) throws -> Set<Key> {

@@ -13,7 +13,6 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
     @IBOutlet var mappingText: NSTextView!
-    @IBOutlet weak var controlKeyBox: NSComboBox!
     
     public static var instace: ViewController? = nil
     
@@ -23,7 +22,6 @@ class ViewController: NSViewController {
         ViewController.instace = self
         ViewController.instace?.title = "Settings"
         
-        initControlKeyBox(selectedKey: Config.controlKey)
         initMapping(mapping: Config.mappingString)
         
         keyDetected = KeyDetected(textView: self.lastPressedKeyText)
@@ -31,21 +29,12 @@ class ViewController: NSViewController {
     
     @IBAction func apply(_ sender: Any) {
         do {
-            try Config.save(controlKey: controlKeyBox.stringValue, mapping: mappingText.string)
+            try Config.save(mapping: mappingText.string)
             
             AlertView.alert(window: self.view.window!, text: "Applied")
         } catch {
             AlertView.alert(window: self.view.window!, text: "\(error)")
         }
-    }
-    
-    private func initControlKeyBox(selectedKey: Modifier) {
-        for modifier in Modifier.allCases{
-            ViewController.instace?
-                .controlKeyBox.insertItem(withObjectValue: modifier.description, at: 0)
-        }
-        
-        ViewController.instace?.controlKeyBox.selectItem(withObjectValue: selectedKey.description)
     }
     
     private func initMapping(mapping: String) {

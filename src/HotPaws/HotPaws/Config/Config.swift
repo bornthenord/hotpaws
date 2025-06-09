@@ -8,31 +8,18 @@
 import Foundation
 
 
-struct MappingRule {
-    var key: Key
-    var targetKeys: Set<Key>
-    var modifiers: Set<Modifier>?
-}
-
 struct Config {
-    private static let _keyMapping: String = "mapping"
-    private static var _mapping: Dictionary<Key,MappingRule> = [:]
+    private static let _keyMapping: String = "config"
+    private static var _mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> = [:]
     private static var _mappingString: String = """
         # navigation
-        h:left
-        k:up
-        j:down
-        l:right
+        fn:h:left
+        fn:k:up
+        fn:j:down
+        fn:l:right
         """
-    
-    private static let _keyControlKey: String = "controlKey"
-    private static var _keyControl: Modifier = .fn
 
-    public static var controlKey: Modifier {
-        _keyControl
-    }
-    
-    public static var mapping: Dictionary<Key,MappingRule> {
+    public static var mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> {
         _mapping
     }
     
@@ -41,24 +28,19 @@ struct Config {
     }
     
     public static func load() throws {
-        let keyStr = UserDefaults.standard.string(forKey: _keyControlKey)
-        if keyStr != nil {
-            _keyControl =  try Modifier.parse(keyStr!)
-        }
-        
         let mappingStr = UserDefaults.standard.string(forKey: _keyMapping)
+        
         if mappingStr != nil {
             _mappingString = mappingStr!
-            _mapping = try ConfigParser.parse(mappingStr!)
         }
+        
+        _mapping = try ConfigParser.parse(_mappingString)
     }
     
-    public static func save(controlKey: String, mapping: String) throws {
-        _keyControl = try Modifier.parse(controlKey)
+    public static func save(mapping: String) throws {
         _mapping = try ConfigParser.parse(mapping)
         _mappingString = mapping
         
-        UserDefaults.standard.set(controlKey, forKey: _keyControlKey)
         UserDefaults.standard.set(mapping, forKey: _keyMapping)
     }
 }

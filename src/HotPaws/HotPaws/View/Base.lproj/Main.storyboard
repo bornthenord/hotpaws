@@ -99,17 +99,17 @@
                                 </textFieldCell>
                             </textField>
                             <scrollView fixedFrame="YES" borderType="groove" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mV-kO-rWt">
-                                <rect key="frame" x="8" y="89" width="470" height="499"/>
+                                <rect key="frame" x="8" y="89" width="470" height="567"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" drawsBackground="NO" id="g9l-zs-zTC">
-                                    <rect key="frame" x="2" y="2" width="451" height="495"/>
+                                    <rect key="frame" x="2" y="2" width="451" height="563"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Pgn-v4-5MJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="451" height="495"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="451" height="563"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="451" height="495"/>
+                                            <size key="minSize" width="451" height="563"/>
                                             <size key="maxSize" width="470" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -119,28 +119,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="JYM-8L-MHn">
-                                    <rect key="frame" x="453" y="2" width="15" height="495"/>
+                                    <rect key="frame" x="453" y="2" width="15" height="563"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ogN-wI-xvb">
-                                <rect key="frame" x="8" y="641" width="73" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Control key" id="y3U-ys-UBV">
-                                    <font key="font" metaFont="systemBold" size="12"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="04f-tE-bhx">
-                                <rect key="frame" x="8" y="593" width="57" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Mapping" id="Gya-HK-rFe">
-                                    <font key="font" metaFont="systemBold" size="12"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ibz-6Z-eHi">
                                 <rect key="frame" x="1" y="1" width="484" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -152,19 +134,9 @@
                                     </connections>
                                 </buttonCell>
                             </button>
-                            <comboBox focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEa-Iu-c9f">
-                                <rect key="frame" x="8" y="614" width="473" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" completes="NO" numberOfVisibleItems="10" id="s52-Up-vGS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </comboBoxCell>
-                            </comboBox>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="controlKeyBox" destination="kEa-Iu-c9f" id="24D-iH-WJC"/>
                         <outlet property="lastPressedKeyText" destination="aLc-NU-Zbx" id="P0L-gO-H8u"/>
                         <outlet property="mappingText" destination="Pgn-v4-5MJ" id="Mh0-Ii-IJt"/>
                     </connections>

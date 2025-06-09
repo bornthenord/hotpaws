@@ -20,27 +20,28 @@ struct HotSwap {
 private func keyDownEventHandler(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           
-            let key = Key(rawValue: event.keyCode) {
+           !event.modifierFlags.isEmpty {
             
-            if let item = Config.mapping[key] {
-                
+            if let key = Key(rawValue: event.keyCode) {
                 var pressedModfifers = event.modifierFlags.getPressedModifiers()
                 
-                if pressedModfifers.contains(Config.controlKey) == true {
-                    
-                    pressedModfifers.remove(Config.controlKey)
-                    
-                    if item.modifiers != nil{
-                        pressedModfifers = pressedModfifers.union(item.modifiers!)
+                for switchModifier in pressedModfifers {
+                    if let layer = Config.mapping[switchModifier] {
+                        if let mapping = layer[key] {
+                            
+                            pressedModfifers.remove(switchModifier)
+                            
+                            if mapping.modifiers != nil{
+                                pressedModfifers = pressedModfifers.union(mapping.modifiers!)
+                            }
+                            
+                            Keyboard.press(keys: mapping.targets, modifiers: pressedModfifers)
+                            
+                            return nil
+                        }
                     }
-                    
-                    Keyboard.press(keys: item.targetKeys, modifiers: pressedModfifers)
-                    
-                    return nil
                 }
             }
         }
-        
         return Unmanaged.passUnretained(cgEvent)
     }

@@ -9,74 +9,50 @@ import Foundation
 
 
 struct Config {
-    private static let _keyConfig: String = "config"
-    private static var _contentConfig: String?
-    
-    private static let _keyControlKey: String = "controlKey"
-    private static var _keyControl: Modifier?
-    
-    private static var defaultControlKey: Modifier {
-        get {
-            return .function
-        }
-    }
-
-    private static let defaultConfig: String = """
+    private static let _keyMapping: String = "mapping"
+    private static var _mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)] = [:]
+    private static var _mappingString: String = """
         # navigation
         h:left
         k:up
         j:down
         l:right
-        # cmd z,c,v, del
-        u:z:command
-        y:c:command
-        p:v:command
-        x:delete
-        # go to begin/end
-        e:right:option
-        b:left:option
-        # tab navigation
-        s:left:option,command
-        d:right:option,command
         """
     
-    public static var mapping: String {
-        get {
-            if _contentConfig == nil {
-                _contentConfig = UserDefaults.standard.string(forKey: _keyConfig) ?? defaultConfig
-            }
-            
-            return _contentConfig!
+    private static let _keyControlKey: String = "controlKey"
+    private static var _keyControl: Modifier = .function
+
+    public static var controlKey: Modifier {
+        _keyControl
+    }
+    
+    public static var mapping: [Key: (Keys: [Key], Modifiers: [Modifier]?)] {
+        _mapping
+    }
+    
+    public static var mappingString: String {
+        _mappingString
+    }
+    
+    public static func load() throws {
+        let keyStr = UserDefaults.standard.string(forKey: _keyControlKey)
+        if keyStr != nil {
+            _keyControl =  try Modifier.parse(keyStr!)
         }
         
-        set {
-            UserDefaults.standard.set(newValue, forKey: _keyConfig)
-            _contentConfig = newValue
+        let mappingStr = UserDefaults.standard.string(forKey: _keyMapping)
+        if mappingStr != nil {
+            _mappingString = mappingStr!
+            _mapping = try ConfigParser.parse(mappingStr!)
         }
     }
     
-    public static var controlKey: Modifier {
-        get {
-            if _keyControl == nil {
-                let keyStr = UserDefaults.standard.string(forKey: _keyControlKey)
-                
-                if keyStr == nil {
-                    _keyControl = defaultControlKey
-                } else {
-                    do {
-                        _keyControl = try Modifier.parse(keyStr!)
-                    } catch {
-                        _keyControl = defaultControlKey
-                    }
-                }
-            }
-            
-            return _keyControl!
-        }
+    public static func save(controlKey: String, mapping: String) throws {
+        _keyControl = try Modifier.parse(controlKey)
+        _mapping = try ConfigParser.parse(mapping)
+        _mappingString = mapping
         
-        set {
-            UserDefaults.standard.set(newValue.description, forKey: _keyControlKey)
-            _keyControl = newValue
-        }
+        UserDefaults.standard.set(controlKey, forKey: _keyControlKey)
+        UserDefaults.standard.set(mapping, forKey: _keyMapping)
     }
 }

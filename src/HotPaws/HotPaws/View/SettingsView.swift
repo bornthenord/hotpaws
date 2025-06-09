@@ -24,16 +24,14 @@ class ViewController: NSViewController {
         ViewController.instace?.title = "Settings"
         
         initControlKeyBox(selectedKey: Config.controlKey)
-        initMapping(mapping: Config.mapping)
+        initMapping(mapping: Config.mappingString)
         
         handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
     }
     
     @IBAction func apply(_ sender: Any) {
         do {
-            HotSwap.mapping = try ConfigParser.parse(mappingText.string)
-            Config.controlKey = try Modifier.parse(controlKeyBox.stringValue)
-            Config.mapping = mappingText.string
+            try Config.save(controlKey: controlKeyBox.stringValue, mapping: mappingText.string)
             
             alert(text: "Applied")
         } catch {

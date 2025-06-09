@@ -98,19 +98,19 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mV-kO-rWt">
+                            <scrollView fixedFrame="YES" borderType="groove" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mV-kO-rWt">
                                 <rect key="frame" x="8" y="89" width="470" height="499"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" drawsBackground="NO" id="g9l-zs-zTC">
-                                    <rect key="frame" x="0.0" y="0.0" width="455" height="499"/>
+                                    <rect key="frame" x="2" y="2" width="451" height="495"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Pgn-v4-5MJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="455" height="499"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="451" height="495"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="455" height="499"/>
-                                            <size key="maxSize" width="465" height="10000000"/>
+                                            <size key="minSize" width="451" height="495"/>
+                                            <size key="maxSize" width="470" height="10000000"/>
                                         </textView>
                                     </subviews>
                                 </clipView>
@@ -119,7 +119,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="JYM-8L-MHn">
-                                    <rect key="frame" x="455" y="0.0" width="15" height="499"/>
+                                    <rect key="frame" x="453" y="2" width="15" height="495"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -133,7 +133,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="04f-tE-bhx">
-                                <rect key="frame" x="8" y="591" width="57" height="15"/>
+                                <rect key="frame" x="8" y="593" width="57" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Mapping" id="Gya-HK-rFe">
                                     <font key="font" metaFont="systemBold" size="12"/>
@@ -155,7 +155,7 @@
                             <comboBox focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEa-Iu-c9f">
                                 <rect key="frame" x="8" y="614" width="473" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="10" id="s52-Up-vGS">
+                                <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" completes="NO" numberOfVisibleItems="10" id="s52-Up-vGS">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

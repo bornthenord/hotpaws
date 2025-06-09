@@ -33,16 +33,10 @@ class ViewController: NSViewController {
         do {
             try Config.save(controlKey: controlKeyBox.stringValue, mapping: mappingText.string)
             
-            alert(text: "Applied")
+            AlertView.alert(window: self.view.window!, text: "Applied")
         } catch {
-            alert(text: "\(error)")
+            AlertView.alert(window: self.view.window!, text: "\(error)")
         }
-    }
-    
-    private func alert(text: String) {
-        let alert = NSAlert()
-        alert.messageText = text
-        alert.beginSheetModal(for: self.view.window!)
     }
     
     private func initControlKeyBox(selectedKey: Modifier) {

@@ -26,7 +26,7 @@ struct Config {
         """
     
     private static let _keyControlKey: String = "controlKey"
-    private static var _keyControl: Modifier = .function
+    private static var _keyControl: Modifier = .fn
 
     public static var controlKey: Modifier {
         _keyControl

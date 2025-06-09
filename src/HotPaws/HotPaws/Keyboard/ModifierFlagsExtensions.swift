@@ -19,31 +19,31 @@ extension NSEvent.ModifierFlags {
         var result = Set<Modifier>(minimumCapacity: 4)
         
         if self.contains(.capsLock) {
-            result.insert(.capsLock)
+            result.insert(.capslock)
         }
         
         if self.contains(.function) {
-            result.insert(.function)
+            result.insert(.fn)
         }
         
         if self.contains(.control){
-            result.insert(.control)
+            result.insert(.ctrl)
         }
         
         if self.contains(.option) && self.rawValue != OptionRightValue {
-            result.insert(.option)
+            result.insert(.opt)
         }
         
         if self.rawValue == OptionRightValue {
-            result.insert(.rightOption)
+            result.insert(.optr)
         }
         
         if self.contains(.command) && self.rawValue != CommandRightValue {
-            result.insert(.command)
+            result.insert(.cmd)
         }
         
         if self.rawValue == CommandRightValue {
-            result.insert(.rightCommand)
+            result.insert(.cmdr)
         }
         
         if self.contains(.shift) && self.rawValue != ShiftRightValue {
@@ -51,7 +51,7 @@ extension NSEvent.ModifierFlags {
         }
         
         if self.rawValue == ShiftRightValue {
-            result.insert(.rightShift)
+            result.insert(.shiftr)
         }
         
         return result

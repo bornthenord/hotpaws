@@ -12,11 +12,10 @@ class ViewController: NSViewController {
     private let handleKeyUp: Event = Event()
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
-    @IBOutlet var configText: NSTextView!
+    @IBOutlet var mappingText: NSTextView!
     @IBOutlet weak var controlKeyBox: NSComboBox!
     
     public static var instace: ViewController? = nil
-    public static let unknownKeyText: String = "unknown key"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,24 +23,17 @@ class ViewController: NSViewController {
         ViewController.instace = self
         ViewController.instace?.title = "Settings"
         
-        for modifier in Modifier.allCases{
-            ViewController.instace?
-                .controlKeyBox.insertItem(withObjectValue: modifier.description, at: 0)
-        }
-        
-        ViewController.instace?.controlKeyBox.selectItem(withObjectValue: Config.controlKey.description)
-        
-        configText.string = Config.mapping
-        configText.font = .systemFont(ofSize: 16)
+        initControlKeyBox(selectedKey: Config.controlKey)
+        initMapping(mapping: Config.mapping)
         
         handleKeyUp.subscribe(type: CGEventType.keyUp, handler: keyForDescHandler)
     }
     
     @IBAction func apply(_ sender: Any) {
         do {
-            HotSwap.mapping = try ConfigParser.parse(configText.string)
+            HotSwap.mapping = try ConfigParser.parse(mappingText.string)
             Config.controlKey = try Modifier.parse(controlKeyBox.stringValue)
-            Config.mapping = configText.string
+            Config.mapping = mappingText.string
             
             alert(text: "Applied")
         } catch {
@@ -54,13 +46,27 @@ class ViewController: NSViewController {
         alert.messageText = text
         alert.beginSheetModal(for: self.view.window!)
     }
+    
+    private func initControlKeyBox(selectedKey: Modifier) {
+        for modifier in Modifier.allCases{
+            ViewController.instace?
+                .controlKeyBox.insertItem(withObjectValue: modifier.description, at: 0)
+        }
+        
+        ViewController.instace?.controlKeyBox.selectItem(withObjectValue: selectedKey.description)
+    }
+    
+    private func initMapping(mapping: String) {
+        mappingText.string = mapping
+        mappingText.font = .systemFont(ofSize: 16)
+    }
 }
 
 private func keyForDescHandler(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if ViewController.instace?.lastPressedKeyText.isAccessibilityFocused() == true {
             if let event = NSEvent(cgEvent: cgEvent) {
-                var description: String = ViewController.unknownKeyText
+                var description: String = "unknown key"
                 
                 if let key = Key(rawValue: event.keyCode){
                     description = key.description

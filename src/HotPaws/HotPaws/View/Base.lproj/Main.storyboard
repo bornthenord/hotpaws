@@ -164,9 +164,9 @@
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="configText" destination="Pgn-v4-5MJ" id="nLR-eq-zU5"/>
                         <outlet property="controlKeyBox" destination="kEa-Iu-c9f" id="24D-iH-WJC"/>
                         <outlet property="lastPressedKeyText" destination="aLc-NU-Zbx" id="P0L-gO-H8u"/>
+                        <outlet property="mappingText" destination="Pgn-v4-5MJ" id="Mh0-Ii-IJt"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

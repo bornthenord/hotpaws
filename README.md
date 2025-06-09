@@ -28,6 +28,7 @@ mapping rule **key**:**targets**:**modifiers** for switch key
 and comment **#**
 
 You can assign rules to modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command\
+
 To determine the code for the desired key or modifier, use the code definition feature in the settings.
 
 ### Example

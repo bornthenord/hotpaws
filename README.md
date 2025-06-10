@@ -25,7 +25,7 @@ The configuration consists of
     - **modifiers** - modifier codes (separated by commas) to be pressed, not required
 - **#** - comment
 
-You can assign rules to key modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command\
+You can assign rules to key modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command.\
 To determine the code for the desired key or modifier, use the code definition feature in the settings.
 
 ### Examples

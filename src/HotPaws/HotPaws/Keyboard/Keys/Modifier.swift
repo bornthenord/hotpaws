@@ -15,6 +15,7 @@ public enum Modifier: UInt16, CaseIterable {
     case cmdr                      = 0x36
     case fn                        = 0x3F
     case capslock                  = 0x39
+    case general                   = 0x00
     
     var description : String {
         switch self {
@@ -27,6 +28,7 @@ public enum Modifier: UInt16, CaseIterable {
         case .cmdr: return "cmdr"
         case .fn: return "fn"
         case .capslock: return "capslock"
+        case .general: return "general"
         }
     }
     
@@ -50,6 +52,8 @@ public enum Modifier: UInt16, CaseIterable {
             return .fn
         case "capslock":
             return .capslock
+        case "general":
+            return .general
         default:
             throw KeyErrors.KeyNotExists(key: modifier)
         }

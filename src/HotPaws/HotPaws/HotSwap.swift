@@ -20,10 +20,16 @@ struct HotSwap {
 private func keyDownEventHandler(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           !event.modifierFlags.isEmpty {
+           
+           !event.modifierFlags.isEmpty || Config.mapping.keys.contains(.general) {
             
             if let key = Key(rawValue: event.keyCode) {
                 var pressedModfifers = event.modifierFlags.getPressedModifiers()
+                
+                if Config.mapping.keys.contains(.general){
+                    pressedModfifers.insert(.general)
+                }
+                
                 
                 for switchModifier in pressedModfifers {
                     if let layer = Config.mapping[switchModifier] {

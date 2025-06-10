@@ -16,7 +16,7 @@ extension NSEvent.ModifierFlags {
     
     public func getPressedModifiers() -> Set<Modifier>
     {
-        var result = Set<Modifier>(minimumCapacity: 4)
+        var result = Set<Modifier>(minimumCapacity: 5)
         
         if self.contains(.capsLock) {
             result.insert(.capslock)

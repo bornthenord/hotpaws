@@ -36,6 +36,8 @@ struct Keyboard {
                     continue
                 case .capslock:
                     continue
+                case .general:
+                   continue
                 }
             }
         }

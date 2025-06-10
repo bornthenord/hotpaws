@@ -12,7 +12,7 @@ Version macOS Big Sur 11.5 or higher
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 
 ## How use
-Remapping will be enabled while **[switch key]** is held down
+Remapping will be enabled while the **[switch key]** is held down or if the **[general]** section is configured.
 
 ### Configuration
 The configuration consists of **[switch key]**
@@ -27,14 +27,20 @@ mapping rule **key**:**targets**:**modifiers** for switch key
 
 and comment **#**
 
-You can assign rules to modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command
+- **[general]** - the mapping specified in the general section works without modification keys
 
-To determine the code for the desired key or modifier, use the code definition feature in the settings
+You can assign rules to modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command\
+To determine the code for the desired key or modifier, use the code definition feature in the settings.
 
 ### Example
 
 ```text
-# command layer
+# mapping without modification keys
+[general]
+# lock screen
+grave:q:ctrl,cmd
+
+# mapping if command key pressed
 [cmd]
 # like vim navigation
 h:left
@@ -42,7 +48,7 @@ k:up
 j:down
 l:right
 
-# right command layer
+# mapping if right command key pressed
 [cmdr]
 l:enter
 k:escape

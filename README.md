@@ -47,7 +47,7 @@ l:right
 # mapping if opt key pressed
 [opt]
 # left tab
-comma:left:opt,cmd
+h:left:opt,cmd
 # right tab
-period:right:opt,cmd
+l:right:opt,cmd
 ```

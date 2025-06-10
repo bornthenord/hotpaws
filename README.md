@@ -46,8 +46,8 @@ l:right
 
 # mapping if opt key pressed
 [opt]
-# go cursor to end line
-l:right:cmd
-go cursor to begin line
-n:left:cmd
+# left tab
+comma:left:opt,cmd
+# right tab
+period:right:opt,cmd
 ```

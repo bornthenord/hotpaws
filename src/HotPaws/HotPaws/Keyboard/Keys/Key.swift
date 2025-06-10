@@ -244,6 +244,8 @@ enum Key: UInt16 {
             return .space
         case "delete":
             return .delete
+        case "forwardDelete":
+            return .forwardDelete
         case "escape":
             return .escape
         case "left":

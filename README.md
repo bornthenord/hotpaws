@@ -15,24 +15,20 @@ Version macOS Big Sur 11.5 or higher
 Remapping will be enabled while the **[switch key]** is held down or if the **[general]** section is configured.
 
 ### Configuration
-The configuration consists of **[switch key]**
-
-- **[switch key]** - modifier code, required
-
-mapping rule **key**:**targets**:**modifiers** for switch key
-
-- **key** - key code to be redefined, required
-- **targets** - key codes (separated by commas) to which we assign, required
-- **modifiers** - modifier codes (separated by commas) to be pressed, not required
+The configuration consists of
 
 - **[general]** - the mapping specified in the general section works without modification keys
+- **[switch key]** - modifier code
+- **key**:**targets**:**modifiers** - mapping rule
+    - **key** - key code to be redefined, required
+    - **targets** - key codes (separated by commas) to which we assign, required
+    - **modifiers** - modifier codes (separated by commas) to be pressed, not required
+- **#** - comment
 
-and comment **#**
-
-You can assign rules to modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command\
+You can assign rules to key modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command\
 To determine the code for the desired key or modifier, use the code definition feature in the settings.
 
-### Example
+### Examples
 
 ```text
 # mapping without modification keys
@@ -48,8 +44,10 @@ k:up
 j:down
 l:right
 
-# mapping if right command key pressed
-[cmdr]
-l:enter
-k:escape
+# mapping if opt key pressed
+[opt]
+# go cursor to end line
+l:right:cmd
+go cursor to begin line
+n:left:cmd
 ```

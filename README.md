@@ -25,9 +25,9 @@ mapping rule **key**:**targets**:**modifiers** for switch key
 - **targets** - key codes (separated by commas) to which we assign, required
 - **modifiers** - modifier codes (separated by commas) to be pressed, not required
 
-and comment **#**
-
 - **[general]** - the mapping specified in the general section works without modification keys
+
+and comment **#**
 
 You can assign rules to modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command\
 To determine the code for the desired key or modifier, use the code definition feature in the settings.

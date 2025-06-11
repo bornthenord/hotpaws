@@ -18,7 +18,7 @@ class HotSwapHandler : KeyDownHandler {
                         modifiers = modifiers.union(mapping.modifiers!)
                     }
                     
-                    Keyboard.press(keys: mapping.targets, modifiers: modifiers)
+                    Keyboard.press(key: mapping.target, modifiers: modifiers)
                     
                     return true
                 }

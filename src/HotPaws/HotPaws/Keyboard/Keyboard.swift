@@ -34,34 +34,30 @@ struct Keyboard {
         keyDownEvent.subscribe(type: CGEventType.flagsChanged, handler: modifierChangeHandler)
     }
     
-    public static func press(keys: Set<Key>, modifiers: Set<Modifier>?) {
-        down(keys: keys, modifiers: modifiers)
-        up(keys: keys)
+    public static func press(key: Key, modifiers: Set<Modifier>?) {
+        down(key: key, modifiers: modifiers)
+        up(key: key)
     }
     
-    private static func up(keys: Set<Key>) {
-        for key in keys {
-            let up = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: false)
-            up?.post(tap: .cghidEventTap)
-        }
+    private static func up(key: Key) {
+        let up = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: false)
+        up?.post(tap: .cghidEventTap)
     }
     
-    private static func down(keys: Set<Key>, modifiers: Set<Modifier>?) {
+    private static func down(key: Key, modifiers: Set<Modifier>?) {
         var flags: CGEventFlags?
         
         if (modifiers != nil) {
             flags = modifiers!.toFlags()
         }
         
-        for key in keys {
-            let down = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: true)
-            
-            if (flags != nil) {
-                down?.flags = flags!
-            }
-            
-            down?.post(tap: .cghidEventTap)
+        let down = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: true)
+        
+        if (flags != nil) {
+            down?.flags = flags!
         }
+        
+        down?.post(tap: .cghidEventTap)
     }
 }
 

@@ -46,7 +46,7 @@ private func modifierChangeEventHandler(
             if let event = NSEvent(cgEvent: cgEvent) {
                 var description: String = ""
                 
-                if let presedModifier = event.modifierFlags.getPressedModifiers().first{
+                if let presedModifier = event.modifierFlags.toModifiers().first{
                     description = presedModifier.description
                 }
                 

@@ -14,7 +14,7 @@ private let ShiftRightValue: Int = 131332
 
 extension NSEvent.ModifierFlags {
     
-    public func getPressedModifiers() -> Set<Modifier>
+    public func toModifiers() -> Set<Modifier>
     {
         var result = Set<Modifier>(minimumCapacity: 5)
         
@@ -55,5 +55,38 @@ extension NSEvent.ModifierFlags {
         }
         
         return result
+    }
+}
+
+extension Set<Modifier> {
+    public func toFlags() -> CGEventFlags {
+        var flags: CGEventFlags = []
+        
+        for modifier in self {
+            switch modifier {
+            case .shift:
+                flags.insert(.maskShift)
+            case .shiftr:
+                flags.insert(.maskShift)
+            case .ctrl:
+                flags.insert(.maskControl)
+            case .opt:
+                flags.insert(.maskAlternate)
+            case .optr:
+                flags.insert(.maskAlternate)
+            case .cmd:
+                flags.insert(.maskCommand)
+            case .cmdr:
+                flags.insert(.maskCommand)
+            case .fn:
+                continue
+            case .capslock:
+                continue
+            case .general:
+               continue
+            }
+        }
+        
+        return flags
     }
 }

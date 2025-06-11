@@ -24,7 +24,7 @@ private func keyDownEventHandler(
            !event.modifierFlags.isEmpty || Config.mapping.keys.contains(.general) {
             
             if let key = Key(rawValue: event.keyCode) {
-                var pressedModfifers = event.modifierFlags.getPressedModifiers()
+                var pressedModfifers = event.modifierFlags.toModifiers()
                 
                 if Config.mapping.keys.contains(.general){
                     pressedModfifers.insert(.general)

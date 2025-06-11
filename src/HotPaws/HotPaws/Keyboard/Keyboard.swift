@@ -6,7 +6,23 @@
 //
 import Cocoa
 
+protocol KeyDownHandler {
+    func handle(key: Key, modifiers: Set<Modifier>?) -> Bool
+}
+
+protocol KeyUpHandler {
+    func handle(key: Key) -> Bool
+}
+
 struct Keyboard {
+    
+    private static let keyDownEvent: Event = Event()
+    public static var handlers: [KeyDownHandler] = []
+    
+    public static func connect() throws {
+        keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownHandler)
+    }
+        
     public static func press(keys: Set<Key>, modifiers: Set<Modifier>?) {
         down(keys: keys, modifiers: modifiers)
         up(keys: keys)
@@ -36,4 +52,30 @@ struct Keyboard {
             down?.post(tap: .cghidEventTap)
         }
     }
+}
+
+private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
+    if let event = NSEvent(cgEvent: cgEvent) {
+        if let key = Key(rawValue: event.keyCode) {
+            var modifiers: Set<Modifier>?
+            
+            if !event.modifierFlags.isEmpty {
+                modifiers = event.modifierFlags.toModifiers()
+            }
+            
+            var handled = true
+            
+            for handler in Keyboard.handlers {
+                if !handler.handle(key: key, modifiers: modifiers) {
+                    handled = false
+                }
+            }
+            
+            if !handled {
+                return nil
+            }
+        }
+    }
+    
+    return Unmanaged.passUnretained(cgEvent)
 }

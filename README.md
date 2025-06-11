@@ -7,33 +7,47 @@
 Version macOS Big Sur 11.5 or higher
 
 ## Installation
-1. Download zip [arhive](https://github.com/bornthenord/hotpaws/releases)
-2. Open the archive and extract the app to the Applications folder
+1. Download dmg [installer](https://github.com/bornthenord/hotpaws/releases)
+2. Open the installer and copy the app to the Applications folder
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
 
 ## How use
-<b>caps lock</b> - enable/disable\
-or press <b>fn</b> for remapping will be enabled while the button is held down
+Remapping will be enabled while the **[switch key]** is held down or if the **[general]** section is configured.
 
 ### Configuration
+The configuration consists of
 
-The configuration consists of mapping rules [***key source***]:[***keys target***]:[***modifiers***] and comments ***#***
+- **[general]** - the mapping specified in the general section works without modification keys
+- **[switch key]** - modifier code
+- **key**:**targets**:**modifiers** - mapping rule
+    - **key** - key code to be redefined, required
+    - **targets** - key codes (separated by commas) to which we assign, required
+    - **modifiers** - modifier codes (separated by commas) to be pressed, not required
+- **#** - comment
 
-[***key source***] - the [key](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) to be redefined\
-[***keys target***] - [keys](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Key.swift) (separated by commas) to which we assign\
-[***modifiers***] - [modifiers](https://github.com/bornthenord/keyborg/blob/main/src/Keyborg/Keyborg/Keyboard/Keys/Modifier.swift) (separated by commas) to be pressed, not required
+You can assign rules to key modifiers: caps lock/shift/right shift/function/control/option/right option/command and right command.\
+To determine the code for the desired key or modifier, use the code definition feature in the settings.
 
-### Example
+### Examples
 
-\# like vim navigation\
-h:left\
-k:up\
-j:down\
-l:right\
-\# tab navigation\
-s:left:option,command\
-d:right:option,command
+```text
+# mapping without modification keys
+[general]
+# lock screen
+grave:q:ctrl,cmd
 
-## Tips & Tricks
-Swap the Caps Lock and Fn keys (Settings -> Keyboard -> Shortcuts -> Modifier Keys).\
-Now, by holding down the Caps Lock key with your pinky, you can easily switch between "layers" as needed.
+# mapping if command key pressed
+[cmd]
+# like vim navigation
+h:left
+k:up
+j:down
+l:right
+
+# mapping if opt key pressed
+[opt]
+# left tab
+h:left:opt,cmd
+# right tab
+l:right:opt,cmd
+```

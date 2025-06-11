@@ -5,31 +5,57 @@
 //  Created by cat dog on 08.05.2025.
 //
 
-enum Modifier: UInt16 {
+public enum Modifier: UInt16, CaseIterable {
     case shift                     = 0x38
-    case control                   = 0x3B
-    case option                    = 0x3A
-    case command                   = 0x37
-    case function                  = 0x3F
-    case capsLock                  = 0x39
-    case rightShift                = 0x3C
-    case rightControl              = 0x3E
-    case rightOption               = 0x3D
-    case rightCommand              = 0x36
+    case shiftr                    = 0x3C
+    case ctrl                      = 0x3B
+    case opt                       = 0x3A
+    case optr                      = 0x3D
+    case cmd                       = 0x37
+    case cmdr                      = 0x36
+    case fn                        = 0x3F
+    case capslock                  = 0x39
+    case general                   = 0x00
     
     var description : String {
         switch self {
         case .shift: return "shift"
-        case .control: return "control"
-        case .option: return "option"
-        case .command: return "command"
-        case .function: return "function cannot be reassigned"
-        case .capsLock: return "capsLock cannot be reassigned"
-            
-        case .rightShift: return "rightShift"
-        case .rightControl: return "rightControl"
-        case .rightOption: return "rightOption"
-        case .rightCommand: return "rightCommand"
+        case .shiftr: return "shiftr"
+        case .ctrl: return "ctrl"
+        case .opt: return "opt"
+        case .optr: return "optr"
+        case .cmd: return "cmd"
+        case .cmdr: return "cmdr"
+        case .fn: return "fn"
+        case .capslock: return "capslock"
+        case .general: return "general"
+        }
+    }
+    
+    public static func parse(_ modifier: String) throws -> Modifier {
+        switch modifier {
+        case "shift":
+            return .shift
+        case "shiftr":
+            return .shiftr
+        case "ctrl":
+            return .ctrl
+        case "opt":
+            return .opt
+        case "optr":
+            return .optr
+        case "cmd":
+            return .cmd
+        case "cmdr":
+            return .cmdr
+        case "fn":
+            return .fn
+        case "capslock":
+            return .capslock
+        case "general":
+            return .general
+        default:
+            throw KeyErrors.KeyNotExists(key: modifier)
         }
     }
 }

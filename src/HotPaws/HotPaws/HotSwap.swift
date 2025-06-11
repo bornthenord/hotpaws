@@ -8,85 +8,46 @@
 import Cocoa
 
 struct HotSwap {
-    private let keyDownEvent: Event?
+    private let keyDownEvent: Event = Event()
     
-    public static var config: [Key: (Keys: [Key], Modifiers: [Modifier]?)]?
-   
     init() throws {
-        keyDownEvent = Event()
-        keyDownEvent?.subscribe(type: CGEventType.keyDown, handler: handleKeyDown)
+        keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownEventHandler)
         
-        HotSwap.config = try Parser.parse(Repository.config)
+        try Config.load()
     }
 }
 
-private func handleKeyDown(
+private func keyDownEventHandler(
     _: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
         if let event = NSEvent(cgEvent: cgEvent),
-           event.modifierFlags.contains(.capsLock) || event.modifierFlags.contains(.function) {
-            
-            let pressedModfifers = getPressedModifiers(flags: event.modifierFlags)
+           
+           !event.modifierFlags.isEmpty || Config.mapping.keys.contains(.general) {
             
             if let key = Key(rawValue: event.keyCode) {
-                if let item = HotSwap.config?[key] {
-                    let modifiers = mergeModifiers(left: pressedModfifers, right: item.Modifiers)
-                    
-                    Keyboard.press(keys: item.Keys, modifiers: modifiers)
-                    
-                    return nil
+                var pressedModfifers = event.modifierFlags.getPressedModifiers()
+                
+                if Config.mapping.keys.contains(.general){
+                    pressedModfifers.insert(.general)
+                }
+                
+                for switchModifier in pressedModfifers {
+                    if let layer = Config.mapping[switchModifier] {
+                        if let mapping = layer[key] {
+                            
+                            pressedModfifers.remove(switchModifier)
+                            
+                            if mapping.modifiers != nil{
+                                pressedModfifers = pressedModfifers.union(mapping.modifiers!)
+                            }
+                            
+                            Keyboard.press(keys: mapping.targets, modifiers: pressedModfifers)
+                            
+                            return nil
+                        }
+                    }
                 }
             }
         }
-    
-    return Unmanaged.passUnretained(cgEvent)
-}
-
-private func getPressedModifiers(flags: NSEvent.ModifierFlags) -> [Modifier]? {
-    var result : [Modifier]?
-    
-    if flags.contains(.shift) {
-        if result == nil {
-            result = [.shift]
-        } else {
-            result?.append(.shift)
-        }
+        
+        return Unmanaged.passUnretained(cgEvent)
     }
-    
-    if flags.contains(.control) {
-        if result == nil {
-            result = [.control]
-        } else {
-            result?.append(.control)
-        }
-    }
-    
-    if flags.contains(.option) {
-        if result == nil {
-            result = [.option]
-        } else {
-            result?.append(.option)
-        }
-    }
-    
-    if flags.contains(.command) {
-        if result == nil {
-            result = [.command]
-        } else {
-            result?.append(.command)
-        }
-    }
-    
-    return result
-}
-
-private func mergeModifiers(left: [Modifier]?, right: [Modifier]?) -> [Modifier]? {
-    if left == nil {
-        return right
-    }
-    
-    if right == nil {
-        return left
-    }
-    
-    return left! + right!
-}

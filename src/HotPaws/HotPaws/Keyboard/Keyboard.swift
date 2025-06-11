@@ -7,7 +7,7 @@
 import Cocoa
 
 struct Keyboard {
-    public static func press(keys: [Key], modifiers: [Modifier]?) {
+    public static func press(keys: Set<Key>, modifiers: Set<Modifier>?) {
         
         var flags: CGEventFlags = []
         
@@ -16,27 +16,28 @@ struct Keyboard {
                 switch modifier {
                 case .shift:
                     flags.insert(.maskShift)
-                case .rightShift:
+                case .shiftr:
                     flags.insert(.maskShift)
                     
-                case .control:
-                    flags.insert(.maskControl)
-                case .rightControl:
+                case .ctrl:
                     flags.insert(.maskControl)
                     
-                case .option:
+                case .opt:
                     flags.insert(.maskAlternate)
-                case .rightOption:
+                case .optr:
                     flags.insert(.maskAlternate)
                     
-                case .command:
+                case .cmd:
                     flags.insert(.maskCommand)
-                case .rightCommand:
+                case .cmdr:
                     flags.insert(.maskCommand)
-                case .function:
-                    break
-                case .capsLock:
-                    break
+                    
+                case .fn:
+                    continue
+                case .capslock:
+                    continue
+                case .general:
+                   continue
                 }
             }
         }

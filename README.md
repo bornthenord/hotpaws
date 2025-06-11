@@ -39,8 +39,8 @@ To find out the code for a specific key or modifier, use the code definition fea
 ```ini
 # Mapping without modifiers
 [general]
-# Lock screen with Grave (`) key
-grave:q:ctrl,cmd
+# Lock screen with F1 key
+f1:q:ctrl,cmd
 
 # Vim-like navigation when Command is pressed
 [cmd]

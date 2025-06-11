@@ -1,7 +1,7 @@
 <p align="center">
   <img width="256" height="256" src="https://github.com/bornthenord/keyborg/blob/main/logo.jpeg">
 <p>
-<h1 align="center"># Hot Swap Key Mapping for macOS</h1>
+<h1 align="center">Hot Swap Key Mapping for macOS</h1>
 
 ## What is?
 This is a utility that allows you to dynamically remap keys or assign keyboard shortcuts on macOS.

@@ -3,16 +3,15 @@
 <p>
 <h1 align="center">Hot swap key mapping for macOS</h1>
 
-# What is?
+## What is?
 This is a utility that allows you to redefine keys or assign a keyboard shortcut.
-  
-## Pre requirements
-Version macOS Big Sur 11.5 or higher
 
 ## Installation
 1. Download dmg [installer](https://github.com/bornthenord/hotpaws/releases)
 2. Open the installer and copy the app to the Applications folder
 3. When you first start it, you need to grant access to Accessibility, and then restart the application
+
+*Requirements: Version macOS Big Sur 11.5 or higher*
 
 ## How use
 Remapping will be enabled while the **[switch key]** is held down or if the **[general]** section is configured.

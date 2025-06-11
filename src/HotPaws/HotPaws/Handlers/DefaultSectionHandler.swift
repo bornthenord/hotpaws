@@ -1,22 +1,12 @@
 //
-//  HotPaws.swift
+//  DefaultSectionHandler.swift
 //  HotPaws
 //
-//  Created by cat dog on 14.04.2025.
+//  Created by cat dog on 11.06.2025.
 //
 
+
 import Cocoa
-
-
-struct HotSwap {
-    
-    init() throws {
-        try Config.load()
-        try Keyboard.connect()
-        
-        Keyboard.handlers.append(DefaultSectionHandler())
-    }
-}
 
 struct DefaultSectionHandler : KeyDownHandler {
     func handle(key: Key, modifiers: Set<Modifier>?) -> Bool {
@@ -46,12 +36,12 @@ struct DefaultSectionHandler : KeyDownHandler {
                         
                         Keyboard.press(keys: mapping.targets, modifiers: pressedModifers)
                         
-                        return false
+                        return true
                     }
                 }
             }
         }
         
-        return true
+        return false
     }
 }

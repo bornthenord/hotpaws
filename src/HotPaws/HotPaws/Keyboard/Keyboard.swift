@@ -14,15 +14,26 @@ protocol KeyUpHandler {
     func handle(key: Key) -> Bool
 }
 
+protocol ModifierChangeHandler {
+    func handle(modifiers: Set<Modifier>) -> Bool
+}
+
 struct Keyboard {
     
     private static let keyDownEvent: Event = Event()
-    public static var handlers: [KeyDownHandler] = []
-    
+    private static let keyUpEvent: Event = Event()
+    private static let flagsChangedEvent: Event = Event()
+
+    public static var keyDownSubscribers: Dictionary<String,KeyDownHandler> = [:]
+    public static var keyUpSubscribers: Dictionary<String,KeyUpHandler> = [:]
+    public static var modifierChangeSubscribers: Dictionary<String,ModifierChangeHandler> = [:]
+
     public static func connect() throws {
         keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownHandler)
+        keyDownEvent.subscribe(type: CGEventType.keyUp, handler: keyUpHandler)
+        keyDownEvent.subscribe(type: CGEventType.flagsChanged, handler: modifierChangeHandler)
     }
-        
+    
     public static func press(keys: Set<Key>, modifiers: Set<Modifier>?) {
         down(keys: keys, modifiers: modifiers)
         up(keys: keys)
@@ -63,15 +74,38 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
                 modifiers = event.modifierFlags.toModifiers()
             }
             
-            var handled = true
-            
-            for handler in Keyboard.handlers {
-                if !handler.handle(key: key, modifiers: modifiers) {
-                    handled = false
+            for handler in Keyboard.keyDownSubscribers.values {
+                if handler.handle(key: key, modifiers: modifiers) {
+                    return nil
                 }
             }
+        }
+    }
+    
+    return Unmanaged.passUnretained(cgEvent)
+}
+
+private func keyUpHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
+    if let event = NSEvent(cgEvent: cgEvent) {
+        if let key = Key(rawValue: event.keyCode) {
+            for handler in Keyboard.keyUpSubscribers.values {
+                if handler.handle(key: key) {
+                    return nil
+                }
+            }
+        }
+    }
+    
+    return Unmanaged.passUnretained(cgEvent)
+}
+
+private func modifierChangeHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
+    if let event = NSEvent(cgEvent: cgEvent) {
+        
+        let presedModifier = event.modifierFlags.toModifiers()
             
-            if !handled {
+        for handler in Keyboard.modifierChangeSubscribers.values {
+            if handler.handle(modifiers: presedModifier) {
                 return nil
             }
         }

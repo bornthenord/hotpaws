@@ -24,7 +24,7 @@ class KeyDetected : KeyUpHandler, ModifierChangeHandler {
         Keyboard.modifierChangeSubscribers.removeValue(forKey: name)
     }
     
-    func handle(key: Key) -> Bool {
+    func handle(key: inout Key) -> Bool {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
             KeyDetected.textView!.stringValue = key.description
         }

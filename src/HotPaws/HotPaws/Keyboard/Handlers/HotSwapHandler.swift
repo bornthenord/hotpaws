@@ -8,7 +8,7 @@
 import Foundation
 
 class HotSwapHandler : KeyDownHandler {
-    func handle(key: Key, modifiers: inout Set<Modifier>) -> Bool {
+    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         for switchModifier in modifiers {
             if let layer = Config.mapping[switchModifier] {
                 if let mapping = layer[key] {
@@ -18,13 +18,13 @@ class HotSwapHandler : KeyDownHandler {
                         modifiers = modifiers.union(mapping.modifiers!)
                     }
                     
-                    Keyboard.press(key: mapping.target, modifiers: modifiers)
+                    key = mapping.target
                     
-                    return true
+                    return false
                 }
             }
         }
         
-        return false
+        return true
     }
 }

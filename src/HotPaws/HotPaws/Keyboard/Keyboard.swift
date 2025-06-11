@@ -7,11 +7,11 @@
 import Cocoa
 
 protocol KeyDownHandler {
-    func handle(key: Key, modifiers: inout Set<Modifier>) -> Bool
+    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool
 }
 
 protocol KeyUpHandler {
-    func handle(key: Key) -> Bool
+    func handle(key: inout Key) -> Bool
 }
 
 protocol ModifierChangeHandler {
@@ -63,7 +63,7 @@ struct Keyboard {
 
 private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
-        if let key = Key(rawValue: event.keyCode) {
+        if var key = Key(rawValue: event.keyCode) {
             var modifiers: Set<Modifier>?
             
             if !event.modifierFlags.isEmpty {
@@ -73,7 +73,8 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
             }
             
             for handler in Keyboard.keyDownSubscribers.values {
-                if handler.handle(key: key, modifiers: &modifiers!) {
+                if !handler.handle(key: &key, modifiers: &modifiers!) {
+                    Keyboard.press(key: key, modifiers: modifiers)
                     return nil
                 }
             }
@@ -85,9 +86,9 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
 
 private func keyUpHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
-        if let key = Key(rawValue: event.keyCode) {
+        if var key = Key(rawValue: event.keyCode) {
             for handler in Keyboard.keyUpSubscribers.values {
-                if handler.handle(key: key) {
+                if !handler.handle(key: &key) {
                     return nil
                 }
             }
@@ -103,7 +104,7 @@ private func modifierChangeHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CG
         var presedModifier = event.modifierFlags.toModifiers()
             
         for handler in Keyboard.modifierChangeSubscribers.values {
-            if handler.handle(modifiers: &presedModifier) {
+            if !handler.handle(modifiers: &presedModifier) {
                 return nil
             }
         }

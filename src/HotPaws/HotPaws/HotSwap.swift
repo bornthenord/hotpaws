@@ -30,7 +30,6 @@ private func keyDownEventHandler(
                     pressedModfifers.insert(.general)
                 }
                 
-                
                 for switchModifier in pressedModfifers {
                     if let layer = Config.mapping[switchModifier] {
                         if let mapping = layer[key] {
@@ -49,5 +48,6 @@ private func keyDownEventHandler(
                 }
             }
         }
+        
         return Unmanaged.passUnretained(cgEvent)
     }

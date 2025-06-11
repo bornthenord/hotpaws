@@ -3,6 +3,9 @@
 <p>
 <h1 align="center">Hot swap key mapping for macOS</h1>
 
+# What is?
+This is a utility that allows you to redefine keys or assign a keyboard shortcut.
+  
 ## Pre requirements
 Version macOS Big Sur 11.5 or higher
 

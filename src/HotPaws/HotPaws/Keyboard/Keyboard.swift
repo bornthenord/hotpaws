@@ -7,7 +7,7 @@
 import Cocoa
 
 protocol KeyDownHandler {
-    func handle(key: Key, modifiers: Set<Modifier>?) -> Bool
+    func handle(key: Key, modifiers: inout Set<Modifier>) -> Bool
 }
 
 protocol KeyUpHandler {
@@ -15,7 +15,7 @@ protocol KeyUpHandler {
 }
 
 protocol ModifierChangeHandler {
-    func handle(modifiers: Set<Modifier>) -> Bool
+    func handle(modifiers: inout Set<Modifier>) -> Bool
 }
 
 struct Keyboard {
@@ -72,10 +72,12 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
             
             if !event.modifierFlags.isEmpty {
                 modifiers = event.modifierFlags.toModifiers()
+            } else {
+                modifiers = []
             }
             
             for handler in Keyboard.keyDownSubscribers.values {
-                if handler.handle(key: key, modifiers: modifiers) {
+                if handler.handle(key: key, modifiers: &modifiers!) {
                     return nil
                 }
             }
@@ -102,10 +104,10 @@ private func keyUpHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: 
 private func modifierChangeHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
         
-        let presedModifier = event.modifierFlags.toModifiers()
+        var presedModifier = event.modifierFlags.toModifiers()
             
         for handler in Keyboard.modifierChangeSubscribers.values {
-            if handler.handle(modifiers: presedModifier) {
+            if handler.handle(modifiers: &presedModifier) {
                 return nil
             }
         }

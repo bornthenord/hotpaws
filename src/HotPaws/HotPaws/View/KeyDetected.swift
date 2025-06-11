@@ -32,7 +32,7 @@ class KeyDetected : KeyUpHandler, ModifierChangeHandler {
         return true
     }
     
-    func handle(modifiers: Set<Modifier>) -> Bool {
+    func handle(modifiers: inout Set<Modifier>) -> Bool {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
             if let desc = modifiers.first?.description {
                 KeyDetected.textView!.stringValue = desc

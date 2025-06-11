@@ -9,39 +9,17 @@
 import Cocoa
 
 struct DefaultSectionHandler : KeyDownHandler {
-    func handle(key: Key, modifiers: Set<Modifier>?) -> Bool {
-        var pressedModifers: Set<Modifier>?
-        
-        if (modifiers != nil) {
-            pressedModifers = modifiers
-        }
-        
+    let decorated: KeyDownHandler
+    
+    init (_ decorated: KeyDownHandler) {
+        self.decorated = decorated
+    }
+    
+    func handle(key: Key, modifiers: inout Set<Modifier>) -> Bool {
         if Config.mapping.keys.contains(.general) {
-            if (pressedModifers == nil) {
-                pressedModifers = Set<Modifier>(minimumCapacity: 1)
-            }
-            
-            pressedModifers!.insert(.general)
+            modifiers.insert(.general)
         }
         
-        if pressedModifers != nil {
-            for switchModifier in pressedModifers! {
-                if let layer = Config.mapping[switchModifier] {
-                    if let mapping = layer[key] {
-                        pressedModifers!.remove(switchModifier)
-                        
-                        if mapping.modifiers != nil {
-                            pressedModifers = pressedModifers?.union(mapping.modifiers!)
-                        }
-                        
-                        Keyboard.press(keys: mapping.targets, modifiers: pressedModifers)
-                        
-                        return true
-                    }
-                }
-            }
-        }
-        
-        return false
+        return self.decorated.handle(key: key, modifiers: &modifiers)
     }
 }

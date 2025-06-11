@@ -6,12 +6,8 @@
 //
 import Cocoa
 
-protocol KeyDownHandler {
+protocol KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool
-}
-
-protocol KeyUpHandler {
-    func handle(key: inout Key) -> Bool
 }
 
 protocol ModifierChangeHandler {
@@ -24,8 +20,7 @@ struct Keyboard {
     private static let keyUpEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()
 
-    public static var keyDownSubscribers: Dictionary<String,KeyDownHandler> = [:]
-    public static var keyUpSubscribers: Dictionary<String,KeyUpHandler> = [:]
+    public static var keySubscribers: Dictionary<String,KeyHandler> = [:]
     public static var modifierChangeSubscribers: Dictionary<String,ModifierChangeHandler> = [:]
 
     public static func connect() throws {
@@ -72,7 +67,7 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
                 modifiers = []
             }
             
-            for handler in Keyboard.keyDownSubscribers.values {
+            for handler in Keyboard.keySubscribers.values {
                 if !handler.handle(key: &key, modifiers: &modifiers!) {
                     Keyboard.press(key: key, modifiers: modifiers)
                     return nil
@@ -87,14 +82,8 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
 private func keyUpHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
         if var key = Key(rawValue: event.keyCode) {
-            for handler in Keyboard.keyUpSubscribers.values {
-                if !handler.handle(key: &key) {
-                    return nil
-                }
-            }
         }
     }
-    
     return Unmanaged.passUnretained(cgEvent)
 }
 

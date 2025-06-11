@@ -24,8 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try Config.load()
             try Keyboard.connect()
             
-            Keyboard.keyDownSubscribers["general"] = GeneralSectionHandler()
-            Keyboard.keyDownSubscribers["hotswap"] = HotSwapHandler()
+            Keyboard.keySubscribers["general"] = GeneralSectionHandler()
+            Keyboard.keySubscribers["hotswap"] = SwitchModifierHandler()
         } catch {
             print(error)
         }

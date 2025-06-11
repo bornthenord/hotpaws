@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HotSwapHandler : KeyDownHandler {
+class SwitchModifierHandler : KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         for switchModifier in modifiers {
             if let layer = Config.mapping[switchModifier] {

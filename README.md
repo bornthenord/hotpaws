@@ -51,6 +51,7 @@ l:right
 
 # When Option is pressed
 [opt]
+# prev/next tab
 h:left:opt,cmd
-l:right:opt,cmdl:right:opt,cmd
+l:right:opt,cmd
 ```

@@ -9,12 +9,17 @@
 import Cocoa
 
 class GeneralSectionHandler : KeyHandler {
+    let decorated: KeyHandler
+    
+    init(_ decorated: KeyHandler){
+        self.decorated = decorated
+    }
     
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if Config.mapping.keys.contains(.general) {
             modifiers.insert(.general)
         }
         
-        return true
+        return self.decorated.handle(key: &key, modifiers: &modifiers)
     }
 }

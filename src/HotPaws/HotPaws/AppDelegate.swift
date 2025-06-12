@@ -24,8 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try Config.load()
             try Keyboard.connect()
             
-            Keyboard.keySubscribers["general"] = GeneralSectionHandler()
-            Keyboard.keySubscribers["switch"] = SwitchHandler()
+            Keyboard.keySubscribers["general"] = GeneralSectionHandler(SwitchHandler())
         } catch {
             print(error)
         }

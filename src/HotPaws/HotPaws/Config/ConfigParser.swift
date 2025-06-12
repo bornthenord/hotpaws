@@ -22,16 +22,16 @@ struct ConfigParser {
             }
             
             if raw.starts(with: "[") {
-                currentSwitchModifier = try toSwitchModifier(String(raw))
+                currentSwitchModifier = try toGeneralModifier(String(raw))
                 continue
             }
             
             let mapping = try parseMapping(String(raw))
             
             if layers.keys.contains(currentSwitchModifier) {
-                layers[currentSwitchModifier]![mapping.key] = mapping
+                layers[currentSwitchModifier]![mapping.source] = mapping
             } else {
-                layers[currentSwitchModifier] = [mapping.key: mapping]
+                layers[currentSwitchModifier] = [mapping.source: mapping]
             }
         }
         
@@ -45,26 +45,15 @@ struct ConfigParser {
             throw ConfigErrors.Invalid(raw)
         }
         
-        let key = try toKey(String(items[0]))
-        let targets = try parseKeys(String(items[1]))
+        let source = try toKey(String(items[0]))
+        let target = try toKey(String(items[1]))
         var modifiers: Set<Modifier>?
         
         if items.count == 3 {
             modifiers = try parseModifiers(String(items[2]))
         }
         
-        return Mapping(key: key, targets: targets, modifiers: modifiers)
-    }
-    
-    private static func parseKeys(_ keys: String) throws -> Set<Key> {
-        var result = Set<Key>()
-        let raws = keys.split(separator: ",")
-        
-        for raw in raws {
-            result.insert(try toKey(String(raw)))
-        }
-        
-        return result
+        return Mapping(source: source, target: target, modifiers: modifiers)
     }
     
     private static func parseModifiers(_ modifiers: String) throws -> Set<Modifier> {
@@ -90,7 +79,7 @@ struct ConfigParser {
         return try Modifier.parse(modifier)
     }
     
-    private static func toSwitchModifier(_ raw: String) throws -> Modifier {
+    private static func toGeneralModifier(_ raw: String) throws -> Modifier {
         var switchModifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
         switchModifier = String(switchModifier.dropFirst())

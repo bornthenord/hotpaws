@@ -9,6 +9,7 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+    private var isClosing = false
     private var keyDetected: KeyDetected?
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
@@ -25,6 +26,17 @@ class ViewController: NSViewController {
         initMapping(mapping: Config.mappingString)
         
         keyDetected = KeyDetected(textView: self.lastPressedKeyText)
+    }
+        
+    override func viewWillDisappear() {
+        // Method called at start and when the window is closed.
+        if isClosing {
+            keyDetected!.close()
+        }
+        
+        isClosing = true
+        
+        super.viewDidDisappear()
     }
     
     @IBAction func apply(_ sender: Any) {

@@ -9,7 +9,6 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var hotSwap: HotSwap?
     var status: StatusView?
     
     @IBOutlet weak var menu: NSMenu?
@@ -22,7 +21,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         StatusView.statusItem?.menu = menu
         
         do {
-            hotSwap = try HotSwap()
+            try Config.load()
+            try Keyboard.connect()
+            
+            Keyboard.keySubscribers["general"] = GeneralSectionHandler(SwitchHandler())
         } catch {
             print(error)
         }

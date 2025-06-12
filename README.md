@@ -24,9 +24,9 @@ The configuration consists of
 
 - **[general]** - rules that work without modifier keys.
 - **[switch key]** - the modifier key used to activate remapping (e.g., a specific key code).
-- **key**:**targets**:**modifiers** - remapping rules:
-    - **key** - the key code to be remapped (required).
-    - **targets** - comma-separated target key codes (required).
+- **source**:**target**:**modifiers** - remapping rules:
+    - **source** - the key code to be remapped (required).
+    - **targets** - target key code (required).
     - **modifiers** - optional comma-separated modifier codes.
 - **Comments**: lines starting with #.
 

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-struct GeneralSectionHandler : KeyHandler {
+class GeneralSectionHandler : KeyHandler {
     
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if Config.mapping.keys.contains(.general) {

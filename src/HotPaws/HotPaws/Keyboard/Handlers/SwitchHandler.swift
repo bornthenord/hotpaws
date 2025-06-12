@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SwitchModifierHandler : KeyHandler {
+class SwitchHandler : KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         for switchModifier in modifiers {
             if let layer = Config.mapping[switchModifier] {

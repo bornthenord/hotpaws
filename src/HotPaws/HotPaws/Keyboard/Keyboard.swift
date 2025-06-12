@@ -17,7 +17,6 @@ protocol ModifierChangeHandler {
 struct Keyboard {
     
     private static let keyDownEvent: Event = Event()
-    private static let keyUpEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()
 
     public static var keySubscribers: Dictionary<String,KeyHandler> = [:]
@@ -25,8 +24,7 @@ struct Keyboard {
 
     public static func connect() throws {
         keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownHandler)
-        keyDownEvent.subscribe(type: CGEventType.keyUp, handler: keyUpHandler)
-        keyDownEvent.subscribe(type: CGEventType.flagsChanged, handler: modifierChangeHandler)
+        flagsChangedEvent.subscribe(type: CGEventType.flagsChanged, handler: modifierChangeHandler)
     }
     
     public static func press(key: Key, modifiers: Set<Modifier>?) {
@@ -76,14 +74,6 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
         }
     }
     
-    return Unmanaged.passUnretained(cgEvent)
-}
-
-private func keyUpHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-    if let event = NSEvent(cgEvent: cgEvent) {
-        if var key = Key(rawValue: event.keyCode) {
-        }
-    }
     return Unmanaged.passUnretained(cgEvent)
 }
 

@@ -6,6 +6,8 @@
 ## What is?
 This is a utility that allows you to dynamically remap keys or assign keyboard shortcuts on macOS.
 
+*Origin story: This tool was inspired by the comfortable navigation in Vim, where moving around with h, j, k, l is quick and doesn't require reaching for arrow keys. I wanted to bring that same flexibility and speed to macOS — so navigation becomes fast and comfortable without relying on arrow keys or other awkward shortcuts.*
+
 ## Installation
 1. Download dmg [installer](https://github.com/bornthenord/hotpaws/releases)
 2. Open the downloaded file and copy the app to the **Applications** folder.

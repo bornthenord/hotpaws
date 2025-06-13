@@ -10,6 +10,9 @@ import Foundation
 
 struct Config {
     private static let _keyMapping: String = "config"
+    private static let _keyCapsLockisOnOff: String = "capsLockisOnOff"
+    private static var _capsLockIsOnOff: Bool = false
+    
     private static var _mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> = [:]
     private static var _mappingString: String = """
         [fn]
@@ -28,6 +31,10 @@ struct Config {
         _mappingString
     }
     
+    public static var capsLockIsOnOff: Bool {
+        _capsLockIsOnOff
+    }
+    
     public static func load() throws {
         let mappingStr = UserDefaults.standard.string(forKey: _keyMapping)
         
@@ -36,12 +43,15 @@ struct Config {
         }
         
         _mapping = try ConfigParser.parse(_mappingString)
+        
+        _capsLockIsOnOff = UserDefaults.standard.bool(forKey: _keyCapsLockisOnOff)
     }
     
-    public static func save(mapping: String) throws {
+    public static func save(mapping: String, capsLockIsOnOff: Bool) throws {
         _mapping = try ConfigParser.parse(mapping)
         _mappingString = mapping
         
         UserDefaults.standard.set(mapping, forKey: _keyMapping)
+        UserDefaults.standard.set(capsLockIsOnOff, forKey: _keyCapsLockisOnOff)
     }
 }

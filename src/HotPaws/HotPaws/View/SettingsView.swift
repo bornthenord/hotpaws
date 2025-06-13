@@ -14,6 +14,7 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
     @IBOutlet var mappingText: NSTextView!
+    @IBOutlet weak var switchOnOff: NSSwitch!
     
     public static var instace: ViewController? = nil
     
@@ -24,6 +25,7 @@ class ViewController: NSViewController {
         ViewController.instace?.title = "Settings"
         
         initMapping(mapping: Config.mappingString)
+        initCapsLockIsOnOff(state: Config.capsLockIsOnOff)
         
         keyDetected = KeyDetected(textView: self.lastPressedKeyText)
     }
@@ -41,7 +43,9 @@ class ViewController: NSViewController {
     
     @IBAction func apply(_ sender: Any) {
         do {
-            try Config.save(mapping: mappingText.string)
+            let _capsLockIsOnOff = ViewController.instace?.switchOnOff.state == .on
+            
+            try Config.save(mapping: mappingText.string, capsLockIsOnOff: _capsLockIsOnOff)
             
             AlertView.alert(window: self.view.window!, text: "Applied")
         } catch {
@@ -52,5 +56,13 @@ class ViewController: NSViewController {
     private func initMapping(mapping: String) {
         mappingText.string = mapping
         mappingText.font = .systemFont(ofSize: 16)
+    }
+    
+    private func initCapsLockIsOnOff(state: Bool) {
+        if state == true {
+            ViewController.instace?.switchOnOff .state = .on
+        } else {
+            ViewController.instace?.switchOnOff .state = .off
+        }
     }
 }

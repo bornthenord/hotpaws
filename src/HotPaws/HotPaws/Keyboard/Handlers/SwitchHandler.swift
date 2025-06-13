@@ -20,11 +20,11 @@ class SwitchHandler : KeyHandler {
                     
                     key = mapping.target
                     
-                    return false
+                    return true
                 }
             }
         }
         
-        return true
+        return false
     }
 }

@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try Config.load()
             try Keyboard.connect()
             
-            Keyboard.keySubscribers["general"] = GeneralSectionHandler(SwitchHandler())
+            Keyboard.keySubscribers["general"] = CapsLockIsOnOffHandler(GeneralSectionHandler(SwitchHandler()))
         } catch {
             print(error)
         }

@@ -66,7 +66,7 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
             }
             
             for handler in Keyboard.keySubscribers.values {
-                if !handler.handle(key: &key, modifiers: &modifiers!) {
+                if handler.handle(key: &key, modifiers: &modifiers!) {
                     Keyboard.press(key: key, modifiers: modifiers)
                     return nil
                 }
@@ -80,10 +80,10 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
 private func modifierChangeHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
         
-        var presedModifier = event.modifierFlags.toModifiers()
+        var pressedModifier = event.modifierFlags.toModifiers()
             
         for handler in Keyboard.modifierChangeSubscribers.values {
-            if !handler.handle(modifiers: &presedModifier) {
+            if handler.handle(modifiers: &pressedModifier) {
                 return nil
             }
         }

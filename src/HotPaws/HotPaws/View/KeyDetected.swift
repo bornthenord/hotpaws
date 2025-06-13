@@ -29,7 +29,7 @@ class KeyDetected : KeyHandler, ModifierChangeHandler {
             KeyDetected.textView!.stringValue = key.description
         }
         
-        return true
+        return false
     }
     
     func handle(modifiers: inout Set<Modifier>) -> Bool {
@@ -39,6 +39,6 @@ class KeyDetected : KeyHandler, ModifierChangeHandler {
             }
         }
         
-        return true
+        return false
     }
 }

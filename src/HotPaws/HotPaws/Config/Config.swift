@@ -53,5 +53,7 @@ struct Config {
         
         UserDefaults.standard.set(mapping, forKey: _keyMapping)
         UserDefaults.standard.set(capsLockIsOnOff, forKey: _keyCapsLockisOnOff)
+        
+        _capsLockIsOnOff = capsLockIsOnOff
     }
 }

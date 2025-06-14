@@ -34,26 +34,16 @@ public enum Modifier: UInt16, CaseIterable {
     
     public static func parse(_ modifier: String) throws -> Modifier {
         switch modifier {
-        case "shift":
-            return .shift
-        case "shiftr":
-            return .shiftr
-        case "ctrl":
-            return .ctrl
-        case "opt":
-            return .opt
-        case "optr":
-            return .optr
-        case "cmd":
-            return .cmd
-        case "cmdr":
-            return .cmdr
-        case "fn":
-            return .fn
-        case "capslock":
-            return .capslock
-        case "general":
-            return .general
+        case "shift": return .shift
+        case "shiftr": return .shiftr
+        case "ctrl": return .ctrl
+        case "opt": return .opt
+        case "optr": return .optr
+        case "cmd": return .cmd
+        case "cmdr": return .cmdr
+        case "fn": return .fn
+        case "capslock": return .capslock
+        case "general": return .general
         default:
             throw KeyErrors.KeyNotExists(key: modifier)
         }

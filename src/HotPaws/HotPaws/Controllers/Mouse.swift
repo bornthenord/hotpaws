@@ -48,13 +48,11 @@ struct Mouse {
     public static func rightClick() {
         btnDown(false)
         btnUp(false)
-        print("rightClick")
     }
     
     public static func leftClick() {
         btnDown(true)
         btnUp(true)
-        print("leftClick")
     }
     
     private static func getCurrentMousePosition() -> CGPoint {

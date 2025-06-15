@@ -19,13 +19,20 @@ struct Config {
         j:down
         l:right
         """
-
+    
+    private static let _mouseCursorStepKey = "mouseCursorStep"
+    private static var _mouseCursorStep: Double = 5
+    
     public static var mapping: Dictionary<Button,Dictionary<Button,Mapping>> {
         _mapping
     }
     
     public static var mappingString: String {
         _mappingString
+    }
+    
+    public static var mouseCursorStep: Double {
+        _mouseCursorStep
     }
     
     public static func load() throws {
@@ -36,12 +43,16 @@ struct Config {
         }
         
         _mapping = try ConfigParser.parse(_mappingString)
+
+        _mouseCursorStep = UserDefaults.standard.double(forKey: _mouseCursorStepKey)
     }
     
-    public static func save(mapping: String) throws {
+    public static func save(mapping: String, mouseCursorStep: Double) throws {
         _mapping = try ConfigParser.parse(mapping)
         _mappingString = mapping
+        _mouseCursorStep = mouseCursorStep
         
         UserDefaults.standard.set(mapping, forKey: _keyMapping)
+        UserDefaults.standard.set(_mouseCursorStep, forKey: _mouseCursorStepKey)
     }
 }

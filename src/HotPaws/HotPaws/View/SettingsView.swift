@@ -14,6 +14,7 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
     @IBOutlet var mappingText: NSTextView!
+    @IBOutlet weak var cursorStepSlider: NSSlider!
     
     public static var instace: ViewController? = nil
     
@@ -26,6 +27,8 @@ class ViewController: NSViewController {
         initMapping(mapping: Config.mappingString)
         
         buttonDetected = ButtonDetected(textView: self.lastPressedKeyText)
+        
+        cursorStepSlider.doubleValue = Config.mouseCursorStep
     }
         
     override func viewWillDisappear() {
@@ -41,12 +44,16 @@ class ViewController: NSViewController {
     
     @IBAction func apply(_ sender: Any) {
         do {
-            try Config.save(mapping: mappingText.string)
+            try Config.save(mapping: mappingText.string, mouseCursorStep: cursorStepSlider.doubleValue)
             
             AlertView.alert(window: self.view.window!, text: "Applied")
         } catch {
             AlertView.alert(window: self.view.window!, text: "\(error)")
         }
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        self.view.window?.close()
     }
     
     private func initMapping(mapping: String) {

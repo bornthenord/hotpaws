@@ -21,28 +21,28 @@ struct Mouse {
         mouseMoveEvent.subscribe(type: CGEventType.mouseMoved, handler: mouseMoveHandler)
     }
     
-    public static func left(_ pixels: CGFloat) {
+    public static func left(_ pixels: Double) {
         let currentPosition = getCurrentMousePosition()
         
-        move(x: currentPosition.x - pixels, y: currentPosition.y)
+        move(x: currentPosition.x - CGFloat(pixels), y: currentPosition.y)
     }
     
-    public static func up(_ pixels: CGFloat) {
+    public static func up(_ pixels: Double) {
         let currentPosition = getCurrentMousePosition()
         
-        move(x: currentPosition.x, y: currentPosition.y + pixels)
+        move(x: currentPosition.x, y: currentPosition.y + CGFloat(pixels))
     }
     
-    public static func down(_ pixels: CGFloat) {
+    public static func down(_ pixels: Double) {
         let currentPosition = getCurrentMousePosition()
         
-        move(x: currentPosition.x, y: currentPosition.y - pixels)
+        move(x: currentPosition.x, y: currentPosition.y - CGFloat(pixels))
     }
     
-    public static func right(_ pixels: CGFloat) {
+    public static func right(_ pixels: Double) {
         let currentPosition = getCurrentMousePosition()
         
-        move(x: currentPosition.x + pixels, y: currentPosition.y)
+        move(x: currentPosition.x + CGFloat(pixels), y: currentPosition.y)
     }
 
     public static func rightClick() {

@@ -8,25 +8,37 @@
 import Foundation
 
 class MouseButtonHandler : ButtonHandler {
+    let stepPixsels: CGFloat = 20
+    
     func handle(button: inout Button, modifiers: inout Set<Button>) -> HandlerResult {
         
         if button == .mouseUp {
-            Mouse.up()
+            Mouse.up(stepPixsels)
             return .handled
         }
         
         if button == .mouseDown {
-            Mouse.down()
+            Mouse.down(stepPixsels)
             return .handled
         }
         
         if button == .mouseLeft {
-            Mouse.left()
+            Mouse.left(stepPixsels)
             return .handled
         }
         
         if button == .mouseRight {
-            Mouse.right()
+            Mouse.right(stepPixsels)
+            return .handled
+        }
+        
+        if button == .mouseLeftClick {
+            Mouse.leftClick()
+            return .handled
+        }
+        
+        if button == .mouseRightClick {
+            Mouse.rightClick()
             return .handled
         }
         

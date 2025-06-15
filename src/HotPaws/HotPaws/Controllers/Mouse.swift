@@ -21,28 +21,88 @@ struct Mouse {
         mouseMoveEvent.subscribe(type: CGEventType.mouseMoved, handler: mouseMoveHandler)
     }
     
-    public static func left() {
-        let currentLocation = NSEvent.mouseLocation
-        let point = CGPoint(x: currentLocation.x + 1, y: currentLocation.y + 1)
+    public static func left(_ pixels: CGFloat) {
+        let currentPosition = getCurrentMousePosition()
         
-        let event = CGEvent(mouseEventSource: nil, mouseType: CGEventType.mouseMoved, mouseCursorPosition: point, mouseButton: .left)
+        move(x: currentPosition.x - pixels, y: currentPosition.y)
+    }
+    
+    public static func up(_ pixels: CGFloat) {
+        let currentPosition = getCurrentMousePosition()
         
-        event?.post(tap: CGEventTapLocation.cghidEventTap)
+        move(x: currentPosition.x, y: currentPosition.y + pixels)
     }
     
-    public static func up() {
+    public static func down(_ pixels: CGFloat) {
+        let currentPosition = getCurrentMousePosition()
+        
+        move(x: currentPosition.x, y: currentPosition.y - pixels)
     }
     
-    public static func down() {
-    }
-    
-    public static func right() {
+    public static func right(_ pixels: CGFloat) {
+        let currentPosition = getCurrentMousePosition()
+        
+        move(x: currentPosition.x + pixels, y: currentPosition.y)
     }
 
     public static func rightClick() {
+        btnDown(false)
+        btnUp(false)
+        print("rightClick")
     }
     
     public static func leftClick() {
+        btnDown(true)
+        btnUp(true)
+        print("leftClick")
+    }
+    
+    private static func getCurrentMousePosition() -> CGPoint {
+        return CGEvent(source: nil)?.location ?? CGPoint.zero
+    }
+    
+    private static func move(x: Double, y: Double) {
+        let newPosition = CGPoint(x: x, y: y)
+        
+        if let moveEvent = CGEvent(mouseEventSource: nil, mouseType: .mouseMoved, mouseCursorPosition: newPosition, mouseButton: .left) {
+            moveEvent.post(tap: .cghidEventTap)
+        }
+    }
+    
+    private static func btnDown(_ isLeft: Bool) {
+        let currentPosition = getCurrentMousePosition()
+        var mouseType = CGEventType.leftMouseDown
+        var mouseButton = CGMouseButton.left
+        
+        if !isLeft {
+            mouseType = .rightMouseDown
+            mouseButton = CGMouseButton.right
+        }
+        
+        if let event = CGEvent(mouseEventSource: nil,
+                               mouseType: mouseType,
+                               mouseCursorPosition: currentPosition,
+                               mouseButton: mouseButton) {
+            event.post(tap: .cghidEventTap)
+        }
+    }
+    
+    private static func btnUp(_ isLeft: Bool) {
+        let currentPosition = getCurrentMousePosition()
+        var mouseType = CGEventType.leftMouseUp
+        var mouseButton = CGMouseButton.left
+        
+        if !isLeft {
+            mouseType = .rightMouseUp
+            mouseButton = CGMouseButton.right
+        }
+        
+        if let event = CGEvent(mouseEventSource: nil,
+                               mouseType: mouseType,
+                               mouseCursorPosition: currentPosition,
+                               mouseButton: mouseButton) {
+            event.post(tap: .cghidEventTap)
+        }
     }
 }
 

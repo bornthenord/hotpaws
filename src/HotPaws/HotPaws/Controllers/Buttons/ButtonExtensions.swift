@@ -24,6 +24,8 @@ extension Button {
         return self == .mouseUp ||
         self == .mouseDown ||
         self == .mouseLeft ||
-        self == .mouseRight
+        self == .mouseRight ||
+        self == .mouseLeftClick ||
+        self == .mouseRightClick
     }
 }

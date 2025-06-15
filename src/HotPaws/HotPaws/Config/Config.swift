@@ -10,7 +10,7 @@ import Foundation
 
 struct Config {
     private static let _keyMapping: String = "config"
-    private static var _mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> = [:]
+    private static var _mapping: Dictionary<Button,Dictionary<Button,Mapping>> = [:]
     private static var _mappingString: String = """
         [fn]
         # navigation
@@ -20,7 +20,7 @@ struct Config {
         l:right
         """
 
-    public static var mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> {
+    public static var mapping: Dictionary<Button,Dictionary<Button,Mapping>> {
         _mapping
     }
     

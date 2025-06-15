@@ -1,14 +1,14 @@
 //
-//  Key.swift
+//  Button.swift
 //  HotPaws
 //
-//  Created by cat dog on 14.04.2025.
+//  Created by cat dog on 15.06.2025.
 //
-enum KeyErrors: Error {
-    case KeyNotExists(key: String)
+enum ButtonErrors: Error {
+    case ButtonNotExists(button: String)
 }
 
-enum Key: UInt16 {
+enum Button: UInt16 {
     case `return`                  = 0x24
     case enter                     = 0x4C
     case tab                       = 0x30
@@ -117,6 +117,17 @@ enum Key: UInt16 {
     case keypad7                   = 0x59
     case keypad8                   = 0x5B
     case keypad9                   = 0x5C
+    
+    case shift                     = 0x38
+    case shiftr                    = 0x3C
+    case ctrl                      = 0x3B
+    case opt                       = 0x3A
+    case optr                      = 0x3D
+    case cmd                       = 0x37
+    case cmdr                      = 0x36
+    case fn                        = 0x3F
+    case capslock                  = 0x39
+    case general                   = 0xAC
     
     case mouseLeft                     = 0xAA
     case mouseRight                    = 0xBB
@@ -236,6 +247,17 @@ enum Key: UInt16 {
         case .keypad8: return "keypad8"
         case .keypad9: return "keypad9"
         
+        case .shift: return "shift"
+        case .shiftr: return "shiftr"
+        case .ctrl: return "ctrl"
+        case .opt: return "opt"
+        case .optr: return "optr"
+        case .cmd: return "cmd"
+        case .cmdr: return "cmdr"
+        case .fn: return "fn"
+        case .capslock: return "capslock"
+        case .general: return "general"
+
         case .mouseUp: return "mouseUp"
         case .mouseDown: return "mouseDown"
         case .mouseLeft: return "mouseLeft"
@@ -245,9 +267,9 @@ enum Key: UInt16 {
         }
     }
     
-    public static func parse(_ key: String) throws -> Key {
+    public static func parse(_ button: String) throws -> Button {
         
-        switch key {
+        switch button {
         case "return": return .return
         case "enter": return .enter
         case "tab": return .tab
@@ -365,8 +387,19 @@ enum Key: UInt16 {
         case "mouseLeftClick": return .mouseLeftClick
         case "mouseRightClick": return .mouseRightClick
             
+        case "shift": return .shift
+        case "shiftr": return .shiftr
+        case "ctrl": return .ctrl
+        case "opt": return .opt
+        case "optr": return .optr
+        case "cmd": return .cmd
+        case "cmdr": return .cmdr
+        case "fn": return .fn
+        case "capslock": return .capslock
+        case "general": return .general
+
         default:
-            throw KeyErrors.KeyNotExists(key: key)
+            throw ButtonErrors.ButtonNotExists(button: button)
         }
     }
 }

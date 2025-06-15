@@ -6,42 +6,35 @@
 //
 import Cocoa
 
-protocol KeyHandler {
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool
-}
-
-protocol ModifierChangeHandler {
-    func handle(modifiers: inout Set<Modifier>) -> Bool
-}
 
 struct Keyboard {
     
     private static let keyDownEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()
 
-    public static var keySubscribers: Dictionary<String,KeyHandler> = [:]
-    public static var modifierChangeSubscribers: Dictionary<String,ModifierChangeHandler> = [:]
+    public static var keySubscribers: Dictionary<String,ButtonHandler> = [:]
+    public static var modifierChangeSubscribers: Dictionary<String,ModifierHandler> = [:]
 
     public static func connect() throws {
         keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownHandler)
         flagsChangedEvent.subscribe(type: CGEventType.flagsChanged, handler: modifierChangeHandler)
     }
     
-    public static func press(key: Key, modifiers: Set<Modifier>?) {
-        down(key: key, modifiers: modifiers)
+    public static func press(key: Button, modifiers: Set<Button>?) throws {
+        try down(key: key, modifiers: modifiers)
         up(key: key)
     }
     
-    private static func up(key: Key) {
+    private static func up(key: Button) {
         let up = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: false)
         up?.post(tap: .cghidEventTap)
     }
     
-    private static func down(key: Key, modifiers: Set<Modifier>?) {
+    private static func down(key: Button, modifiers: Set<Button>?) throws {
         var flags: CGEventFlags?
         
         if (modifiers != nil) {
-            flags = modifiers!.toFlags()
+            flags = try modifiers!.toFlags()
         }
         
         let down = CGEvent(keyboardEventSource: nil, virtualKey: key.rawValue, keyDown: true)
@@ -56,8 +49,8 @@ struct Keyboard {
 
 private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
-        if var key = Key(rawValue: event.keyCode) {
-            var modifiers: Set<Modifier>?
+        if var key = Button(rawValue: event.keyCode) {
+            var modifiers: Set<Button>?
             
             if !event.modifierFlags.isEmpty {
                 modifiers = event.modifierFlags.toModifiers()
@@ -66,8 +59,7 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
             }
             
             for handler in Keyboard.keySubscribers.values {
-                if !handler.handle(key: &key, modifiers: &modifiers!) {
-                    Keyboard.press(key: key, modifiers: modifiers)
+                if handler.handle(button: &key, modifiers: &modifiers!) == .handled {
                     return nil
                 }
             }
@@ -83,7 +75,7 @@ private func modifierChangeHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CG
         var presedModifier = event.modifierFlags.toModifiers()
             
         for handler in Keyboard.modifierChangeSubscribers.values {
-            if !handler.handle(modifiers: &presedModifier) {
+            if handler.handle(modifiers: &presedModifier) == .handled {
                 return nil
             }
         }

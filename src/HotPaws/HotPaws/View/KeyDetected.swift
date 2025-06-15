@@ -8,7 +8,7 @@
 import Foundation
 import AppKit
 
-class KeyDetected : KeyHandler, ModifierChangeHandler {
+class KeyDetected : ButtonHandler, ModifierHandler {
     let name: String = "KeyDetected"
     
     public static var textView: NSTextFieldCell?
@@ -24,21 +24,21 @@ class KeyDetected : KeyHandler, ModifierChangeHandler {
         Keyboard.modifierChangeSubscribers.removeValue(forKey: name)
     }
     
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
+    func handle(button: inout Button, modifiers: inout Set<Button>) -> HandlerResult {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
-            KeyDetected.textView!.stringValue = key.description
+            KeyDetected.textView!.stringValue = button.description
         }
         
-        return true
+        return .skipped
     }
     
-    func handle(modifiers: inout Set<Modifier>) -> Bool {
+    func handle(modifiers: inout Set<Button>) -> HandlerResult {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
             if let desc = modifiers.first?.description {
                 KeyDetected.textView!.stringValue = desc
             }
         }
         
-        return true
+        return .skipped
     }
 }

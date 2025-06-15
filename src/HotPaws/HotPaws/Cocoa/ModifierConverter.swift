@@ -8,15 +8,19 @@
 import Foundation
 import AppKit
 
+enum ModifierErrors: Error {
+    case ModifierNotExists(button: String)
+}
+
 private let CommandRightValue: Int = 1048848
 private let OptionRightValue: Int = 524608
 private let ShiftRightValue: Int = 131332
 
 extension NSEvent.ModifierFlags {
     
-    public func toModifiers() -> Set<Modifier>
+    internal func toModifiers() -> Set<Button>
     {
-        var result = Set<Modifier>(minimumCapacity: 5)
+        var result = Set<Button>(minimumCapacity: 5)
         
         if self.contains(.capsLock) {
             result.insert(.capslock)
@@ -58,8 +62,8 @@ extension NSEvent.ModifierFlags {
     }
 }
 
-extension Set<Modifier> {
-    public func toFlags() -> CGEventFlags {
+extension Set<Button> {
+    internal func toFlags() throws -> CGEventFlags {
         var flags: CGEventFlags = []
         
         for modifier in self {
@@ -84,6 +88,9 @@ extension Set<Modifier> {
                 continue
             case .general:
                continue
+            
+            default:
+                throw ModifierErrors.ModifierNotExists(button: modifier.description)
             }
         }
         

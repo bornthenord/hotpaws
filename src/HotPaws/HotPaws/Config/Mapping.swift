@@ -9,7 +9,7 @@
 import Foundation
 
 struct Mapping {
-    var source: Key
-    var target: Key
-    var modifiers: Set<Modifier>?
+    var source: Button
+    var target: Button
+    var modifiers: Set<Button>?
 }

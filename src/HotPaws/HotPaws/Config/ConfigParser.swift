@@ -12,9 +12,9 @@ enum ConfigErrors: Error {
 }
 
 struct ConfigParser {
-    public static func parse(_ content: String) throws -> Dictionary<Modifier,Dictionary<Key,Mapping>> {
-        var layers = Dictionary<Modifier,Dictionary<Key,Mapping>>()
-        var currentSwitchModifier = Modifier.fn
+    public static func parse(_ content: String) throws -> Dictionary<Button,Dictionary<Button,Mapping>> {
+        var layers = Dictionary<Button,Dictionary<Button,Mapping>>()
+        var currentSwitchModifier = Button.fn
         
         for raw in content.split(separator: "\n") {
             if raw.starts(with: "#") {
@@ -47,7 +47,7 @@ struct ConfigParser {
         
         let source = try toKey(String(items[0]))
         let target = try toKey(String(items[1]))
-        var modifiers: Set<Modifier>?
+        var modifiers: Set<Button>?
         
         if items.count == 3 {
             modifiers = try parseModifiers(String(items[2]))
@@ -56,8 +56,8 @@ struct ConfigParser {
         return Mapping(source: source, target: target, modifiers: modifiers)
     }
     
-    private static func parseModifiers(_ modifiers: String) throws -> Set<Modifier> {
-        var result = Set<Modifier>()
+    private static func parseModifiers(_ modifiers: String) throws -> Set<Button> {
+        var result = Set<Button>()
         let raws = modifiers.split(separator: ",")
         
         for raw in raws {
@@ -67,24 +67,24 @@ struct ConfigParser {
         return result
     }
     
-    private static func toKey(_ raw: String) throws -> Key {
+    private static func toKey(_ raw: String) throws -> Button {
         let key = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return try Key.parse(key)
+        return try Button.parse(key)
     }
     
-    private static func toModifier(_ raw: String) throws -> Modifier {
+    private static func toModifier(_ raw: String) throws -> Button {
         let modifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return try Modifier.parse(modifier)
+        return try Button.parse(modifier)
     }
     
-    private static func toGeneralModifier(_ raw: String) throws -> Modifier {
+    private static func toGeneralModifier(_ raw: String) throws -> Button {
         var switchModifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
         switchModifier = String(switchModifier.dropFirst())
         switchModifier = String(switchModifier.dropLast())
         
-        return try Modifier.parse(switchModifier)
+        return try Button.parse(switchModifier)
     }
 }

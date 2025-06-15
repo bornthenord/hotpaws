@@ -8,37 +8,39 @@
 import Foundation
 import AppKit
 
-class KeyDetected : ButtonHandler, ModifierHandler {
-    let name: String = "KeyDetected"
+class ButtonDetected : ButtonHandler, ModifierHandler {
+    let name: String = "ButtonDetected"
     
     public static var textView: NSTextFieldCell?
     
     init(textView: NSTextFieldCell) {
-        KeyDetected.textView = textView
+        ButtonDetected.textView = textView
         Keyboard.keySubscribers[name] = self
         Keyboard.modifierChangeSubscribers[name] = self
+        Mouse.buttonSubscribers[name] = self
     }
     
     func close() {
         Keyboard.keySubscribers.removeValue(forKey: name)
         Keyboard.modifierChangeSubscribers.removeValue(forKey: name)
+        Mouse.buttonSubscribers.removeValue(forKey: name)
     }
     
     func handle(button: inout Button, modifiers: inout Set<Button>) -> HandlerResult {
-        if KeyDetected.textView?.isAccessibilityFocused() == true {
-            KeyDetected.textView!.stringValue = button.description
+        if ButtonDetected.textView?.isAccessibilityFocused() == true {
+            ButtonDetected.textView!.stringValue = button.description
         }
         
         return .skipped
     }
     
     func handle(modifiers: inout Set<Button>) -> HandlerResult {
-        if KeyDetected.textView?.isAccessibilityFocused() == true {
+        if ButtonDetected.textView?.isAccessibilityFocused() == true {
             if let desc = modifiers.first?.description {
-                KeyDetected.textView!.stringValue = desc
+                ButtonDetected.textView!.stringValue = desc
             }
         }
         
-        return .skipped
+        return .handled
     }
 }

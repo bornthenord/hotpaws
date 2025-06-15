@@ -129,6 +129,7 @@ enum Button: UInt16 {
     case capslock                  = 0x39
     case general                   = 0xAC
     
+    case mouseMove                      = 0xAE
     case mouseLeft                     = 0xAA
     case mouseRight                    = 0xBB
     case mouseUp                       = 0xCC
@@ -258,6 +259,7 @@ enum Button: UInt16 {
         case .capslock: return "capslock"
         case .general: return "general"
 
+        case .mouseMove: return "\(Button.mouseUp.description)/\(Button.mouseDown.description)/\(Button.mouseLeft.description)/\(Button.mouseRight.description)"
         case .mouseUp: return "mouseUp"
         case .mouseDown: return "mouseDown"
         case .mouseLeft: return "mouseLeft"

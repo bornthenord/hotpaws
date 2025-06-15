@@ -23,8 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         do {
             try Config.load()
             try Keyboard.connect()
+            try Mouse.connect()
             
-            Keyboard.keySubscribers["general"] = GeneralSectionHandler(KeyboardClickHandler())
+            let controllerHandler = ControllerHandler(keyHandler: KeyHandler(), mouseHandler: MouseButtonHandler())
+            
+            Keyboard.keySubscribers["general"] = GeneralSectionHandler(controllerHandler)
         } catch {
             print(error)
         }

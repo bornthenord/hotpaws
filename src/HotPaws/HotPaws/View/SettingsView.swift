@@ -10,7 +10,7 @@ import Cocoa
 class ViewController: NSViewController {
 
     private var isClosing = false
-    private var keyDetected: KeyDetected?
+    private var buttonDetected: ButtonDetected?
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
     @IBOutlet var mappingText: NSTextView!
@@ -25,13 +25,13 @@ class ViewController: NSViewController {
         
         initMapping(mapping: Config.mappingString)
         
-        keyDetected = KeyDetected(textView: self.lastPressedKeyText)
+        buttonDetected = ButtonDetected(textView: self.lastPressedKeyText)
     }
         
     override func viewWillDisappear() {
         // Method called at start and when the window is closed.
         if isClosing {
-            keyDetected!.close()
+            buttonDetected!.close()
         }
         
         isClosing = true

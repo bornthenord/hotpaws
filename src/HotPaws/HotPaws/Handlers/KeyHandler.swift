@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KeyboardClickHandler : ButtonHandler {
+class KeyHandler : ButtonHandler {
     func handle(button: inout Button, modifiers: inout Set<Button>) -> HandlerResult {
         for switchModifier in modifiers {
             if let layer = Config.mapping[switchModifier] {

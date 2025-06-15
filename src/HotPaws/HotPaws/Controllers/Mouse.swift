@@ -107,7 +107,7 @@ struct Mouse {
 private func leftMouseDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
         if event.type == .leftMouseDown {
-            var btn = Button.mouseRightClick
+            var btn = Button.mouseLeftClick
             var modifiers = Set<Button>()
             
             for handler in Mouse.buttonSubscribers.values {

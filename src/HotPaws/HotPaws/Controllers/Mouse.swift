@@ -49,7 +49,7 @@ struct Mouse {
 private func leftMouseDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
         if event.type == .leftMouseDown {
-            var btn = Button.mouseLeft
+            var btn = Button.mouseRightClick
             var modifiers = Set<Button>()
             
             for handler in Mouse.buttonSubscribers.values {
@@ -66,7 +66,7 @@ private func leftMouseDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGE
 private func rightMouseDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if let event = NSEvent(cgEvent: cgEvent) {
         if event.type == .rightMouseDown {
-            var btn = Button.mouseRight
+            var btn = Button.mouseRightClick
             var modifiers = Set<Button>()
             
             for handler in Mouse.buttonSubscribers.values {

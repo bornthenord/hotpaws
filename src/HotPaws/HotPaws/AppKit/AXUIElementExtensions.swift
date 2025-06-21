@@ -9,12 +9,18 @@ import Foundation
 import AppKit
 
 extension AXUIElement {
-    func getPoint() -> CGPoint? {
+    func getAttribute(_ name: String) -> (status: AXError, value: CFTypeRef?) {
         var value: CFTypeRef?
-        let result = AXUIElementCopyAttributeValue(self, kAXPositionAttribute as CFString, &value)
+        let result = AXUIElementCopyAttributeValue(self, name as CFString, &value)
         
-        if result == .success {
-            let position = value as! AXValue
+        return (result, value)
+    }
+    
+    func getPoint() -> CGPoint? {
+        let attribute = self.getAttribute(kAXPositionAttribute)
+        
+        if attribute.status == .success {
+            let position = attribute.value as! AXValue
             var point = CGPoint.zero
             
             if AXValueGetType(position) == .cgPoint,
@@ -28,17 +34,14 @@ extension AXUIElement {
     
     func getClickableElements() -> [AXUIElement] {
         var clickableElements: [AXUIElement] = []
-        var childrenValue: CFTypeRef?
+        let children = self.getAttribute(kAXChildrenAttribute)
         
-        let result = AXUIElementCopyAttributeValue(self, kAXChildrenAttribute as CFString, &childrenValue)
-        
-        if result == .success {
-            if let children = childrenValue as? [AXUIElement] {
+        if children.status == .success {
+            if let children = children.value as? [AXUIElement] {
                 for child in children {
-                    var elementTypeValue: AnyObject?
-                    let typeResult = AXUIElementCopyAttributeValue(child, kAXRoleAttribute as CFString, &elementTypeValue)
+                    let role = child.getAttribute(kAXRoleAttribute)
                     
-                    if typeResult == .success, let role = elementTypeValue as? String {
+                    if role.status == .success, let role = role.value as? String {
                         // Проверяем, является ли элемент кликабельным
                         if role == kAXButtonRole as String ||
                             //                       role == kAXLinkRole as String ||
@@ -49,7 +52,7 @@ extension AXUIElement {
                             clickableElements.append(child)
                         }
                     } else {
-                        print("Failed to get element type: \(typeResult)")
+                        print("Failed to get element type: \(role.status)")
                     }
                     
                     // Рекурсивно обходим дочерние элементы
@@ -59,8 +62,8 @@ extension AXUIElement {
                 print("Failed convert children elementsf to [AXUIElement]")
             }
         } else {
-            if result != .noValue {
-                print("Failed to get children elements: \(result)")
+            if children.status != .noValue {
+                print("Failed to get children elements: \(children.status)")
             }
         }
         

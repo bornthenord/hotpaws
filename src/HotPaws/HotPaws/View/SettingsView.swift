@@ -6,7 +6,6 @@
 //
 
 import Cocoa
-import AppKit
 
 class ViewController: NSViewController {
 

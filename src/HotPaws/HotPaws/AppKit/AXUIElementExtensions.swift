@@ -13,8 +13,6 @@ extension AXUIElement {
         var value: CFTypeRef?
         let result = AXUIElementCopyAttributeValue(self, kAXPositionAttribute as CFString, &value)
         
-        print(result.rawValue)
-        
         if result == .success {
             let position = value as! AXValue
             var point = CGPoint.zero
@@ -61,7 +59,9 @@ extension AXUIElement {
                 print("Failed convert children elementsf to [AXUIElement]")
             }
         } else {
-            print("Failed to get children elements: \(result)")
+            if result != .noValue {
+                print("Failed to get children elements: \(result)")
+            }
         }
         
         return clickableElements

@@ -19,10 +19,10 @@ class ModeHandler: KeyHandler {
         if key == .f {
             print("Mode activated")
             if let app = NSRunningApplication.getCurrentApp() {
-                print("app")
-                
                 for element in app.getClickableElements() {
-                    print(element)
+                    let point = element.getPoint()
+                    
+                    print(point!)
                 }
             }
             return true

@@ -57,16 +57,6 @@ class ViewController: NSViewController {
         }
     }
     
-    @IBAction func click(_ sender: Any) {
-        var n = Navigation()
-        // Пример использования
-        let clickableItems = n.findClickableElements()
-        for item in clickableItems {
-            print("  Класс: \(type(of: item))")
-            n.addCenteredLabel(to: item, withText: "AAA")
-        }
-    }
-    
     private func initMapping(mapping: String) {
         mappintTextView.documentView?.insertText(mapping)
         

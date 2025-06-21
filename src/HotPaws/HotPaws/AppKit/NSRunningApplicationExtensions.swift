@@ -9,9 +9,21 @@ import Foundation
 import AppKit
 
 extension NSRunningApplication {
-    func getCurrentApp() -> AXUIElement? {
+    static func getCurrentApp() -> AXUIElement? {
         if let app = NSWorkspace.shared.frontmostApplication {
-            return AXUIElementCreateApplication(app.processIdentifier)
+            let app = AXUIElementCreateApplication(app.processIdentifier)
+            
+            var focusedWindow: CFTypeRef?
+            
+            let windowResult = AXUIElementCopyAttributeValue(app, kAXFocusedWindowAttribute as CFString, &focusedWindow)
+            
+            if windowResult == .success {
+                return (focusedWindow as! AXUIElement)
+            } else {
+                print("Error getting focused window: \(windowResult)")
+            }
+        } else {
+            print("Error getting window")
         }
         
         return nil

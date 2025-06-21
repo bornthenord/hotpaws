@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import AppKit
 
 class ViewController: NSViewController {
 
@@ -46,6 +47,16 @@ class ViewController: NSViewController {
             AlertView.alert(window: self.view.window!, text: "Applied")
         } catch {
             AlertView.alert(window: self.view.window!, text: "\(error)")
+        }
+    }
+    
+    @IBAction func click(_ sender: Any) {
+        var n = Navigation()
+        // Пример использования
+        let clickableItems = n.findClickableElements()
+        for item in clickableItems {
+            print("  Класс: \(type(of: item))")
+            n.addCenteredLabel(to: item, withText: "AAA")
         }
     }
     

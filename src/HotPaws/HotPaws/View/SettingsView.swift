@@ -39,6 +39,10 @@ class ViewController: NSViewController {
         super.viewDidDisappear()
     }
     
+    @IBAction func close(_ sender: Any) {
+        self.view.window?.close()
+    }
+    
     @IBAction func apply(_ sender: Any) {
         do {
             try Config.save(mapping: mappingText.string)

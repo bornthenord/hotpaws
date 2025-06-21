@@ -8,9 +8,29 @@
 import Foundation
 import AppKit
 
-class Navigation {
+class Window {
+    var controls: Dictionary<String, NSView> = (.init(minimumCapacity: 50))
+    
+    func markout() {
+        controls.removeAll()
+        
+        let marker = Marker()
+        
+        for control in findClickableControls() {
+            let key = marker.next()
+            addCenteredLabel(to: control, withText: key)
+            controls[key] = control
+        }
+    }
+    
+    func unmarkout() {
+        for control in controls.values {
+            control.subviews.removeLast()
+        }
+    }
+    
     // Функция для поиска кликабельных элементов
-    func findClickableElements() -> [NSView] {
+    private func findClickableControls() -> [NSView] {
         // Получаем главное окно приложения
         guard let window = NSApp.keyWindow else { return [] }
         
@@ -37,15 +57,15 @@ class Navigation {
         return clickableElements
     }
     
-    func addCenteredLabel(to view: NSView, withText text: String) {
+    private func addCenteredLabel(to view: NSView, withText text: String) {
         // Создаем лейбл
         let label = NSTextField(labelWithString: text)
         label.textColor = .systemPink
         label.translatesAutoresizingMaskIntoConstraints = false
-        
+//        label
         // Добавляем лейбл как сабвью к кнопке
         view.addSubview(label)
-        
+        view.subviews.removeLast()
         // Центрируем лейбл по горизонтали и вертикали внутри кнопки
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),

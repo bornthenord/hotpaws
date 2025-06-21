@@ -15,7 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if !isAccessibilityEnabled() {
-            print("Accessibility API is not enabled for this application.")
+            Logger.panic("Accessibility API is not enabled for this application.")
             return
         }
         
@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             Keyboard.keySubscribers["general"] = ModeHandler(GeneralSectionHandler(SwitchHandler()))
         } catch {
-            print(error)
+            Logger.error(error)
         }
     }
     

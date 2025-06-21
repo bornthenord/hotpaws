@@ -18,10 +18,10 @@ extension NSRunningApplication {
             if focusedWindow.status == .success {
                 return (focusedWindow.value as! AXUIElement)
             } else {
-                print("Error getting focused window: \(focusedWindow.status)")
+                Logger.error("Error getting focused window. AXError: \(focusedWindow.status)")
             }
         } else {
-            print("Error getting window")
+            Logger.error("Error getting window")
         }
         
         return nil

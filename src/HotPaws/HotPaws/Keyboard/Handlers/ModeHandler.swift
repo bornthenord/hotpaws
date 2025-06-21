@@ -17,12 +17,12 @@ class ModeHandler: KeyHandler {
     
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if key == .f {
-            print("Mode activated")
+            Logger.info("Mode activated")
             if let app = NSRunningApplication.getCurrentApp() {
                 for element in app.getClickableElements() {
                     let point = element.getPoint()
                     
-                    print(point!)
+                    Logger.info(point!)
                 }
             }
             return true

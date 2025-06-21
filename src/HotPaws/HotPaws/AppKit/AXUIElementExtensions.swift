@@ -52,18 +52,18 @@ extension AXUIElement {
                             clickableElements.append(child)
                         }
                     } else {
-                        print("Failed to get element type: \(role.status)")
+                        Logger.error("Error getting element type. AXError: \(role.status)")
                     }
                     
                     // Рекурсивно обходим дочерние элементы
                     clickableElements += child.getClickableElements()
                 }
             } else {
-                print("Failed convert children elementsf to [AXUIElement]")
+                Logger.error("Failed convert children elements to [AXUIElement]")
             }
         } else {
             if children.status != .noValue {
-                print("Failed to get children elements: \(children.status)")
+                Logger.error("Failed get children elements. AXError: \(children.status)")
             }
         }
         

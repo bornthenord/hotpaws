@@ -13,7 +13,8 @@ class ViewController: NSViewController {
     private var keyDetected: KeyDetected?
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
-    @IBOutlet var mappingText: NSTextView!
+    
+    @IBOutlet weak var mappintTextView: NSScrollView!
     
     public static var instace: ViewController? = nil
     
@@ -39,18 +40,27 @@ class ViewController: NSViewController {
         super.viewDidDisappear()
     }
     
+    @IBAction func close(_ sender: Any) {
+        self.view.window?.close()
+    }
+    
     @IBAction func apply(_ sender: Any) {
         do {
-            try Config.save(mapping: mappingText.string)
-            
-            AlertView.alert(window: self.view.window!, text: "Applied")
+            if let txtView = mappintTextView.documentView as? NSTextView {
+                try Config.save(mapping: txtView.string)
+                
+                AlertView.alert(window: self.view.window!, text: "Applied")
+            }
         } catch {
             AlertView.alert(window: self.view.window!, text: "\(error)")
         }
     }
     
     private func initMapping(mapping: String) {
-        mappingText.string = mapping
-        mappingText.font = .systemFont(ofSize: 16)
+        mappintTextView.documentView?.insertText(mapping)
+        
+        if let txtView = mappintTextView.documentView as? NSTextView {
+            txtView.font = .systemFont(ofSize: 16)
+        }
     }
 }

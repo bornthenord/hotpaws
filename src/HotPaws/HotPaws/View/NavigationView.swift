@@ -26,8 +26,19 @@ class NavigationWindowController: NSWindowController {
         
         let window = NavigationWindowController.shared.window
         
+        if let app = NSRunningApplication.getCurrentApp() {
+            let marker = Marker()
+            
+            for element in app.getClickableElements() {
+                let point = element.getPoint()
+                
+                window?.contentView?.subviews.append(createLabel(withText: marker.next(), coordinate: point!))
+                
+                Logger.info(point!)
+            }
+        }
+        
         window?.center()
-        window?.toggleFullScreen(self)
         window?.makeKeyAndOrderFront(nil)
     }
     
@@ -35,18 +46,30 @@ class NavigationWindowController: NSWindowController {
         NavigationWindowController.shared.window?.close()
     }
     
+    private static func createLabel(withText text: String, coordinate: CGPoint) -> NSTextField {
+        let label = NSTextField(frame: NSRect(x: coordinate.x, y: coordinate.y, width: 30, height: 22))
+        label.stringValue = text
+        label.font = NSFont.systemFont(ofSize: 16)
+        label.textColor = NSColor.black
+//        label.isBezeled = false // Убираем рамку
+//        label.backgroundColor = NSColor.clear
+        
+        return label
+    }
+    
     private static func createWindow() -> NSWindow {
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
+            contentRect: NSRect(x: 0, y: 0, width: 400, height: 300), // Установка фиксированного размера
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
             backing: .buffered, defer: false
         )
         
-        window.collectionBehavior = .fullScreenPrimary
-        window.title = "Полноэкранное окно"
+        window.title = "Прозрачное окно"
         window.isMovableByWindowBackground = true
         
-        window.contentViewController = NavigationViewController()
+        // Настройка прозрачности
+        window.backgroundColor = NSColor.clear
+//        window.opaque = false // Указываем, что окно не должно быть непрозрачным
         
         return window
     }
@@ -57,7 +80,7 @@ class NavigationViewController: NSViewController {
     
     override func loadView() {
         view = NSView()
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.white.cgColor
+//        view.wantsLayer = true
+//        view.layer?.backgroundColor = NSColor.clear.cgColor
     }
 }

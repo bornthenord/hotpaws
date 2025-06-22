@@ -18,6 +18,7 @@ class NavigationHandler: KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if key == .f {
             Logger.info("Mode activated")
+            NavigationWindowController.show()
             return true
         }
         

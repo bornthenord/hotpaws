@@ -19,13 +19,6 @@ class NavigationHandler: KeyHandler {
         if key == .f {
             Logger.info("Mode activated")
             NavigationWindowController.show()
-//            if let app = NSRunningApplication.getCurrentApp() {
-//                for element in app.getClickableElements() {
-//                    let point = element.getPoint()
-//                    
-//                    Logger.info(point!)
-//                }
-//            }
             return true
         }
         

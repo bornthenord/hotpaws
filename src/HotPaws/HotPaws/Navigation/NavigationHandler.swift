@@ -8,7 +8,7 @@
 import Foundation
 import AppKit
 
-class ModeHandler: KeyHandler {
+class NavigationHandler: KeyHandler {
     let decorated: KeyHandler
     
     init(_ decorated: KeyHandler){
@@ -18,13 +18,14 @@ class ModeHandler: KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if key == .f {
             Logger.info("Mode activated")
-            if let app = NSRunningApplication.getCurrentApp() {
-                for element in app.getClickableElements() {
-                    let point = element.getPoint()
-                    
-                    Logger.info(point!)
-                }
-            }
+        
+//            if let app = NSRunningApplication.getCurrentApp() {
+//                for element in app.getClickableElements() {
+//                    let point = element.getPoint()
+//                    
+//                    Logger.info(point!)
+//                }
+//            }
             return true
         }
         

@@ -9,14 +9,18 @@ import Foundation
 
 class Logger {
     public static func info(_ message: Any) {
-        print("info | \(message)")
+        log(level: "info", message)
     }
     
     public static func error(_ message: Any) {
-        print("error | \(message)")
+        log(level: "error", message)
     }
     
     public static func panic(_ message: Any) {
-        print("panic | \(message)")
+        log(level: "panic", message)
+    }
+    
+    private static func log(level: String, _ message: Any) {
+        print("[\(level)][\(Date())] \(message)")
     }
 }

@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try Config.load()
             try Keyboard.connect()
             
-            Keyboard.keySubscribers["general"] = ModeHandler(GeneralSectionHandler(SwitchHandler()))
+            Keyboard.keySubscribers["general"] = NavigationHandler(GeneralSectionHandler(SwitchHandler()))
         } catch {
             Logger.error(error)
         }

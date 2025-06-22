@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Marker {
+class MarkerGenerator {
     private var currentIndex: Int = 0
     private let totalCombinations = 26 * 26
     

@@ -106,14 +106,14 @@
                                 <rect key="frame" x="9" y="35" width="468" height="593"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" drawsBackground="NO" id="47r-fX-aah">
-                                    <rect key="frame" x="0.0" y="0.0" width="468" height="593"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="453" height="593"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="yu8-OD-8tU">
-                                            <rect key="frame" x="0.0" y="0.0" width="468" height="593"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="453" height="593"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="468" height="593"/>
+                                            <size key="minSize" width="453" height="593"/>
                                             <size key="maxSize" width="468" height="10000000"/>
                                         </textView>
                                     </subviews>
@@ -123,7 +123,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="lra-zJ-Zsb">
-                                    <rect key="frame" x="452" y="0.0" width="16" height="593"/>
+                                    <rect key="frame" x="453" y="0.0" width="15" height="593"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -146,19 +146,6 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="93" y="1337.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="fvA-P8-1Pu">
-            <objects>
-                <viewController id="rvE-uW-RhF" sceneMemberID="viewController">
-                    <view key="view" id="8TZ-Ge-sQy">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="eWr-PD-vmk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="46" y="1929"/>
         </scene>
     </scenes>
 </document>

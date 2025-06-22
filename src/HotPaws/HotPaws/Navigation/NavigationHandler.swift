@@ -22,6 +22,12 @@ class NavigationHandler: KeyHandler {
             return true
         }
         
+        if key == .escape {
+            Logger.info("Mode disabled")
+            NavigationWindowController.hide()
+            return true
+        }
+        
         return self.decorated.handle(key: &key, modifiers: &modifiers)
     }
 }

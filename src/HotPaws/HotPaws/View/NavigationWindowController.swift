@@ -24,15 +24,34 @@ class NavigationWindowController: NSWindowController {
             NavigationWindowController.shared.window = createWindow()
         }
         
-        let window = NavigationWindowController.shared.window
+        let window = NavigationWindowController.shared.window!
         
-        window?.center()
-        window?.toggleFullScreen(self)
-        window?.makeKeyAndOrderFront(nil)
+        let view = NavigationViewController()
+        
+        if let app = NSRunningApplication.getCurrentApp() {
+            let marker = Marker()
+            
+            for element in app.getClickableElements() {
+                if let point = element.getPoint() {
+                    view.addLabel(marker.next(), point: point)
+                    Logger.info("Add point: \(point)")
+                } else {
+                    Logger.error("Failed get point")
+                }
+            }
+        } else {
+            Logger.error("Failed get app")
+        }
+        
+        window.contentViewController = view
+        
+        window.center()
+        window.toggleFullScreen(self)
+        window.makeKeyAndOrderFront(nil)
     }
     
-    func hide() {
-        NavigationWindowController.shared.window?.close()
+    public static func hide() {
+        NavigationWindowController.shared.window!.close()
     }
     
     private static func createWindow() -> NSWindow {
@@ -46,18 +65,24 @@ class NavigationWindowController: NSWindowController {
         window.title = "Полноэкранное окно"
         window.isMovableByWindowBackground = true
         
-        window.contentViewController = NavigationViewController()
-        
         return window
     }
 }
 
 // Контроллер содержимого окна
 class NavigationViewController: NSViewController {
-    
     override func loadView() {
         view = NSView()
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.white.cgColor
+    }
+    
+    func addLabel(_ text: String, point: CGPoint) {
+        let label = NSTextField(labelWithString: text)
+        
+        label.frame = NSRect(x: point.x, y: point.y, width: 30, height: 30)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(label)
     }
 }

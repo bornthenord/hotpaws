@@ -18,7 +18,7 @@ class NavigationHandler: KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if key == .f {
             Logger.info("Mode activated")
-        
+            NavigationWindowController.show()
 //            if let app = NSRunningApplication.getCurrentApp() {
 //                for element in app.getClickableElements() {
 //                    let point = element.getPoint()

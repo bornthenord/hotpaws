@@ -16,6 +16,20 @@ extension AXUIElement {
         return (result, value)
     }
     
+    func getFrame() -> NSRect? {
+        if let size = self.getSize() {
+            if let position = self.getCoordinate() {
+                return NSRect(x: position.x, y: position.y, width: size.width, height: size.height)
+            } else {
+                Logger.error("Faield to get app coordinate")
+            }
+        } else {
+            Logger.error("Faield to get app size")
+        }
+        
+        return nil
+    }
+    
     func getSize() -> CGSize? {
         let attribute = self.getAttribute(kAXSizeAttribute)
         

@@ -16,6 +16,30 @@ extension AXUIElement {
         return (result, value)
     }
     
+    func getSize() -> CGSize? {
+        let attribute = self.getAttribute(kAXSizeAttribute)
+        
+        if attribute.status == .success {
+            let axValue = attribute.value as! AXValue
+            
+            if AXValueGetType(axValue) == .cgSize {
+                var size = CGSize.zero
+                
+                if AXValueGetValue(axValue, .cgSize, &size) {
+                    return size
+                } else {
+                    Logger.error("Failed to get CGSize value from AXValue")
+                }
+            } else {
+                Logger.error("Unexpected AXValue type: \(AXValueGetType(axValue))")
+            }
+        } else {
+            Logger.error("Failed get size attribute for element: \(self)")
+        }
+        
+        return nil
+    }
+    
     func getCoordinate() -> CGPoint? {
         let attribute = self.getAttribute(kAXPositionAttribute)
         

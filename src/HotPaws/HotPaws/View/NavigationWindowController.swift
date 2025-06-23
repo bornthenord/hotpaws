@@ -9,7 +9,7 @@ import Foundation
 import Cocoa
 
 class NavigationWindowController: NSWindowController {
-    private static let shared = NavigationWindowController()
+//    private static let shared = NavigationWindowController()
     
     private init() {
         super.init(window: nil)
@@ -20,11 +20,11 @@ class NavigationWindowController: NSWindowController {
     }
     
     public static func show() {
-        if NavigationWindowController.shared.window == nil {
-            NavigationWindowController.shared.window = createWindow()
-        }
+//        if NavigationWindowController.shared.window == nil {
+//            NavigationWindowController.shared.window = createWindow()
+//        }
         
-        let window = NavigationWindowController.shared.window!
+//        let window = NavigationWindowController.shared.window!
         
         if let app = NSRunningApplication.getCurrentApp() {
             let marker = Marker()
@@ -41,11 +41,11 @@ class NavigationWindowController: NSWindowController {
             Logger.error("Failed get app")
         }
         
-        window.makeKeyAndOrderFront(nil)
+//        self.makeKeyAndOrderFront(nil)
     }
     
     public static func hide() {
-        NavigationWindowController.shared.window!.close()
+//        NavigationWindowController.shared.window!.close()
     }
     
     private static func createWindow() -> NSWindow {
@@ -73,6 +73,6 @@ class NavigationWindowController: NSWindowController {
         label.font = NSFont.systemFont(ofSize: 16)
         label.textColor = NSColor.black
         
-        NavigationWindowController.shared.window!.contentView!.addSubview(label)
+//        NavigationWindowController.shared.window!.contentView!.addSubview(label)
     }
 }

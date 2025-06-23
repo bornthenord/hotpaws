@@ -26,14 +26,12 @@ class NavigationWindowController: NSWindowController {
         
         let window = NavigationWindowController.shared.window!
         
-        let view = NavigationViewController()
-        
         if let app = NSRunningApplication.getCurrentApp() {
             let marker = Marker()
             
             for element in app.getClickableElements() {
                 if let point = element.getCoordinate() {
-                    view.addLabel(marker.next(), coordinate: point)
+                    addLabel(marker.next(), coordinate: point)
                     Logger.info("Add point: \(point)")
                 } else {
                     Logger.error("Failed get point")
@@ -43,10 +41,6 @@ class NavigationWindowController: NSWindowController {
             Logger.error("Failed get app")
         }
         
-        window.contentViewController = view
-        
-        window.center()
-        window.toggleFullScreen(self)
         window.makeKeyAndOrderFront(nil)
     }
     
@@ -55,34 +49,30 @@ class NavigationWindowController: NSWindowController {
     }
     
     private static func createWindow() -> NSWindow {
+        // Задаем размеры и позицию окна
+        let windowWidth: CGFloat = 400
+        let windowHeight: CGFloat = 300
+        let windowX: CGFloat = 100 // Положение по оси X
+        let windowY: CGFloat = 100 // Положение по оси Y
+        
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 800, height: 600),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable],
-            backing: .buffered, defer: false
+            contentRect: NSRect(x: windowX, y: windowY, width: windowWidth, height: windowHeight),
+            styleMask: [.titled, .closable, .resizable],
+            backing: .buffered,
+            defer: false
         )
         
-        window.collectionBehavior = .fullScreenPrimary
-        window.title = "Полноэкранное окно"
-        window.isMovableByWindowBackground = true
+        window.title = "окно"
         
         return window
     }
-}
-
-// Контроллер содержимого окна
-class NavigationViewController: NSViewController {
-    override func loadView() {
-        view = NSView()
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.white.cgColor
-    }
     
-    func addLabel(_ text: String, coordinate: CGPoint) {
+    private static func addLabel(_ text: String, coordinate: CGPoint) {
         let label = NSTextField(frame: NSRect(x: coordinate.x, y: coordinate.y, width: 30, height: 22))
         label.stringValue = text
         label.font = NSFont.systemFont(ofSize: 16)
         label.textColor = NSColor.black
         
-        self.view.addSubview(label)
+        NavigationWindowController.shared.window!.contentView!.addSubview(label)
     }
 }

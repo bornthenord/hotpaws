@@ -32,8 +32,8 @@ class NavigationWindowController: NSWindowController {
             let marker = Marker()
             
             for element in app.getClickableElements() {
-                if let point = element.getPoint() {
-                    view.addLabel(marker.next(), point: point)
+                if let point = element.getCoordinate() {
+                    view.addLabel(marker.next(), coordinate: point)
                     Logger.info("Add point: \(point)")
                 } else {
                     Logger.error("Failed get point")
@@ -77,11 +77,11 @@ class NavigationViewController: NSViewController {
         view.layer?.backgroundColor = NSColor.white.cgColor
     }
     
-    func addLabel(_ text: String, point: CGPoint) {
-        let label = NSTextField(labelWithString: text)
-        
-        label.frame = NSRect(x: point.x, y: point.y, width: 30, height: 30)
-        label.translatesAutoresizingMaskIntoConstraints = false
+    func addLabel(_ text: String, coordinate: CGPoint) {
+        let label = NSTextField(frame: NSRect(x: coordinate.x, y: coordinate.y, width: 30, height: 22))
+        label.stringValue = text
+        label.font = NSFont.systemFont(ofSize: 16)
+        label.textColor = NSColor.black
         
         self.view.addSubview(label)
     }

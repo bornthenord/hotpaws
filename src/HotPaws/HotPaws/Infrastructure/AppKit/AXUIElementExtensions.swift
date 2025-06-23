@@ -16,16 +16,16 @@ extension AXUIElement {
         return (result, value)
     }
     
-    func getPoint() -> CGPoint? {
+    func getCoordinate() -> CGPoint? {
         let attribute = self.getAttribute(kAXPositionAttribute)
         
         if attribute.status == .success {
             let position = attribute.value as! AXValue
-            var point = CGPoint.zero
+            var coordinate = CGPoint.zero
             
             if AXValueGetType(position) == .cgPoint,
-               AXValueGetValue(position, .cgPoint, &point) {
-                return point
+               AXValueGetValue(position, .cgPoint, &coordinate) {
+                return coordinate
             }
         }
         

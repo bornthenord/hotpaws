@@ -20,7 +20,6 @@ class NavigationWindow {
             if let frame = app.getFrame() {
                 let view = createView(frame)
                 window.contentView!.addSubview(view)
-//                window.setFrame(frame, display: true)
                 window.orderFront(nil)
             } else {
                 Logger.error("Failled to get current app frame")

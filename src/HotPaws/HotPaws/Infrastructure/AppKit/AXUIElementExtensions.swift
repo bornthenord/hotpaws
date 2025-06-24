@@ -19,7 +19,10 @@ extension AXUIElement {
     func getFrame() -> NSRect? {
         if let size = self.getSize() {
             if let position = self.getCoordinate() {
-                return NSRect(x: position.x, y: position.y, width: size.width, height: size.height)
+                let screenFrame = NSScreen.screens.first!.frame
+                let yOrigin = screenFrame.height - position.y - size.height
+                
+                return NSRect(x: position.x, y: yOrigin, width: size.width, height: size.height)
             } else {
                 Logger.error("Faield to get app coordinate")
             }
@@ -30,7 +33,7 @@ extension AXUIElement {
         return nil
     }
     
-    func getSize() -> CGSize? {
+    private func getSize() -> CGSize? {
         let attribute = self.getAttribute(kAXSizeAttribute)
         
         if attribute.status == .success {
@@ -54,7 +57,7 @@ extension AXUIElement {
         return nil
     }
     
-    func getCoordinate() -> CGPoint? {
+    private func getCoordinate() -> CGPoint? {
         let attribute = self.getAttribute(kAXPositionAttribute)
         
         if attribute.status == .success {

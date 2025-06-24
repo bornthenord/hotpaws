@@ -19,10 +19,9 @@ class NavigationWindow {
         if let app = NSRunningApplication.getCurrentApp() {
             if let frame = app.getFrame() {
                 let view = createView(frame)
-                
                 window.contentView!.addSubview(view)
-                
-                window.makeKeyAndOrderFront(nil)
+//                window.setFrame(frame, display: true)
+                window.orderFront(nil)
             } else {
                 Logger.error("Failled to get current app frame")
             }
@@ -38,6 +37,7 @@ class NavigationWindow {
     
     private func createView(_ frame: NSRect) -> NSView {
         let view = NSView(frame: frame)
+
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.red.cgColor
         

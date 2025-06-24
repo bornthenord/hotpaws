@@ -10,6 +10,7 @@ import AppKit
 
 class NavigationHandler: KeyHandler {
     let decorated: KeyHandler
+    let view = NavigationWindow()
     
     init(_ decorated: KeyHandler){
         self.decorated = decorated
@@ -21,8 +22,7 @@ class NavigationHandler: KeyHandler {
             
             if let app = NSRunningApplication.getCurrentApp() {
                 if let frame = app.getFrame() {
-                    let view = NavigationView(frame)
-                    view.show()
+                    view.markout(frame)
                     return true
                 }
             }
@@ -30,6 +30,7 @@ class NavigationHandler: KeyHandler {
         
         if key == .escape {
             Logger.info("Mode disabled")
+            view.hide()
             return true
         }
         

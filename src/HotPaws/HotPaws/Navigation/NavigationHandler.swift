@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import AppKit
 
 class NavigationHandler: KeyHandler {
     let decorated: KeyHandler
@@ -19,13 +18,8 @@ class NavigationHandler: KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if key == .f {
             Logger.info("Mode activated")
-            
-            if let app = NSRunningApplication.getCurrentApp() {
-                if let frame = app.getFrame() {
-                    view.markout(frame)
-                    return true
-                }
-            }
+            view.markout()
+            return true
         }
         
         if key == .escape {

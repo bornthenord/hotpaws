@@ -15,12 +15,20 @@ class NavigationWindow {
         window = NavigationWindow.createWindow()
     }
     
-    func markout(_ frame: NSRect) {
-        let view = createView(frame)
-        
-        window.contentView!.addSubview(view)
-        
-        window.makeKeyAndOrderFront(nil)
+    func markout() {
+        if let app = NSRunningApplication.getCurrentApp() {
+            if let frame = app.getFrame() {
+                let view = createView(frame)
+                
+                window.contentView!.addSubview(view)
+                
+                window.makeKeyAndOrderFront(nil)
+            } else {
+                Logger.error("Failled to get current app frame")
+            }
+        } else {
+            Logger.error("Failled to get current app")
+        }
     }
     
     func hide() {

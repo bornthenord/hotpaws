@@ -17,13 +17,18 @@ class NavigationWindow {
     
     func markout() {
         if let app = NSRunningApplication.getCurrentApp() {
-            if let frame = app.getFrame() {
-                let view = createView(frame)
-                window.contentView!.addSubview(view)
-                window.orderFront(nil)
-            } else {
-                Logger.error("Failled to get current app frame")
+            let marker = Marker()
+            
+            for element in app.getClickableElements() {
+                if let frame = element.getFrame() {
+                    window.contentView!.addSubview(createLabel(marker.next(), frame: frame))
+                } else {
+                    Logger.error("Failled to get element frame")
+                }
             }
+            
+            window.level = .floating
+            window.orderFront(nil)
         } else {
             Logger.error("Failled to get current app")
         }
@@ -34,13 +39,10 @@ class NavigationWindow {
         window.orderOut(nil)
     }
     
-    private func createView(_ frame: NSRect) -> NSView {
-        let view = NSView(frame: frame)
-
-        view.wantsLayer = true
-        view.layer?.backgroundColor = NSColor.red.cgColor
-        
-        return view
+    private func createLabel(_ text: String, frame: CGRect) -> NSTextField {
+        let label = NSTextField(labelWithString: text)
+        label.frame = frame
+        return label
     }
     
     private static func createWindow() -> NSWindow {

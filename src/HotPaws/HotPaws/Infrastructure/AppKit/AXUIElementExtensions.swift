@@ -33,7 +33,7 @@ extension AXUIElement {
         return nil
     }
     
-    private func getSize() -> CGSize? {
+    public func getSize() -> CGSize? {
         let attribute = self.getAttribute(kAXSizeAttribute)
         
         if attribute.status == .success {
@@ -57,7 +57,7 @@ extension AXUIElement {
         return nil
     }
     
-    private func getCoordinate() -> CGPoint? {
+    public func getCoordinate() -> CGPoint? {
         let attribute = self.getAttribute(kAXPositionAttribute)
         
         if attribute.status == .success {
@@ -84,12 +84,10 @@ extension AXUIElement {
                     
                     if role.status == .success, let role = role.value as? String {
                         // Проверяем, является ли элемент кликабельным
-                        if role == kAXButtonRole as String ||
-                            //                       role == kAXLinkRole as String ||
-                            //                       role == kAXCheckboxRole as String ||
-                            role == kAXRadioButtonRole as String ||
-                            role == kAXPopUpButtonRole as String ||
-                            role == kAXMenuItemRole as String {
+                        if role == kAXButtonRole ||
+                            role == kAXRadioButtonRole ||
+                            role == kAXPopUpButtonRole ||
+                            role == kAXMenuItemRole {
                             clickableElements.append(child)
                         }
                     } else {

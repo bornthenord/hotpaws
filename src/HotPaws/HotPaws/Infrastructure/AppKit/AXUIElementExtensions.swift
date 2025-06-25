@@ -8,16 +8,18 @@
 import Foundation
 import AppKit
 
-let roles = [
-    "AXButton",
-//    "AXScrollArea",
-//    "AXTextArea",
-//    "AXScrollBar",
-//    "AXStaticText",
-//    "AXPopUpButton",
-//    "AXMenuButton",
-//    "AXRow",
-//    "AXValueIndicator"
+let clickableRoles: [String] = [
+    kAXButtonRole,
+    kAXScrollAreaRole,
+    kAXScrollBarRole,
+    kAXTextAreaRole,
+    kAXStaticTextRole,
+    kAXPopUpButtonRole,
+    kAXMenuButtonRole,
+    kAXMenuItemRole,
+//    kAXMenuBarItemRole,
+    kAXRowRole,
+    kAXValueIndicatorRole
 ]
 
 extension AXUIElement {
@@ -26,9 +28,9 @@ extension AXUIElement {
         let result = AXUIElementCopyAttributeValue(self, name as CFString, &value)
         
         if result != .success {
-            if result != .noValue
+            if result != .noValue && result != .attributeUnsupported
             {
-                Logger.error("Faield to get attribute \(name)")
+                Logger.error("Faield to get attribute \(name). \(result)")
             }
         }
         
@@ -118,14 +120,13 @@ extension AXUIElement {
         let role = self.getAttribute(kAXRoleAttribute)
         
         if role.status == .success, let role = role.value as? String {
-            Logger.info("Role: \(role)")
-            return roles.contains(role)
+            return clickableRoles.contains(role)
         }
         
         return false
     }
     
-    func fisEnable() -> Bool {
+    func isEnable() -> Bool {
         let isEnable = self.getAttribute(kAXEnabledAttribute)
         
         if isEnable.status == .success {

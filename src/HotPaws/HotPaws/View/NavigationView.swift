@@ -22,15 +22,11 @@ class NavigationWindow {
             for element in app.getClickableElements() {
                 if let frame = element.getFrame() {
                     window.contentView!.addSubview(createLabel(marker.next(), frame: frame))
-                } else {
-                    Logger.error("Failled to get element frame")
                 }
             }
             
             window.level = .floating
             window.orderFront(nil)
-        } else {
-            Logger.error("Failled to get current app")
         }
     }
     

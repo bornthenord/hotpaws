@@ -17,8 +17,6 @@ extension NSRunningApplication {
             
             if focusedWindow.status == .success {
                 return (focusedWindow.value as! AXUIElement)
-            } else {
-                Logger.error("Error getting focused window. AXError: \(focusedWindow.status)")
             }
         } else {
             Logger.error("Error getting window")

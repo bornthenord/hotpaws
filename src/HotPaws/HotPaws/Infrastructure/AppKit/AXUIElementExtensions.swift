@@ -25,6 +25,13 @@ extension AXUIElement {
         var value: CFTypeRef?
         let result = AXUIElementCopyAttributeValue(self, name as CFString, &value)
         
+        if result != .success {
+            if result != .noValue
+            {
+                Logger.error("Faield to get attribute \(name)")
+            }
+        }
+        
         return (result, value)
     }
     
@@ -35,11 +42,7 @@ extension AXUIElement {
                 let yOrigin = screenFrame.height - position.y - size.height
                 
                 return NSRect(x: position.x, y: yOrigin, width: size.width, height: size.height)
-            } else {
-                Logger.error("Faield to get app coordinate")
             }
-        } else {
-            Logger.error("Faield to get app size")
         }
         
         return nil
@@ -62,8 +65,6 @@ extension AXUIElement {
             } else {
                 Logger.error("Unexpected AXValue type: \(AXValueGetType(axValue))")
             }
-        } else {
-            Logger.error("Failed get size attribute for element: \(self)")
         }
         
         return nil
@@ -108,10 +109,6 @@ extension AXUIElement {
             if let children = children.value as? [AXUIElement] {
                 return children
             }
-        } else {
-            if children.status != .noValue {
-                Logger.error("Failed get children elements. AXError: \(children.status)")
-            }
         }
         
         return nil
@@ -123,8 +120,6 @@ extension AXUIElement {
         if role.status == .success, let role = role.value as? String {
             Logger.info("Role: \(role)")
             return roles.contains(role)
-        } else {
-            Logger.error("Error getting element type. AXError: \(role.status)")
         }
         
         return false

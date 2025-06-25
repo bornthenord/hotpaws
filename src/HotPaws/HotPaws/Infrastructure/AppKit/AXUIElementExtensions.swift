@@ -12,14 +12,17 @@ let clickableRoles: [String] = [
     kAXButtonRole,
     kAXScrollAreaRole,
     kAXScrollBarRole,
-    kAXTextAreaRole,
+    kAXTextFieldRole,
+    kAXLevelIndicatorRole,
     kAXStaticTextRole,
     kAXPopUpButtonRole,
     kAXMenuButtonRole,
     kAXMenuItemRole,
-//    kAXMenuBarItemRole,
     kAXRowRole,
-    kAXValueIndicatorRole
+    kAXValueIndicatorRole,
+    kAXSliderRole,
+    kAXCheckBoxRole,
+    kAXComboBoxRole,
 ]
 
 extension AXUIElement {

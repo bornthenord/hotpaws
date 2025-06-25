@@ -37,11 +37,13 @@ class NavigationWindow {
     
     private func createLabel(_ text: String, point: CGPoint) -> NSTextField {
         let label = NSTextField(labelWithString: text)
-        label.font = NSFont.boldSystemFont(ofSize: 10)
+        label.font = NSFont.boldSystemFont(ofSize: 11)
         label.wantsLayer = true
-        label.layer?.backgroundColor = NSColor.yellow.cgColor
-//        label.isEditable = true
-        label.frame = CGRect(x: point.x, y: point.y, width: 18, height: 12)
+        label.layer?.backgroundColor = NSColor(calibratedRed: 1.0, green: 0.5, blue: 0.0, alpha: 1.0).cgColor
+        label.wantsLayer = true
+        label.layer?.cornerRadius = label.frame.size.width / 6 // радиус равен половине ширины для круга
+        label.layer?.masksToBounds = true
+        label.frame = CGRect(x: point.x, y: point.y, width: 20, height: 12)
         
         return label
     }

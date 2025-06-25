@@ -43,7 +43,8 @@ class NavigationWindow {
         label.wantsLayer = true
         label.layer?.cornerRadius = label.frame.size.width / 6 // радиус равен половине ширины для круга
         label.layer?.masksToBounds = true
-        label.frame = CGRect(x: point.x, y: point.y, width: 20, height: 12)
+        label.frame = CGRect(x: point.x, y: point.y, width: 20, height: 13)
+        label.frame.size = label.fittingSize
         
         return label
     }

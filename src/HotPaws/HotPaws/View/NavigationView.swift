@@ -21,7 +21,7 @@ class NavigationWindow {
             
             for element in app.getClickableElements() {
                 if let frame = element.getFrame() {
-                    window.contentView!.addSubview(createLabel(marker.next(), frame: frame))
+                    window.contentView!.addSubview(createLabel(marker.next(), point: frame.origin))
                 }
             }
             
@@ -35,10 +35,14 @@ class NavigationWindow {
         window.orderOut(nil)
     }
     
-    private func createLabel(_ text: String, frame: CGRect) -> NSTextField {
+    private func createLabel(_ text: String, point: CGPoint) -> NSTextField {
         let label = NSTextField(labelWithString: text)
-        label.frame = frame
-        label.backgroundColor = .yellow
+        label.font = NSFont.boldSystemFont(ofSize: 10)
+        label.wantsLayer = true
+        label.layer?.backgroundColor = NSColor.yellow.cgColor
+//        label.isEditable = true
+        label.frame = CGRect(x: point.x, y: point.y, width: 18, height: 12)
+        
         return label
     }
     
@@ -53,8 +57,9 @@ class NavigationWindow {
         )
             
         window.isOpaque = false
-        window.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.8)
-        
+        window.backgroundColor = NSColor.clear
+//        window.backgroundColor = NSColor.windowBackgroundColor.withAlphaComponent(0.8)
+
         return window
     }
 }

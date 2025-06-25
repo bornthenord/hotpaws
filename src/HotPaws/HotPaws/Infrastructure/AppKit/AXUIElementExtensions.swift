@@ -91,7 +91,7 @@ extension AXUIElement {
         
         if let children = self.getChildren() {
             for child in children {
-                if child.isClickable() {
+                if child.isClickable() && child.isEnable() {
                     clickableElements.append(child)
                 }
                 
@@ -125,25 +125,12 @@ extension AXUIElement {
         return false
     }
     
-    func isEnable() -> Bool {
+    func fisEnable() -> Bool {
         let isEnable = self.getAttribute(kAXEnabledAttribute)
         
         if isEnable.status == .success {
             if let isEnabled = isEnable.value as? Bool {
                 return isEnabled
-            }
-        }
-        
-        return false
-    }
-    
-    func isVisible() -> Bool {
-        let isHidden = self.getAttribute(kAXHiddenAttribute)
-        print(isHidden)
-        if isHidden.status == .success {
-            print(isHidden.value)
-            if let isHiddenValue = isHidden.value as? Bool {
-                return !isHiddenValue
             }
         }
         

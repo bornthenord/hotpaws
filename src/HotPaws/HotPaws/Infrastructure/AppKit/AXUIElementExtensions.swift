@@ -8,6 +8,18 @@
 import Foundation
 import AppKit
 
+let roles = [
+    "AXButton",
+//    "AXScrollArea",
+//    "AXTextArea",
+//    "AXScrollBar",
+//    "AXStaticText",
+//    "AXPopUpButton",
+//    "AXMenuButton",
+//    "AXRow",
+//    "AXValueIndicator"
+]
+
 extension AXUIElement {
     func getAttribute(_ name: String) -> (status: AXError, value: CFTypeRef?) {
         var value: CFTypeRef?
@@ -75,30 +87,26 @@ extension AXUIElement {
     
     func getClickableElements() -> [AXUIElement] {
         var clickableElements: [AXUIElement] = []
+        
+        if let children = self.getChildren() {
+            for child in children {
+                if child.isClickable() {
+                    clickableElements.append(child)
+                }
+                
+                clickableElements += child.getClickableElements()
+            }
+        }
+        
+        return clickableElements
+    }
+    
+    func getChildren() -> [AXUIElement]? {
         let children = self.getAttribute(kAXChildrenAttribute)
         
         if children.status == .success {
             if let children = children.value as? [AXUIElement] {
-                for child in children {
-                    let role = child.getAttribute(kAXRoleAttribute)
-                    
-                    if role.status == .success, let role = role.value as? String {
-                        // Проверяем, является ли элемент кликабельным
-                        if role == kAXButtonRole ||
-                            role == kAXRadioButtonRole ||
-                            role == kAXPopUpButtonRole ||
-                            role == kAXMenuItemRole {
-                            clickableElements.append(child)
-                        }
-                    } else {
-                        Logger.error("Error getting element type. AXError: \(role.status)")
-                    }
-                    
-                    // Рекурсивно обходим дочерние элементы
-                    clickableElements += child.getClickableElements()
-                }
-            } else {
-                Logger.error("Failed convert children elements to [AXUIElement]")
+                return children
             }
         } else {
             if children.status != .noValue {
@@ -106,6 +114,44 @@ extension AXUIElement {
             }
         }
         
-        return clickableElements
+        return nil
+    }
+    
+    func isClickable() -> Bool {
+        let role = self.getAttribute(kAXRoleAttribute)
+        
+        if role.status == .success, let role = role.value as? String {
+            Logger.info("Role: \(role)")
+            return roles.contains(role)
+        } else {
+            Logger.error("Error getting element type. AXError: \(role.status)")
+        }
+        
+        return false
+    }
+    
+    func isEnable() -> Bool {
+        let isEnable = self.getAttribute(kAXEnabledAttribute)
+        
+        if isEnable.status == .success {
+            if let isEnabled = isEnable.value as? Bool {
+                return isEnabled
+            }
+        }
+        
+        return false
+    }
+    
+    func isVisible() -> Bool {
+        let isHidden = self.getAttribute(kAXHiddenAttribute)
+        print(isHidden)
+        if isHidden.status == .success {
+            print(isHidden.value)
+            if let isHiddenValue = isHidden.value as? Bool {
+                return !isHiddenValue
+            }
+        }
+        
+        return false
     }
 }

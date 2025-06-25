@@ -42,6 +42,7 @@ class NavigationWindow {
     private func createLabel(_ text: String, frame: CGRect) -> NSTextField {
         let label = NSTextField(labelWithString: text)
         label.frame = frame
+        label.backgroundColor = .yellow
         return label
     }
     
@@ -50,7 +51,6 @@ class NavigationWindow {
         
         let window = NSWindow(
             contentRect: mainFrame,
-            //                            styleMask: [.titled, .closable, .resizable],
             styleMask: [],
             backing: .buffered,
             defer: false

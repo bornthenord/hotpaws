@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 class NavigationHandler: KeyHandler {
     let decorated: KeyHandler
@@ -18,7 +19,19 @@ class NavigationHandler: KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
         if key == .f {
             Logger.info("Mode activated")
-            view.markout()
+            
+            if let app = NSRunningApplication.getCurrentApp() {
+                let marker = Marker()
+                
+                for element in app.getClickableElements() {
+                    if let frame = element.getFrame() {
+                        view.markout(marker.next(), point: frame.origin)
+                    }
+                }
+                
+                view.show()
+            }
+            
             return true
         }
         

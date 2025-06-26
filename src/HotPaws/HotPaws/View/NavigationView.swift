@@ -15,19 +15,13 @@ class NavigationWindow {
         window = NavigationWindow.createWindow()
     }
     
-    func markout() {
-        if let app = NSRunningApplication.getCurrentApp() {
-            let marker = Marker()
-            
-            for element in app.getClickableElements() {
-                if let frame = element.getFrame() {
-                    window.contentView!.addSubview(createLabel(marker.next(), point: frame.origin))
-                }
-            }
-            
-            window.level = .floating
-            window.orderFront(nil)
-        }
+    func markout(_ text: String, point: CGPoint) {
+        window.contentView!.addSubview(createLabel(text, point: point))
+    }
+    
+    func show() {
+        window.level = .floating
+        window.orderFront(nil)
     }
     
     func hide() {

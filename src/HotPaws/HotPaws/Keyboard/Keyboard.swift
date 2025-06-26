@@ -26,21 +26,27 @@ struct KeyQueueItem {
 }
 
 struct Keyboard {
-    
     private static let keyDownEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()
+    private static var isPressProgrammatic: Bool = false
     
     public static var keySubscribers: Dictionary<String,KeyHandler> = [:]
     public static var modifierChangeSubscribers: Dictionary<String,ModifierChangeHandler> = [:]
-
+    
+    public static func skipHandling() -> Bool {
+        return isPressProgrammatic
+    }
+    
     public static func connect() throws {
         keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownHandler)
         flagsChangedEvent.subscribe(type: CGEventType.flagsChanged, handler: modifierChangeHandler)
     }
     
     public static func press(key: Key, modifiers: Set<Modifier>?) {
+        isPressProgrammatic = true
         down(key: key, modifiers: modifiers)
         up(key: key)
+        isPressProgrammatic = false
     }
     
     private static func up(key: Key) {
@@ -66,19 +72,21 @@ struct Keyboard {
 }
 
 private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-    if let event = NSEvent(cgEvent: cgEvent) {
-        if var key = Key(rawValue: event.keyCode) {
-            var modifiers: Set<Modifier>?
-            
-            if !event.modifierFlags.isEmpty {
-                modifiers = event.modifierFlags.toModifiers()
-            } else {
-                modifiers = []
-            }
-            
-            for handler in Keyboard.keySubscribers.values {
-                if handler.handle(key: &key, modifiers: &modifiers!) == .handled {
-                    return nil
+    if !Keyboard.skipHandling() {
+        if let event = NSEvent(cgEvent: cgEvent) {
+            if var key = Key(rawValue: event.keyCode) {
+                var modifiers: Set<Modifier>?
+                
+                if !event.modifierFlags.isEmpty {
+                    modifiers = event.modifierFlags.toModifiers()
+                } else {
+                    modifiers = []
+                }
+                
+                for handler in Keyboard.keySubscribers.values {
+                    if handler.handle(key: &key, modifiers: &modifiers!) == .handled {
+                        return nil
+                    }
                 }
             }
         }

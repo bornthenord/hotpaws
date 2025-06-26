@@ -15,7 +15,7 @@ class NavigationWindow {
         window = NavigationWindow.createWindow()
     }
     
-    func markout(_ text: String, point: CGPoint) {
+    func addLabel(_ text: String, point: CGPoint) {
         window.contentView!.addSubview(createLabel(text, point: point))
     }
     

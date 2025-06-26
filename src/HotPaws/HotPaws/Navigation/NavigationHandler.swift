@@ -11,6 +11,7 @@ import AppKit
 class NavigationHandler: KeyHandler {
     let decorated: KeyHandler
     let view = NavigationWindow()
+    let navigation = Navigation()
     
     init(_ decorated: KeyHandler){
         self.decorated = decorated
@@ -20,17 +21,8 @@ class NavigationHandler: KeyHandler {
         if key == .f {
             Logger.info("Mode activated")
             
-            if let app = NSRunningApplication.getCurrentApp() {
-                let marker = Marker()
-                
-                for element in app.getClickableElements() {
-                    if let frame = element.getFrame() {
-                        view.markout(marker.next(), point: frame.origin)
-                    }
-                }
-                
-                view.show()
-            }
+            navigation.markout(handler: view.addLabel)
+            view.show()
             
             return true
         }

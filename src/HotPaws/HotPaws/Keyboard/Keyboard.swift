@@ -6,19 +6,30 @@
 //
 import Cocoa
 
+enum KeyHandlerResult: String {
+    case handled
+    case skip
+}
+
 protocol KeyHandler {
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool
+    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult
 }
 
 protocol ModifierChangeHandler {
-    func handle(modifiers: inout Set<Modifier>) -> Bool
+    func handle(modifiers: inout Set<Modifier>) -> KeyHandlerResult
+}
+
+struct KeyQueueItem {
+    let key: Key
+    let modifiers: Set<Modifier>?
+    let date: Date
 }
 
 struct Keyboard {
     
     private static let keyDownEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()
-
+    
     public static var keySubscribers: Dictionary<String,KeyHandler> = [:]
     public static var modifierChangeSubscribers: Dictionary<String,ModifierChangeHandler> = [:]
 
@@ -66,8 +77,7 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
             }
             
             for handler in Keyboard.keySubscribers.values {
-                if !handler.handle(key: &key, modifiers: &modifiers!) {
-                    Keyboard.press(key: key, modifiers: modifiers)
+                if handler.handle(key: &key, modifiers: &modifiers!) == .handled {
                     return nil
                 }
             }
@@ -81,9 +91,9 @@ private func modifierChangeHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CG
     if let event = NSEvent(cgEvent: cgEvent) {
         
         var presedModifier = event.modifierFlags.toModifiers()
-            
+        
         for handler in Keyboard.modifierChangeSubscribers.values {
-            if !handler.handle(modifiers: &presedModifier) {
+            if handler.handle(modifiers: &presedModifier) == .handled {
                 return nil
             }
         }

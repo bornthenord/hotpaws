@@ -7,8 +7,8 @@
 
 import Foundation
 
-class SwitchHandler : KeyHandler {
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
+class MappingHandler: KeyHandler {
+    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
         for switchModifier in modifiers {
             if let layer = Config.mapping[switchModifier] {
                 if let mapping = layer[key] {
@@ -20,11 +20,13 @@ class SwitchHandler : KeyHandler {
                     
                     key = mapping.target
                     
-                    return false
+                    Keyboard.press(key: key, modifiers: modifiers)
+                    
+                    return .handled
                 }
             }
         }
         
-        return true
+        return .skip
     }
 }

@@ -24,21 +24,21 @@ class KeyDetected : KeyHandler, ModifierChangeHandler {
         Keyboard.modifierChangeSubscribers.removeValue(forKey: name)
     }
     
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
+    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
             KeyDetected.textView!.stringValue = key.description
         }
         
-        return true
+        return .skip
     }
     
-    func handle(modifiers: inout Set<Modifier>) -> Bool {
+    func handle(modifiers: inout Set<Modifier>) -> KeyHandlerResult {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
             if let desc = modifiers.first?.description {
                 KeyDetected.textView!.stringValue = desc
             }
         }
         
-        return true
+        return .skip
     }
 }

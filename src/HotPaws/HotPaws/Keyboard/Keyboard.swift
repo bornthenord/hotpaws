@@ -6,25 +6,6 @@
 //
 import Cocoa
 
-enum KeyHandlerResult: String {
-    case handled
-    case skip
-}
-
-protocol KeyHandler {
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult
-}
-
-protocol ModifierChangeHandler {
-    func handle(modifiers: inout Set<Modifier>) -> KeyHandlerResult
-}
-
-struct KeyQueueItem {
-    let key: Key
-    let modifiers: Set<Modifier>?
-    let date: Date
-}
-
 struct Keyboard {
     private static let keyDownEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()

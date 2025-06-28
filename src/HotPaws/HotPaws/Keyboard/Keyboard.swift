@@ -28,14 +28,10 @@ struct KeyQueueItem {
 struct Keyboard {
     private static let keyDownEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()
-    private static var isPressProgrammatic: Bool = false
+    public static var isPressProgrammatic: Bool = false
     
     public static var keySubscribers: Dictionary<String,KeyHandler> = [:]
     public static var modifierChangeSubscribers: Dictionary<String,ModifierChangeHandler> = [:]
-    
-    public static func skipHandling() -> Bool {
-        return isPressProgrammatic
-    }
     
     public static func connect() throws {
         keyDownEvent.subscribe(type: CGEventType.keyDown, handler: keyDownHandler)
@@ -46,7 +42,6 @@ struct Keyboard {
         isPressProgrammatic = true
         down(key: key, modifiers: modifiers)
         up(key: key)
-        isPressProgrammatic = false
     }
     
     private static func up(key: Key) {
@@ -72,7 +67,7 @@ struct Keyboard {
 }
 
 private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-    if !Keyboard.skipHandling() {
+    if !Keyboard.isPressProgrammatic {
         if let event = NSEvent(cgEvent: cgEvent) {
             if var key = Key(rawValue: event.keyCode) {
                 var modifiers: Set<Modifier>?
@@ -90,6 +85,8 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
                 }
             }
         }
+    } else {
+        Keyboard.isPressProgrammatic = false
     }
     
     return Unmanaged.passUnretained(cgEvent)

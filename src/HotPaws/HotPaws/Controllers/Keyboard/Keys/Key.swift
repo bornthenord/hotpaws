@@ -331,9 +331,40 @@ enum Key: UInt16 {
             self = .keypad8
         case "keypad9":
             self = .keypad9
-            
+
         default:
             return nil
         }
+    }
+}
+
+extension Key {
+    func isLetter() -> Bool {
+        return self == .a ||
+        self == .b ||
+        self == .c ||
+        self == .d ||
+        self == .e ||
+        self == .f ||
+        self == .g ||
+        self == .h ||
+        self == .i ||
+        self == .j ||
+        self == .k ||
+        self == .l ||
+        self == .m ||
+        self == .n ||
+        self == .o ||
+        self == .p ||
+        self == .q ||
+        self == .r ||
+        self == .s ||
+        self == .t ||
+        self == .u ||
+        self == .v ||
+        self == .w ||
+        self == .x ||
+        self == .y ||
+        self == .z
     }
 }

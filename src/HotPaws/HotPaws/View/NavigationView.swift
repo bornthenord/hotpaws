@@ -34,10 +34,6 @@ class NavigationWindow {
         self._isShowing = false
     }
     
-    func isShowing() -> Bool {
-        return self._isShowing
-    }
-    
     private func createLabel(_ text: String, point: CGPoint) -> NSTextField {
         let label = NSTextField(labelWithString: text)
         label.font = NSFont.boldSystemFont(ofSize: 11)

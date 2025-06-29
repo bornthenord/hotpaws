@@ -8,17 +8,7 @@
 import Foundation
 
 class MappingHandler: ClickHandler {
-    let view = NavigationWindow()
-    var navigation:Navigation!
-    
     func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult {
-        if click.key == .escape {
-            if view.isShowing() {
-                view.hide()
-                return .handled
-            }
-        }
-        
         for switchModifier in modifiers {
             if let layer = Config.mapping.rules[switchModifier] {
                 if let rule = layer[click.key] {
@@ -34,11 +24,7 @@ class MappingHandler: ClickHandler {
                         if rule.target.type == .click {
                             Keyboard.click(key: rule.target.key!, modifiers: modifiers)
                         } else if rule.target.type == .navigation {
-                            if !view.isShowing() {
-                                navigation = Navigation()
-                                navigation.markout(handler: view.addLabel)
-                                view.show()
-                            }
+                            AppDelegate.navigation.enable()
                         }
                         
                         return .handled

@@ -10,6 +10,7 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     var status: StatusView?
+    static let navigation = Navigation()
     
     @IBOutlet weak var menu: NSMenu?
     

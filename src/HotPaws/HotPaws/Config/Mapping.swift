@@ -17,10 +17,12 @@ enum MappingErrors: Error {
 
 struct Mapping {
     let rules: Dictionary<Modifier,Dictionary<Key,MapRule>>
+    let containDoubleKeyRule: Bool
     
     init(_ content: String) throws {
         var rules = Dictionary<Modifier,Dictionary<Key,MapRule>>()
         var currentSwitchModifier = MapModifier(Modifier.fn)
+        var containDoubleKeyRule = false
         
         for raw in content.split(separator: "\n") {
             if raw.starts(with: "#") {
@@ -32,19 +34,21 @@ struct Mapping {
                 continue
             }
             
-            let mapping = try Mapping.parseMapping(String(raw))
+            let rule = try Mapping.parseRule(String(raw))
+            containDoubleKeyRule = rule.source.isDouble
             
             if rules.keys.contains(currentSwitchModifier.modifier) {
-                rules[currentSwitchModifier.modifier]![mapping.source.key] = mapping
+                rules[currentSwitchModifier.modifier]![rule.source.key] = rule
             } else {
-                rules[currentSwitchModifier.modifier] = [mapping.source.key: mapping]
+                rules[currentSwitchModifier.modifier] = [rule.source.key: rule]
             }
         }
         
+        self.containDoubleKeyRule = containDoubleKeyRule
         self.rules = rules
     }
     
-    private static func parseMapping(_ raw: String) throws -> MapRule {
+    private static func parseRule(_ raw: String) throws -> MapRule {
         let items = raw.split(separator: ":")
         
         if items.count < 2 {

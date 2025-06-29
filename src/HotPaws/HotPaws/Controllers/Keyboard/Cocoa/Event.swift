@@ -25,7 +25,7 @@ class Event {
             CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
             CGEvent.tapEnable(tap: tap, enable: true)
         } else {
-            print("Failed to create event: \(type).")
+            Logger.error("Failed to create event. CGEventType: \(type).")
         }
     }
 }

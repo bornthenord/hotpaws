@@ -35,7 +35,7 @@ class DoubleClickHandler: ClickHandler {
     }
     
     func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult {
-        if Config.mapping.doubleRules.contains(click.key) {
+        if modifiers.contains(.general) && Config.mapping.doubleRules.contains(click.key) {
             let next = QueueClick(click: click, modifiers: modifiers)
             queue.enqueue(next)
             

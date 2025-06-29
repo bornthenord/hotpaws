@@ -27,7 +27,7 @@ class DoubleClickHandler: KeyHandler {
     init(_ decorated: KeyHandler){
         self.decorated = decorated
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] _ in
             self?.queueHandler()
         }
         

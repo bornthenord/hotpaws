@@ -48,8 +48,6 @@ class ViewController: NSViewController {
         do {
             if let txtView = mappintTextView.documentView as? NSTextView {
                 try Config.save(mapping: txtView.string)
-                
-                AlertView.alert(window: self.view.window!, text: "Applied")
             }
         } catch {
             AlertView.alert(window: self.view.window!, text: "\(error)")

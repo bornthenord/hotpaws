@@ -51,7 +51,7 @@ struct Keyboard {
 private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
     if !Keyboard._isPressProgrammatic {
         if let event = NSEvent(cgEvent: cgEvent) {
-            if var key = Key(rawValue: event.keyCode) {
+            if let key = Key(rawValue: event.keyCode) {
                 var modifiers: Set<Modifier>?
                 
                 if !event.modifierFlags.isEmpty {
@@ -60,8 +60,10 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
                     modifiers = []
                 }
                 
+                let click = Click(key: key, isDouble: false)
+                
                 for handler in Keyboard.subscribers.values {
-                    if handler.handle(key: &key, modifiers: &modifiers!) == .handled {
+                    if handler.handle(click, modifiers: &modifiers!) == .handled {
                         return nil
                     }
                 }

@@ -24,9 +24,9 @@ class KeyDetected : ClickHandler, ModifierChangeHandler {
         Keyboard.modifierChangeSubscribers.removeValue(forKey: name)
     }
     
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> HandlerResult {
+    func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
-            KeyDetected.textView!.stringValue = String(describing: key)
+            KeyDetected.textView!.stringValue = String(describing: click.key)
         }
         
         return .skip

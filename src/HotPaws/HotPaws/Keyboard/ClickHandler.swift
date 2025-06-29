@@ -12,8 +12,17 @@ enum HandlerResult: String {
     case skip
 }
 
+struct Click {
+    let key: Key
+    let isDouble: Bool
+    
+    func toDouble() -> Click {
+        return Click(key: key, isDouble: true)
+    }
+}
+
 protocol ClickHandler {
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> HandlerResult
+    func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult
 }
 
 protocol ModifierChangeHandler {

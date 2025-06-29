@@ -15,11 +15,11 @@ class GeneralSectionHandler: ClickHandler {
         self.decorated = decorated
     }
     
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> HandlerResult {
+    func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult {
         if Config.mapping.rules.keys.contains(.general) {
             modifiers.insert(.general)
         }
         
-        return self.decorated.handle(key: &key, modifiers: &modifiers)
+        return self.decorated.handle(click, modifiers: &modifiers)
     }
 }

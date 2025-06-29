@@ -17,12 +17,12 @@ enum MappingErrors: Error {
 
 struct Mapping {
     let rules: Dictionary<Modifier,Dictionary<Key,MapRule>>
-    let containDoubleKeyRule: Bool
+    let doubleRules: Set<Key>
     
     init(_ content: String) throws {
         var rules = Dictionary<Modifier,Dictionary<Key,MapRule>>()
         var currentSwitchModifier = MapModifier(Modifier.fn)
-        var containDoubleKeyRule = false
+        var doubleRules: Set<Key> = []
         
         for raw in content.split(separator: "\n") {
             if raw.starts(with: "#") {
@@ -35,7 +35,10 @@ struct Mapping {
             }
             
             let rule = try Mapping.parseRule(String(raw))
-            containDoubleKeyRule = rule.source.isDouble
+            
+            if rule.source.isDouble {
+                doubleRules.insert(rule.source.key)
+            }
             
             if rules.keys.contains(currentSwitchModifier.modifier) {
                 rules[currentSwitchModifier.modifier]![rule.source.key] = rule
@@ -44,8 +47,8 @@ struct Mapping {
             }
         }
         
-        self.containDoubleKeyRule = containDoubleKeyRule
         self.rules = rules
+        self.doubleRules = doubleRules
     }
     
     private static func parseRule(_ raw: String) throws -> MapRule {
@@ -96,7 +99,8 @@ struct MapSource: Hashable {
         
         if key == nil {
             if rawTrim.starts(with: "2") {
-                key = Key(from: String(rawTrim.removeFirst()))
+                rawTrim = String(rawTrim.removeLast())
+                key = Key(from: rawTrim)
                 isDouble = true
             }
             
@@ -111,18 +115,18 @@ struct MapSource: Hashable {
 }
 
 enum TargetType: String {
-    case KeyPress
-    case Navigation
+    case click
+    case navigation
 
     init?(from raw: String) {
         let type = raw.lowercased()
         
         switch type {
         case "navigation":
-            self = .Navigation
+            self = .navigation
         default:
             if Key(from: type) != nil {
-                self = .KeyPress
+                self = .click
             } else {
                 return nil
             }

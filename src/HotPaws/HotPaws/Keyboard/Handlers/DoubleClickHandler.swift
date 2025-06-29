@@ -19,12 +19,12 @@ struct QueueKey {
     }
 }
 
-class DoubleClickHandler: KeyHandler {
-    let decorated: KeyHandler
+class DoubleClickHandler: ClickHandler {
+    let decorated: ClickHandler
     var queue: Queue<QueueKey> = Queue()
     var timer: Timer?
     
-    init(_ decorated: KeyHandler){
+    init(_ decorated: ClickHandler){
         self.decorated = decorated
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { [weak self] _ in
@@ -34,7 +34,7 @@ class DoubleClickHandler: KeyHandler {
         RunLoop.current.add(timer!, forMode: .common)
     }
     
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
+    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> HandlerResult {
         if Config.mapping.containDoubleKeyRule {
             let next = QueueKey(key: key, modifiers: modifiers)
             queue.enqueue(next)
@@ -53,25 +53,25 @@ class DoubleClickHandler: KeyHandler {
                         print("double")
                     } else {
                         if self.decorated.handle(key: &first.key, modifiers: &first.modifiers) == .skip {
-                            Keyboard.press(key: first.key, modifiers: first.modifiers)
+                            Keyboard.click(key: first.key, modifiers: first.modifiers)
                         }
                         
                         if self.decorated.handle(key: &second.key, modifiers: &second.modifiers) == .skip {
-                            Keyboard.press(key: second.key, modifiers: second.modifiers)
+                            Keyboard.click(key: second.key, modifiers: second.modifiers)
                         }
                     }
                 } else {
                     if self.decorated.handle(key: &first.key, modifiers: &first.modifiers) == .skip {
-                        Keyboard.press(key: first.key, modifiers: first.modifiers)
+                        Keyboard.click(key: first.key, modifiers: first.modifiers)
                     }
                     
                     if self.decorated.handle(key: &second.key, modifiers: &second.modifiers) == .skip {
-                        Keyboard.press(key: second.key, modifiers: second.modifiers)
+                        Keyboard.click(key: second.key, modifiers: second.modifiers)
                     }
                 }
             } else {
                 if self.decorated.handle(key: &first.key, modifiers: &first.modifiers) == .skip {
-                    Keyboard.press(key: first.key, modifiers: first.modifiers)
+                    Keyboard.click(key: first.key, modifiers: first.modifiers)
                 }
             }
         }

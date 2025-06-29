@@ -7,8 +7,8 @@
 
 import Foundation
 
-class MappingHandler: KeyHandler {
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
+class MappingHandler: ClickHandler {
+    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> HandlerResult {
         for switchModifier in modifiers {
             if let layer = Config.mapping.rules[switchModifier] {
                 if let mapping = layer[key] {
@@ -21,7 +21,7 @@ class MappingHandler: KeyHandler {
                     }
                     
                     if mapping.target.type == .KeyPress {
-                        Keyboard.press(key: mapping.target.key!, modifiers: modifiers)
+                        Keyboard.click(key: mapping.target.key!, modifiers: modifiers)
                     }
                     
                     return .handled

@@ -9,9 +9,10 @@ import Cocoa
 struct Keyboard {
     private static let keyDownEvent: Event = Event()
     private static let flagsChangedEvent: Event = Event()
-    public static var isPressProgrammatic: Bool = false
     
-    public static var keySubscribers: Dictionary<String,KeyHandler> = [:]
+    public static var _isPressProgrammatic: Bool = false
+    
+    public static var subscribers: Dictionary<String,ClickHandler> = [:]
     public static var modifierChangeSubscribers: Dictionary<String,ModifierChangeHandler> = [:]
     
     public static func connect() throws {
@@ -19,8 +20,8 @@ struct Keyboard {
         flagsChangedEvent.subscribe(type: CGEventType.flagsChanged, handler: modifierChangeHandler)
     }
     
-    public static func press(key: Key, modifiers: Set<Modifier>?) {
-        isPressProgrammatic = true
+    public static func click(key: Key, modifiers: Set<Modifier>?) {
+        _isPressProgrammatic = true
         down(key: key, modifiers: modifiers)
         up(key: key)
     }
@@ -48,7 +49,7 @@ struct Keyboard {
 }
 
 private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
-    if !Keyboard.isPressProgrammatic {
+    if !Keyboard._isPressProgrammatic {
         if let event = NSEvent(cgEvent: cgEvent) {
             if var key = Key(rawValue: event.keyCode) {
                 var modifiers: Set<Modifier>?
@@ -59,7 +60,7 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
                     modifiers = []
                 }
                 
-                for handler in Keyboard.keySubscribers.values {
+                for handler in Keyboard.subscribers.values {
                     if handler.handle(key: &key, modifiers: &modifiers!) == .handled {
                         return nil
                     }
@@ -67,7 +68,7 @@ private func keyDownHandler(_: CGEventTapProxy,_: CGEventType,cgEvent: CGEvent,_
             }
         }
     } else {
-        Keyboard.isPressProgrammatic = false
+        Keyboard._isPressProgrammatic = false
     }
     
     return Unmanaged.passUnretained(cgEvent)

@@ -26,7 +26,7 @@ class KeyDetected : KeyHandler, ModifierChangeHandler {
     
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
-            KeyDetected.textView!.stringValue = key.description
+            KeyDetected.textView!.stringValue = String(describing: key)
         }
         
         return .skip
@@ -34,8 +34,8 @@ class KeyDetected : KeyHandler, ModifierChangeHandler {
     
     func handle(modifiers: inout Set<Modifier>) -> KeyHandlerResult {
         if KeyDetected.textView?.isAccessibilityFocused() == true {
-            if let desc = modifiers.first?.description {
-                KeyDetected.textView!.stringValue = desc
+            if let desc = modifiers.first {
+                KeyDetected.textView!.stringValue = String(describing: desc)
             }
         }
         

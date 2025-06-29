@@ -70,13 +70,21 @@ struct ConfigParser {
     private static func toKey(_ raw: String) throws -> Key {
         let key = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return try Key.parse(key)
+        if let result = Key(from: key) {
+            return result
+        }
+        
+        throw KeyErrors.KeyNotExists(key)
     }
     
     private static func toModifier(_ raw: String) throws -> Modifier {
         let modifier = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return try Modifier.parse(modifier)
+        if let result = Modifier(from: modifier) {
+            return result
+        }
+        
+        throw KeyErrors.KeyNotExists(modifier)
     }
     
     private static func toGeneralModifier(_ raw: String) throws -> Modifier {
@@ -85,6 +93,10 @@ struct ConfigParser {
         switchModifier = String(switchModifier.dropFirst())
         switchModifier = String(switchModifier.dropLast())
         
-        return try Modifier.parse(switchModifier)
+        if let result = Modifier(from: switchModifier) {
+            return result
+        }
+        
+        throw KeyErrors.KeyNotExists(switchModifier)
     }
 }

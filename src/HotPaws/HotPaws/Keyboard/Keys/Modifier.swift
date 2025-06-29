@@ -17,45 +17,30 @@ public enum Modifier: UInt16, CaseIterable {
     case capslock                  = 0x39
     case general                   = 0x00
     
-    var description : String {
-        switch self {
-        case .shift: return "shift"
-        case .shiftr: return "shiftr"
-        case .ctrl: return "ctrl"
-        case .opt: return "opt"
-        case .optr: return "optr"
-        case .cmd: return "cmd"
-        case .cmdr: return "cmdr"
-        case .fn: return "fn"
-        case .capslock: return "capslock"
-        case .general: return "general"
-        }
-    }
-    
-    public static func parse(_ modifier: String) throws -> Modifier {
+    init?(from modifier: String) {
         switch modifier {
         case "shift":
-            return .shift
+            self = .shift
         case "shiftr":
-            return .shiftr
+            self = .shiftr
         case "ctrl":
-            return .ctrl
+            self = .ctrl
         case "opt":
-            return .opt
+            self = .opt
         case "optr":
-            return .optr
+            self = .optr
         case "cmd":
-            return .cmd
+            self = .cmd
         case "cmdr":
-            return .cmdr
+            self = .cmdr
         case "fn":
-            return .fn
+            self = .fn
         case "capslock":
-            return .capslock
+            self = .capslock
         case "general":
-            return .general
+            self = .general
         default:
-            throw KeyErrors.KeyNotExists(key: modifier)
+            return nil
         }
     }
 }

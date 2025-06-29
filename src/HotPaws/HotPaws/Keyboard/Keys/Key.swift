@@ -4,9 +4,6 @@
 //
 //  Created by cat dog on 14.04.2025.
 //
-enum KeyErrors: Error {
-    case KeyNotExists(_ key: String)
-}
 
 enum Key: UInt16 {
     case `return`                  = 0x24
@@ -118,7 +115,9 @@ enum Key: UInt16 {
     case keypad8                   = 0x5B
     case keypad9                   = 0x5C
     
-    init?(from key: String) {
+    init?(from raw: String) {
+        let key = raw.lowercased()
+        
         switch key {
         case "return":
             self = .return

@@ -17,7 +17,9 @@ public enum Modifier: UInt16, CaseIterable {
     case capslock                  = 0x39
     case general                   = 0x00
     
-    init?(from modifier: String) {
+    init?(from raw: String) {
+        let modifier = raw.lowercased()
+        
         switch modifier {
         case "shift":
             self = .shift

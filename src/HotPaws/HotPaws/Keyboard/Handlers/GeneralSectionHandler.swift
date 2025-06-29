@@ -16,7 +16,7 @@ class GeneralSectionHandler: KeyHandler {
     }
     
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
-        if Config.mapping.keys.contains(.general) {
+        if Config.mapping.rules.keys.contains(.general) {
             modifiers.insert(.general)
         }
         

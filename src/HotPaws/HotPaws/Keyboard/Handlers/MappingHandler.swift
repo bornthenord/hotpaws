@@ -10,17 +10,19 @@ import Foundation
 class MappingHandler: KeyHandler {
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
         for switchModifier in modifiers {
-            if let layer = Config.mapping[switchModifier] {
+            if let layer = Config.mapping.rules[switchModifier] {
                 if let mapping = layer[key] {
                     modifiers.remove(switchModifier)
                     
                     if mapping.modifiers != nil {
-                        modifiers = modifiers.union(mapping.modifiers!)
+                        for mm in mapping.modifiers! {
+                            modifiers.insert(mm.modifier)
+                        }
                     }
                     
-                    key = mapping.target
-                    
-                    Keyboard.press(key: key, modifiers: modifiers)
+                    if mapping.target.type == .KeyPress {
+                        Keyboard.press(key: mapping.target.key!, modifiers: modifiers)
+                    }
                     
                     return .handled
                 }

@@ -27,20 +27,22 @@ class DoubleClickHandler: KeyHandler {
     init(_ decorated: KeyHandler){
         self.decorated = decorated
         
-        // Создаем и запускаем таймер при инициализации
         timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
             self?.queueHandler()
         }
         
-        // Добавляем таймер в текущий RunLoop
         RunLoop.current.add(timer!, forMode: .common)
     }
     
     func handle(key: inout Key, modifiers: inout Set<Modifier>) -> KeyHandlerResult {
-        let next = QueueKey(key: key, modifiers: modifiers)
-        queue.enqueue(next)
+        if Config.mapping.containDoubleKeyRule {
+            let next = QueueKey(key: key, modifiers: modifiers)
+            queue.enqueue(next)
+            
+            return .handled
+        }
         
-        return .handled
+        return self.decorated.handle(key: &key, modifiers: &modifiers)
     }
     
     private func queueHandler() {

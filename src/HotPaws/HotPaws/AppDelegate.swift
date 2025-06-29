@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try Config.load()
             try Keyboard.connect()
             
-            Keyboard.subscribers["general"] = DoubleClickHandler(GeneralSectionHandler(MappingHandler()))
+            Keyboard.subscribers["general"] = GeneralSectionHandler(DoubleClickHandler(MappingHandler()))
         } catch {
             Logger.error(error)
         }

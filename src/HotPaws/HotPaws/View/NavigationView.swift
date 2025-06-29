@@ -10,6 +10,7 @@ import AppKit
 
 class NavigationWindow {
     private let window: NSWindow
+    private var _isShowing: Bool = false
     
     init() {
         window = NavigationWindow.createWindow()
@@ -20,13 +21,21 @@ class NavigationWindow {
     }
     
     func show() {
-        window.level = .floating
-        window.orderFront(nil)
+        if !self._isShowing {
+            window.level = .floating
+            window.orderFront(nil)
+            self._isShowing = true
+        }
     }
     
     func hide() {
         window.contentView?.subviews.removeAll()
         window.orderOut(nil)
+        self._isShowing = false
+    }
+    
+    func isShowing() -> Bool {
+        return self._isShowing
     }
     
     private func createLabel(_ text: String, point: CGPoint) -> NSTextField {

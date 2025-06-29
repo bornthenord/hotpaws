@@ -4,9 +4,6 @@
 //
 //  Created by cat dog on 14.04.2025.
 //
-enum KeyErrors: Error {
-    case KeyNotExists(key: String)
-}
 
 enum Key: UInt16 {
     case `return`                  = 0x24
@@ -118,337 +115,225 @@ enum Key: UInt16 {
     case keypad8                   = 0x5B
     case keypad9                   = 0x5C
     
-    var description : String {
-        switch self {
-        case .return: return "return"
-        case .enter: return "enter"
-        case .tab: return "tab"
-        case .space: return "space"
-        case .delete: return "delete"
-        case .forwardDelete: return "forwardDelete"
-        case .escape: return "escape"
-        case .left: return "left"
-        case .right: return "right"
-        case .down: return "down"
-        case .up: return "up"
-        case .volumeUp: return "volumeUp"
-        case .volumeDown: return "volumeDown"
-        case .mute: return "mute"
-        case .help: return "help"
-        case .home: return "home"
-        case .pageUp: return "pageUp"
-        case .end: return "end"
-        case .pageDown: return "pageDown"
-            
-        case .f1: return "f1"
-        case .f2: return "f2"
-        case .f3: return "f3"
-        case .f4: return "f4"
-        case .f5: return "f5"
-        case .f6: return "f6"
-        case .f7: return "f7"
-        case .f8: return "f8"
-        case .f9: return "f9"
-        case .f10: return "f10"
-        case .f11: return "f11"
-        case .f12: return "f12"
-        case .f13: return "f13"
-        case .f14: return "f14"
-        case .f15: return "f15"
-        case .f16: return "f16"
-        case .f17: return "f17"
-        case .f18: return "f18"
-        case .f19: return "f19"
-        case .f20: return "f20"
-            
-        case .a: return "a"
-        case .b: return "b"
-        case .c: return "c"
-        case .d: return "d"
-        case .e: return "e"
-        case .f: return "f"
-        case .g: return "g"
-        case .h: return "h"
-        case .i: return "i"
-        case .j: return "j"
-        case .k: return "k"
-        case .l: return "l"
-        case .m: return "m"
-        case .n: return "n"
-        case .o: return "o"
-        case .p: return "p"
-        case .q: return "q"
-        case .r: return "r"
-        case .s: return "s"
-        case .t: return "t"
-        case .u: return "u"
-        case .v: return "v"
-        case .w: return "w"
-        case .x: return "x"
-        case .y: return "y"
-        case .z: return "z"
-            
-        case .zero: return "zero"
-        case .one: return "one"
-        case .two: return "two"
-        case .three: return "three"
-        case .four: return "four"
-        case .five: return "five"
-        case .six: return "six"
-        case .seven: return "seven"
-        case .eight: return "eight"
-        case .nine: return "nine"
-            
-        case .equals: return "equals"
-        case .minus: return "minus"
-        case .semicolon: return "semicolon"
-        case .apostrophe: return "apostrophe"
-        case .comma: return "comma"
-        case .period: return "period"
-        case .slash: return "slash"
-        case .backslash: return "backslash"
-        case .grave: return "grave"
-        case .leftBracket: return "leftBracket"
-        case .rightBracket: return "rightBracket"
-            
-        case .keypadDecimal: return "keypadDecimal"
-        case .keypadMultiply: return "keypadMultiply"
-        case .keypadPlus: return "keypadPlus"
-        case .keypadClear: return "keypadClear"
-        case .keypadDivide: return "keypadDivide"
-        case .keypadMinus: return "keypadMinus"
-        case .keypadEquals: return "keypadEquals"
-        case .keypad0: return "keypad0"
-        case .keypad1: return "keypad1"
-        case .keypad2: return "keypad2"
-        case .keypad3: return "keypad3"
-        case .keypad4: return "keypad4"
-        case .keypad5: return "keypad5"
-        case .keypad6: return "keypad6"
-        case .keypad7: return "keypad7"
-        case .keypad8: return "keypad8"
-        case .keypad9: return "keypad9"
-        }
-    }
-    
-    public static func parse(_ key: String) throws -> Key {
+    init?(from raw: String) {
+        let key = raw.lowercased()
         
         switch key {
         case "return":
-            return .return
+            self = .return
         case "enter":
-            return .enter
+            self = .enter
         case "tab":
-            return .tab
+            self = .tab
         case "space":
-            return .space
+            self = .space
         case "delete":
-            return .delete
+            self = .delete
         case "forwardDelete":
-            return .forwardDelete
+            self = .forwardDelete
         case "escape":
-            return .escape
+            self = .escape
         case "left":
-            return .left
+            self = .left
         case "right":
-            return .right
+            self = .right
         case "down":
-            return .down
+            self = .down
         case "up":
-            return .up
+            self = .up
         case "volumeUp":
-            return .volumeUp
+            self = .volumeUp
         case "volumeDown":
-            return .volumeDown
+            self = .volumeDown
         case "mute":
-            return .mute
+            self = .mute
         case "help":
-            return .help
+            self = .help
         case "home":
-            return .home
+            self = .home
         case "pageUp":
-            return .pageUp
+            self = .pageUp
         case "end":
-            return .end
+            self = .end
         case "pageDown":
-            return .pageDown
+            self = .pageDown
             
         case "f1":
-            return .f1
+            self = .f1
         case "f2":
-            return .f2
+            self = .f2
         case "f3":
-            return .f3
+            self = .f3
         case "f4":
-            return .f4
+            self = .f4
         case "f5":
-            return .f5
+            self = .f5
         case "f6":
-            return .f6
+            self = .f6
         case "f7":
-            return .f7
+            self = .f7
         case "f8":
-            return .f8
+            self = .f8
         case "f9":
-            return .f9
+            self = .f9
         case "f10":
-            return .f10
+            self = .f10
         case "f11":
-            return .f11
+            self = .f11
         case "f12":
-            return .f12
+            self = .f12
         case "f13":
-            return .f13
+            self = .f13
         case "f14":
-            return .f14
+            self = .f14
         case "f15":
-            return .f15
+            self = .f15
         case "f16":
-            return .f16
+            self = .f16
         case "f17":
-            return .f17
+            self = .f17
         case "f18":
-            return .f18
+            self = .f18
         case "f19":
-            return .f19
+            self = .f19
         case "f20":
-            return .f20
+            self = .f20
             
         case "a":
-            return .a
+            self = .a
         case "b":
-            return .b
+            self = .b
         case "c":
-            return .c
+            self = .c
         case "d":
-            return .d
+            self = .d
         case "e":
-            return .e
+            self = .e
         case "f":
-            return .f
+            self = .f
         case "g":
-            return .g
+            self = .g
         case "h":
-            return .h
+            self = .h
         case "i":
-            return .i
+            self = .i
         case "j":
-            return .j
+            self = .j
         case "k":
-            return .k
+            self = .k
         case "l":
-            return .l
+            self = .l
         case "m":
-            return .m
+            self = .m
         case "n":
-            return .n
+            self = .n
         case "o":
-            return .o
+            self = .o
         case "p":
-            return .p
+            self = .p
         case "q":
-            return .q
+            self = .q
         case "r":
-            return .r
+            self = .r
         case "s":
-            return .s
+            self = .s
         case "t":
-            return .t
+            self = .t
         case "u":
-            return .u
+            self = .u
         case "v":
-            return .v
+            self = .v
         case "w":
-            return .w
+            self = .w
         case "x":
-            return .x
+            self = .x
         case "y":
-            return .y
+            self = .y
         case "z":
-            return .z
+            self = .z
             
         case "zero":
-            return .zero
+            self = .zero
         case "one":
-            return .one
+            self = .one
         case "two":
-            return .two
+            self = .two
         case "three":
-            return .three
+            self = .three
         case "four":
-            return .four
+            self = .four
         case "five":
-            return .five
+            self = .five
         case "six":
-            return .six
+            self = .six
         case "seven":
-            return .seven
+            self = .seven
         case "eight":
-            return .eight
+            self = .eight
         case "nine":
-            return .nine
+            self = .nine
             
         case "equals":
-            return .equals
+            self = .equals
         case "minus":
-            return .minus
+            self = .minus
         case "semicolon":
-            return .semicolon
+            self = .semicolon
         case "apostrophe":
-            return .apostrophe
+            self = .apostrophe
         case "comma":
-            return .comma
+            self = .comma
         case "period":
-            return .period
+            self = .period
         case "slash":
-            return .slash
+            self = .slash
         case "backslash":
-            return .backslash
+            self = .backslash
         case "grave":
-            return .grave
+            self = .grave
         case "leftBracket":
-            return .leftBracket
+            self = .leftBracket
         case "rightBracket":
-            return .rightBracket
+            self = .rightBracket
             
         case "keypadDecimal":
-            return .keypadDecimal
+            self = .keypadDecimal
         case "keypadMultiply":
-            return .keypadMultiply
+            self = .keypadMultiply
         case "keypadPlus":
-            return .keypadPlus
+            self = .keypadPlus
         case "keypadClear":
-            return .keypadClear
+            self = .keypadClear
         case "keypadDivide":
-            return .keypadDivide
+            self = .keypadDivide
         case "keypadMinus":
-            return .keypadMinus
+            self = .keypadMinus
         case "keypadEquals":
-            return .keypadEquals
+            self = .keypadEquals
             
         case "keypad0":
-            return .keypad0
+            self = .keypad0
         case "keypad1":
-            return .keypad1
+            self = .keypad1
         case "keypad2":
-            return .keypad2
+            self = .keypad2
         case "keypad3":
-            return .keypad3
+            self = .keypad3
         case "keypad4":
-            return .keypad4
+            self = .keypad4
         case "keypad5":
-            return .keypad5
+            self = .keypad5
         case "keypad6":
-            return .keypad6
+            self = .keypad6
         case "keypad7":
-            return .keypad7
+            self = .keypad7
         case "keypad8":
-            return .keypad8
+            self = .keypad8
         case "keypad9":
-            return .keypad9
+            self = .keypad9
             
         default:
-            throw KeyErrors.KeyNotExists(key: key)
+            return nil
         }
     }
 }

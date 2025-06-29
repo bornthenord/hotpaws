@@ -10,7 +10,7 @@ import Foundation
 
 struct Config {
     private static let _keyMapping: String = "config"
-    private static var _mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> = [:]
+    private static var _mapping: Mapping!
     private static var _mappingString: String = """
         [fn]
         # navigation
@@ -20,7 +20,7 @@ struct Config {
         l:right
         """
 
-    public static var mapping: Dictionary<Modifier,Dictionary<Key,Mapping>> {
+    public static var mapping: Mapping {
         _mapping
     }
     
@@ -35,11 +35,11 @@ struct Config {
             _mappingString = mappingStr!
         }
         
-        _mapping = try ConfigParser.parse(_mappingString)
+        _mapping = try Mapping(_mappingString)
     }
     
     public static func save(mapping: String) throws {
-        _mapping = try ConfigParser.parse(mapping)
+        _mapping = try Mapping(mapping)
         _mappingString = mapping
         
         UserDefaults.standard.set(mapping, forKey: _keyMapping)

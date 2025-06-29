@@ -8,18 +8,18 @@
 
 import Cocoa
 
-class GeneralSectionHandler : KeyHandler {
-    let decorated: KeyHandler
+class GeneralSectionHandler: ClickHandler {
+    let decorated: ClickHandler
     
-    init(_ decorated: KeyHandler){
+    init(_ decorated: ClickHandler){
         self.decorated = decorated
     }
     
-    func handle(key: inout Key, modifiers: inout Set<Modifier>) -> Bool {
-        if Config.mapping.keys.contains(.general) {
+    func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult {
+        if Config.mapping.rules.keys.contains(.general) {
             modifiers.insert(.general)
         }
         
-        return self.decorated.handle(key: &key, modifiers: &modifiers)
+        return self.decorated.handle(click, modifiers: &modifiers)
     }
 }

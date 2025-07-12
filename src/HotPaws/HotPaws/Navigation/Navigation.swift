@@ -59,9 +59,10 @@ class Navigation: ClickHandler {
             for element in app.getClickableElements() {
                 if let frame = element.getFrame() {
                     let label = marker.next()
-                    
-                    elements[label] = frame.origin
-                    handler(label, frame.origin)
+                    let point = frame.getCenter()
+    
+                    elements[label] = point
+                    handler(label, point)
                 }
             }
         }
@@ -69,10 +70,11 @@ class Navigation: ClickHandler {
     
     private func select(first: Click, second: Click) {
         let label = "\(first.key)\(second.key)"
-        print(label)
+        
         if let point = elements[label] {
-            print("click")
-            Mouse.leftClick(at: point)
+            let pointRealtiveScreen = point.toRelativeScreen()
+            
+            Mouse.leftClick(at: pointRealtiveScreen)
         }
     }
 }

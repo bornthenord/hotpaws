@@ -43,8 +43,11 @@ class Navigation: ClickHandler {
                 if self.firstClick == nil {
                     self.firstClick = click
                 } else {
+                    let label = "\(self.firstClick!.key)\(click.key)"
+                    let withShift = modifiers.containsShift()
+                    
                     self.disable()
-                    select(first: self.firstClick!, second: click)
+                    select(label: label, withShift: withShift)
                 }
             }
         }
@@ -68,13 +71,15 @@ class Navigation: ClickHandler {
         }
     }
     
-    private func select(first: Click, second: Click) {
-        let label = "\(first.key)\(second.key)"
-        
+    private func select(label: String, withShift: Bool = false) {
         if let point = elements[label] {
             let pointRealtiveScreen = point.toRelativeScreen()
             
-            Mouse.leftClick(at: pointRealtiveScreen)
+            if withShift {
+                Mouse.rightClick(at: pointRealtiveScreen)
+            } else {
+                Mouse.leftClick(at: pointRealtiveScreen)
+            }
         }
     }
 }

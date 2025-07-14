@@ -8,18 +8,18 @@
 import Foundation
 import AppKit
 
-let clickableRoles: [String] = [
+let clickableRoles: Set<String> = [
     kAXButtonRole,
-    kAXScrollAreaRole,
+//    kAXScrollAreaRole,
     kAXScrollBarRole,
     kAXTextFieldRole,
-    kAXLevelIndicatorRole,
-    kAXStaticTextRole,
+//    kAXLevelIndicatorRole,
+//    kAXStaticTextRole,
     kAXPopUpButtonRole,
     kAXMenuButtonRole,
     kAXMenuItemRole,
-    kAXRowRole,
-    kAXValueIndicatorRole,
+//    kAXRowRole,
+//    kAXValueIndicatorRole,
     kAXSliderRole,
     kAXCheckBoxRole,
     kAXComboBoxRole,

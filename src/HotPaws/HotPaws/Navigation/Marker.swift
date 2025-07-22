@@ -19,8 +19,8 @@ class Marker {
         let firstLetterIndex = currentIndex / 26
         let secondLetterIndex = currentIndex % 26
         
-        let firstLetter = Character(UnicodeScalar(65 + firstLetterIndex)!).lowercased() // 'A' = 65
-        let secondLetter = Character(UnicodeScalar(65 + secondLetterIndex)!).lowercased()
+        let firstLetter = Character(UnicodeScalar(65 + firstLetterIndex)!) // 'A' = 65
+        let secondLetter = Character(UnicodeScalar(65 + secondLetterIndex)!)
         
         currentIndex += 1
         

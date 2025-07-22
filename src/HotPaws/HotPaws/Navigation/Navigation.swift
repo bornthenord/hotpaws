@@ -43,13 +43,15 @@ class Navigation: ClickHandler {
                 if self.firstClick == nil {
                     self.firstClick = click
                 } else {
-                    let label = "\(self.firstClick!.key)\(click.key)".uppercased()czdmdm
+                    let label = "\(self.firstClick!.key)\(click.key)".uppercased()
                     let withShift = modifiers.containsShift()
                     
                     self.disable()
                     select(label: label, withShift: withShift)
                 }
             }
+            
+            return .handled
         }
         
         return .skip

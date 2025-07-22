@@ -27,7 +27,7 @@ let clickableRoles: Set<String> = [
 ]
 
 extension AXUIElement {
-    func getAttribute(_ name: String) -> (status: AXError, value: CFTypeRef?) {
+    func getAttribute(_ name: String) -> (status: AXError, value: CFTypeRef)? {
         var value: CFTypeRef?
         let result = AXUIElementCopyAttributeValue(self, name as CFString, &value)
         
@@ -36,9 +36,11 @@ extension AXUIElement {
             {
                 Logger.error("Faield to get attribute \(name). \(result)")
             }
+            
+            return nil
         }
         
-        return (result, value)
+        return (result, value!)
     }
     
     func getFrame() -> NSRect? {
@@ -55,21 +57,22 @@ extension AXUIElement {
     }
     
     public func getSize() -> CGSize? {
-        let attribute = self.getAttribute(kAXSizeAttribute)
-        
-        if attribute.status == .success {
-            let axValue = attribute.value as! AXValue
+        if let attribute = self.getAttribute(kAXSizeAttribute) {
             
-            if AXValueGetType(axValue) == .cgSize {
-                var size = CGSize.zero
+            if attribute.status == .success {
+                let axValue = attribute.value as! AXValue
                 
-                if AXValueGetValue(axValue, .cgSize, &size) {
-                    return size
+                if AXValueGetType(axValue) == .cgSize {
+                    var size = CGSize.zero
+                    
+                    if AXValueGetValue(axValue, .cgSize, &size) {
+                        return size
+                    } else {
+                        Logger.error("Failed to get CGSize value from AXValue")
+                    }
                 } else {
-                    Logger.error("Failed to get CGSize value from AXValue")
+                    Logger.error("Unexpected AXValue type: \(AXValueGetType(axValue))")
                 }
-            } else {
-                Logger.error("Unexpected AXValue type: \(AXValueGetType(axValue))")
             }
         }
         
@@ -77,15 +80,16 @@ extension AXUIElement {
     }
     
     public func getCoordinate() -> CGPoint? {
-        let attribute = self.getAttribute(kAXPositionAttribute)
-        
-        if attribute.status == .success {
-            let position = attribute.value as! AXValue
-            var coordinate = CGPoint.zero
+        if let attribute = self.getAttribute(kAXPositionAttribute) {
             
-            if AXValueGetType(position) == .cgPoint,
-               AXValueGetValue(position, .cgPoint, &coordinate) {
-                return coordinate
+            if attribute.status == .success {
+                let position = attribute.value as! AXValue
+                var coordinate = CGPoint.zero
+                
+                if AXValueGetType(position) == .cgPoint,
+                   AXValueGetValue(position, .cgPoint, &coordinate) {
+                    return coordinate
+                }
             }
         }
         
@@ -109,11 +113,12 @@ extension AXUIElement {
     }
     
     func getChildren() -> [AXUIElement]? {
-        let children = self.getAttribute(kAXChildrenAttribute)
-        
-        if children.status == .success {
-            if let children = children.value as? [AXUIElement] {
-                return children
+        if let children = self.getAttribute(kAXChildrenAttribute) {
+            
+            if children.status == .success {
+                if let children = children.value as? [AXUIElement] {
+                    return children
+                }
             }
         }
         
@@ -121,21 +126,23 @@ extension AXUIElement {
     }
     
     func isClickable() -> Bool {
-        let role = self.getAttribute(kAXRoleAttribute)
-        
-        if role.status == .success, let role = role.value as? String {
-            return clickableRoles.contains(role)
+        if let role = self.getAttribute(kAXRoleAttribute) {
+            
+            if role.status == .success, let role = role.value as? String {
+                return clickableRoles.contains(role)
+            }
         }
         
         return false
     }
     
     func isEnable() -> Bool {
-        let isEnable = self.getAttribute(kAXEnabledAttribute)
-        
-        if isEnable.status == .success {
-            if let isEnabled = isEnable.value as? Bool {
-                return isEnabled
+        if let isEnable = self.getAttribute(kAXEnabledAttribute) {
+            
+            if isEnable.status == .success {
+                if let isEnabled = isEnable.value as? Bool {
+                    return isEnabled
+                }
             }
         }
         

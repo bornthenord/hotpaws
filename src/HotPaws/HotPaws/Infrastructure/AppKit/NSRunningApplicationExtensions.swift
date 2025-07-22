@@ -13,10 +13,11 @@ extension NSRunningApplication {
         if let app = NSWorkspace.shared.frontmostApplication {
             let app = AXUIElementCreateApplication(app.processIdentifier)
             
-            let focusedWindow = app.getAttribute(kAXFocusedWindowAttribute)
-            
-            if focusedWindow.status == .success {
-                return (focusedWindow.value as! AXUIElement)
+            if let focusedWindow = app.getAttribute(kAXFocusedWindowAttribute) {
+                
+                if focusedWindow.status == .success {
+                    return (focusedWindow.value as! AXUIElement)
+                }
             }
         } else {
             Logger.error("Error getting window")

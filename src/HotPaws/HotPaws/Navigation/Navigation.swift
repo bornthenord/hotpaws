@@ -13,9 +13,10 @@ class Navigation: ClickHandler {
     private let view = NavigationWindow()
     private var isEnabled: Bool = false
     private var firstClick: Click?
+    private let decorated: ClickHandler
     
-    init() {
-        Keyboard.subscribers["navigation"] = self
+    init(_ decorated: ClickHandler){
+        self.decorated = decorated
     }
     
     func enable() {
@@ -40,7 +41,7 @@ class Navigation: ClickHandler {
     func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult {
         if click.key == .escape {
             self.disable()
-            return .handled
+            return decorated.handle(click, modifiers: &modifiers)
         }
         
         if self.isEnabled {
@@ -59,7 +60,7 @@ class Navigation: ClickHandler {
             return .handled
         }
         
-        return .skip
+        return decorated.handle(click, modifiers: &modifiers)
     }
     
     private func markout(handler: (String, CGPoint) -> Void) {

@@ -21,6 +21,11 @@ class Navigation: ClickHandler {
     func enable() {
         if !self.isEnabled {
             self.markout(handler: view.addLabel)
+            
+            if elements.count < 1 {
+                return
+            }
+            
             self.view.show()
             self.isEnabled = true
             self.firstClick = nil
@@ -58,6 +63,8 @@ class Navigation: ClickHandler {
     }
     
     private func markout(handler: (String, CGPoint) -> Void) {
+        elements.removeAll()
+        
         if let app = NSRunningApplication.getCurrentApp() {
             let marker = Marker()
             

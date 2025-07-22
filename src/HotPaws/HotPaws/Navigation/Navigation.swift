@@ -38,12 +38,12 @@ class Navigation: ClickHandler {
     }
     
     func handle(_ click: Click, modifiers: inout Set<Modifier>) -> HandlerResult {
+        if click.key == .escape {
+            self.disable()
+            return .handled
+        }
+        
         if self.isEnabled {
-            if click.key == .escape {
-                self.disable()
-                return .handled
-            }
-           
             if click.key.isLetter() {
                 if self.firstClick == nil {
                     self.firstClick = click

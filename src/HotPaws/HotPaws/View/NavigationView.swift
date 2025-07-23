@@ -38,12 +38,13 @@ class NavigationWindow {
         let label = NSTextField(labelWithString: text)
         label.font = NSFont.boldSystemFont(ofSize: 11)
         label.wantsLayer = true
-        label.layer?.backgroundColor = NSColor(calibratedRed: 1.0, green: 0.5, blue: 0.0, alpha: 1.0).cgColor
+        label.layer?.backgroundColor = NSColor(red: 255/255.0, green: 215/255.0, blue: 95/255.0, alpha: 1.0).cgColor
         label.wantsLayer = true
         label.layer?.cornerRadius = label.frame.size.width / 6 // радиус равен половине ширины для круга
         label.layer?.masksToBounds = true
         label.frame = CGRect(x: point.x, y: point.y, width: 20, height: 13)
         label.frame.size = label.fittingSize
+        label.textColor = .black
         
         return label
     }

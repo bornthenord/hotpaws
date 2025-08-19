@@ -23,10 +23,8 @@ class MappingHandler: ClickHandler {
                         
                         if rule.target.type == .click {
                             Keyboard.click(key: rule.target.key!, modifiers: modifiers)
-                        }
-                        
-                        if rule.target.type == .navigation {
-                            print("navigation")
+                        } else if rule.target.type == .navigation {
+                            AppDelegate.navigation?.enable()
                         }
                         
                         return .handled

@@ -99,7 +99,7 @@ struct MapSource: Hashable {
         
         if key == nil {
             if rawTrim.starts(with: "2") {
-                rawTrim = String(rawTrim.removeLast())
+                rawTrim.remove(at: rawTrim.startIndex)
                 key = Key(from: rawTrim)
                 isDouble = true
             }

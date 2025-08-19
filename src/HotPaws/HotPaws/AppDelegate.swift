@@ -10,10 +10,16 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     var status: StatusView?
+    static var navigation: Navigation?
     
     @IBOutlet weak var menu: NSMenu?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        if !isAccessibilityEnabled() {
+            Logger.panic("Accessibility API is not enabled for this application.")
+            return
+        }
+        
         // The application does not appear in the Dock and may not create
         // windows or be activated.
         NSApp.setActivationPolicy(.accessory)
@@ -24,9 +30,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try Config.load()
             try Keyboard.connect()
             
-            Keyboard.subscribers["general"] = DoubleClickHandler(GeneralSectionHandler(MappingHandler()))
+            AppDelegate.navigation = Navigation(GeneralSectionHandler(DoubleClickHandler(MappingHandler())))
+            
+            Keyboard.subscribers["general"] = AppDelegate.navigation
         } catch {
-            print(error)
+            Logger.error(error)
         }
     }
     
@@ -36,6 +44,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
+    }
+    
+    func isAccessibilityEnabled() -> Bool {
+        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true]
+        return AXIsProcessTrustedWithOptions(options as CFDictionary)
     }
 }
 

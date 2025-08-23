@@ -42,8 +42,11 @@ When navigation mode is activated, all clickable and text-input elements in the 
 To interact with an element, type its corresponding code:
 
 Left click: type the code
+
 Right click: Hold Shift + type the code
+
 Press Escape to exit navigation mode.
+
 
 <img width="512" height="512" src="https://github.com/bornthenord/hotpaws/blob/main/navigation-demo.png">
 

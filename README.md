@@ -2,8 +2,9 @@
   <img width="256" height="256" src="https://github.com/bornthenord/keyborg/blob/main/logo.jpeg">
 <p>
 <h1 align="center">Hot Swap Key Mapping for macOS</h1>
+<h1 align="center">And lets you control macOS from your keyboard instead of having to use your mouse.</h1>
 
-## What is?
+## What the hell is this for?
 This is a utility that allows you to dynamically remap keys or assign keyboard shortcuts on macOS.
 
 *Origin story: This tool was inspired by the comfortable navigation in Vim, where moving around with h, j, k, l is quick and doesn't require reaching for arrow keys. I wanted to bring that same flexibility and speed to macOS — so navigation becomes fast and comfortable without relying on arrow keys or other awkward shortcuts.*
@@ -28,13 +29,21 @@ The configuration consists of
 - **[switch key]** - the modifier key used to activate remapping (e.g., a specific key code).
 - **source**:**target**:**modifiers** - remapping rules:
     - **source** - the key code to be remapped (required).
-    - **target** - target key code (required).
+    - **target** - target key code or navigation (required).
     - **modifiers** - optional comma-separated modifier codes.
 - **Comments**: lines starting with #.
 
 You can assign rules based on modifier keys such as Caps Lock, Shift, Right Shift, Function, Control, Option, Right Option, Command, and Right Command.
 
 To find out the code for a specific key or modifier, use the code definition feature in the app's settings.
+
+### Keyboard based navigation
+When navigation mode is activated, all clickable and text-input elements in the active window will be labeled with two-letter codes (A-Z).
+To interact with an element, type its corresponding code:
+
+Left click: type the code
+Right click: Hold Shift + type the code
+Press Escape to exit navigation mode.
 
 ### Examples
 
@@ -56,4 +65,8 @@ l:right
 # Prev/next tab
 h:left:opt,cmd
 l:right:opt,cmd
+
+# Keyboard based navigation
+semicolon:navigation
 ```
+

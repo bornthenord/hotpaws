@@ -9,22 +9,6 @@ import Foundation
 import AppKit
 import Accessibility
 
-let clickableRoles: Set<String> = [
-    kAXButtonRole,
-    kAXScrollAreaRole,
-    kAXScrollBarRole,
-    kAXTextFieldRole,
-    kAXLevelIndicatorRole,
-    kAXStaticTextRole,
-    kAXPopUpButtonRole,
-    kAXMenuButtonRole,
-    kAXMenuItemRole,
-    kAXRowRole,
-    kAXValueIndicatorRole,
-    kAXSliderRole,
-    kAXCheckBoxRole,
-    kAXComboBoxRole,
-]
 
 extension AXUIElement {
     func getAttribute(_ name: String) -> (status: AXError, value: CFTypeRef)? {
@@ -96,22 +80,6 @@ extension AXUIElement {
         return nil
     }
     
-    func getClickableElements() -> [AXUIElement] {
-        var clickableElements: [AXUIElement] = []
-        
-        if let children = self.getChildren() {
-            for child in children {
-                if child.isClickable() && child.isEnable() {
-                    clickableElements.append(child)
-                }
-                
-                clickableElements += child.getClickableElements()
-            }
-        }
-        
-        return clickableElements
-    }
-    
     func getChildren() -> [AXUIElement]? {
         if let children = self.getAttribute(kAXChildrenAttribute) {
             
@@ -125,15 +93,16 @@ extension AXUIElement {
         return nil
     }
     
-    func isClickable() -> Bool {
-        if let role = self.getAttribute(kAXRoleAttribute) {
-            
-            if role.status == .success, let role = role.value as? String {
-                return clickableRoles.contains(role)
+    func getParent() -> AXUIElement? {
+        if let parent = self.getAttribute(kAXParentAttribute) {
+            if parent.status == .success {
+                if let element = parent.value as? AXUIElement? {
+                    return element
+                }
             }
         }
         
-        return false
+        return nil
     }
     
     func isEnable() -> Bool {
@@ -147,5 +116,15 @@ extension AXUIElement {
         }
         
         return false
+    }
+    
+    func isVisible() -> Bool {
+        if let size = self.getSize() {
+            if size.width < 1 && size.height < 1 {
+                return false
+            }
+        }
+        
+        return true
     }
 }

@@ -67,15 +67,20 @@ class Navigation: ClickHandler {
         elements.removeAll()
         
         if let app = NSRunningApplication.getCurrentApp() {
-            let marker = Marker()
+            let clickElements = app.getClickableElements()
             
-            for element in app.getClickableElements() {
-                if let frame = element.getFrame() {
-                    let label = marker.next()
-                    let point = frame.getCenter()
-    
-                    elements[label] = point
-                    handler(label, point)
+            if !clickElements.isEmpty {
+                
+                let marker = Marker()
+                
+                for element in clickElements {
+                    if let frame = element.getFrame() {
+                        let label = marker.next()
+                        let point = frame.getCenter()
+                        
+                        elements[label] = point
+                        handler(label, point)
+                    }
                 }
             }
         }

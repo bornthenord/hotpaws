@@ -45,6 +45,8 @@ Left click: type the code
 Right click: Hold Shift + type the code
 Press Escape to exit navigation mode.
 
+<img width="512" height="512" src="https://github.com/bornthenord/hotpaws/blob/main/navigation-demo.png">
+
 ### Examples
 
 ```ini

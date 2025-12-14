@@ -2,7 +2,6 @@
   <img width="256" height="256" src="https://github.com/bornthenord/keyborg/blob/main/logo.jpeg">
 <p>
 <h1 align="center">Hot Swap Key Mapping for macOS</h1>
-<h1 align="center">And lets you control macOS from your keyboard instead of having to use your mouse.</h1>
 
 ## What the hell is this for?
 This is a utility that allows you to dynamically remap keys or assign keyboard shortcuts on macOS.
@@ -37,19 +36,6 @@ You can assign rules based on modifier keys such as Caps Lock, Shift, Right Shif
 
 To find out the code for a specific key or modifier, use the code definition feature in the app's settings.
 
-### Keyboard based navigation
-When navigation mode is activated, all clickable and text-input elements in the active window will be labeled with two-letter codes (A-Z).
-To interact with an element, type its corresponding code:
-
-Left click: type the code
-
-Right click: Hold Shift + type the code
-
-Press Escape to exit navigation mode.
-
-
-<img width="512" height="512" src="https://github.com/bornthenord/hotpaws/blob/main/navigation-demo.png">
-
 ### Examples
 
 ```ini
@@ -70,8 +56,5 @@ l:right
 # Prev/next tab
 h:left:opt,cmd
 l:right:opt,cmd
-
-# Keyboard based navigation
-semicolon:navigation
 ```
 

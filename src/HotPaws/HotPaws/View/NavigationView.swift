@@ -22,7 +22,7 @@ class NavigationWindow {
     
     func show() {
         if !self._isShowing {
-            window.level = .floating
+            window.level = .statusBar
             window.orderFront(nil)
             self._isShowing = true
         }

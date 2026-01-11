@@ -10,7 +10,6 @@ import Cocoa
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     var status: StatusView?
-    static var navigation: Navigation?
     
     @IBOutlet weak var menu: NSMenu?
     
@@ -30,9 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             try Config.load()
             try Keyboard.connect()
             
-            AppDelegate.navigation = Navigation(GeneralSectionHandler(DoubleClickHandler(MappingHandler())))
-            
-            Keyboard.subscribers["general"] = AppDelegate.navigation
+            Keyboard.subscribers["general"] = GeneralSectionHandler(DoubleClickHandler(MappingHandler()))
         } catch {
             Logger.error(error)
         }

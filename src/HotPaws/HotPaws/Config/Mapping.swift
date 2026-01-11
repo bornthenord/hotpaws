@@ -114,41 +114,14 @@ struct MapSource: Hashable {
     }
 }
 
-enum TargetType: String {
-    case click
-    case navigation
-
-    init?(from raw: String) {
-        let type = raw.lowercased()
-        
-        switch type {
-        case "navigation":
-            self = .navigation
-        default:
-            if Key(from: type) != nil {
-                self = .click
-            } else {
-                return nil
-            }
-        }
-    }
-}
-
 struct MapTarget {
     let name: String
     let key: Key?
-    let type: TargetType
     
     init(_ raw: String) throws {
         let name = raw.trimmingCharacters(in: .whitespacesAndNewlines)
-        let type = TargetType(from: name)
-        
-        if type == nil {
-            throw MappingErrors.TargetInvalid(name)
-        }
         
         self.name = name
-        self.type = type!
         self.key = Key(from: name)
     }
 }

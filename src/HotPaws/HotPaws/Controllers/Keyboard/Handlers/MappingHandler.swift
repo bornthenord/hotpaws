@@ -21,12 +21,8 @@ class MappingHandler: ClickHandler {
                             }
                         }
                         
-                        if rule.target.type == .click {
-                            Keyboard.click(key: rule.target.key!, modifiers: modifiers)
-                        } else if rule.target.type == .navigation {
-                            AppDelegate.navigation?.enable()
-                        }
-                        
+                        Keyboard.click(key: rule.target.key!, modifiers: modifiers)
+
                         return .handled
                     }
                 }

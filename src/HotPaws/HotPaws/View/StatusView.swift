@@ -15,6 +15,24 @@ class StatusView {
     init() {
         StatusView.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         
-        StatusView.statusItem?.button?.image = NSImage(systemSymbolName: StatusView.systemSymbolName, accessibilityDescription: nil)
+        StatusView.statusItem?.button?.image = StatusView.statusImage()
+        StatusView.statusItem?.button?.toolTip = "HotPaws"
+    }
+    
+    private static func statusImage() -> NSImage? {
+        if let url = Bundle.main.url(forResource: "logo", withExtension: "png"),
+           let image = NSImage(contentsOf: url) {
+            image.size = NSSize(width: 26, height: 26)
+            image.isTemplate = true
+            return image
+        }
+        
+        if let url = Bundle.main.url(forResource: "logo", withExtension: "jpeg"),
+           let image = NSImage(contentsOf: url) {
+            image.size = NSSize(width: 20, height: 20)
+            return image
+        }
+        
+        return NSImage(systemSymbolName: systemSymbolName, accessibilityDescription: nil)
     }
 }

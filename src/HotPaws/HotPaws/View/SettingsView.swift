@@ -7,14 +7,17 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class ViewController: NSViewController, NSTextViewDelegate {
 
     private var isClosing = false
+    private var isHighlighting = false
     private var keyDetected: KeyDetected?
+    private let sectionsDataSource = SectionsDataSource()
     
     @IBOutlet weak var lastPressedKeyText: NSTextFieldCell!
     
     @IBOutlet weak var mappintTextView: NSScrollView!
+    @IBOutlet weak var sectionsScrollView: NSScrollView!
     
     public static var instace: ViewController? = nil
     
@@ -25,6 +28,7 @@ class ViewController: NSViewController {
         ViewController.instace?.title = "Settings"
         
         initMapping(mapping: Config.mappingString)
+        initSections()
         
         keyDetected = KeyDetected(textView: self.lastPressedKeyText)
     }
@@ -54,11 +58,60 @@ class ViewController: NSViewController {
         }
     }
     
-    private func initMapping(mapping: String) {
-        mappintTextView.documentView?.insertText(mapping)
+    @IBAction func modeChanged(_ sender: NSSegmentedControl) {
+        let isIni = sender.selectedSegment == 0
+        mappintTextView.isHidden = !isIni
+        sectionsScrollView.isHidden = isIni
         
-        if let txtView = mappintTextView.documentView as? NSTextView {
-            txtView.font = .systemFont(ofSize: 16)
+        if !isIni {
+            reloadSections()
         }
+    }
+    
+    private func initMapping(mapping: String) {
+        guard let txtView = mappintTextView.documentView as? NSTextView else { return }
+        
+        txtView.string = mapping
+        txtView.delegate = self
+        txtView.isRichText = true
+        highlightMapping()
+    }
+    
+    private func initSections() {
+        guard let outline = sectionsScrollView.documentView as? NSOutlineView else { return }
+        
+        outline.dataSource = sectionsDataSource
+        outline.delegate = sectionsDataSource
+        outline.headerView = nil
+        reloadSections()
+    }
+    
+    private func reloadSections() {
+        guard let outline = sectionsScrollView.documentView as? NSOutlineView else { return }
+        
+        sectionsDataSource.reload(mapping: Config.mapping)
+        outline.reloadData()
+        outline.expandItem(nil, expandChildren: true)
+    }
+    
+    private func highlightMapping() {
+        guard let txtView = mappintTextView.documentView as? NSTextView else { return }
+        guard !isHighlighting else { return }
+        guard let storage = txtView.textStorage else { return }
+        
+        isHighlighting = true
+        defer { isHighlighting = false }
+        
+        let highlighted = IniHighlighter.highlight(txtView.string)
+        
+        if !storage.isEqual(to: highlighted) {
+            let selectedRanges = txtView.selectedRanges
+            storage.setAttributedString(highlighted)
+            txtView.selectedRanges = selectedRanges
+        }
+    }
+    
+    func textDidChange(_ notification: Notification) {
+        highlightMapping()
     }
 }
